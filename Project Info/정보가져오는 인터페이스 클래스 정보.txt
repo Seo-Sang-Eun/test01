@@ -1,0 +1,132 @@
+==> http://jstp.jejutour.go.kr/openapi/service/apiservice/JejuWifiVisitCountInfo.do  의 마지막 xxxx.do 부분을 따서 네이밍
+
+
+제주특별자치도 제주시_문화축제현황  
++ 제주시 축제/행사 정보
+날짜선택
+
+
+
+
+
+
+
+
+제주특별자치도 제주시_공연행사정보 
+날짜선택
+
+
+
+
+
+
+
+제주관광e-book정보서비스
++ 제주 자연유산과 민속문화
+리스트 및 검색
+
+
+
+
+
+
+
+
+
+제주특별자치도 기상관측 정보
+리스트페이지 및 출력
+
+
+
+
+
+
+
+
+
+
+
+
+
+# JejuWifiVisitCountInfo [ http://www.data.go.kr/dataset/15013177/openapi.do ]
+자주가는 방문 목록 *
+3개월정도 자주가는목록출력 및
+선택시 주소 지도뛰어주고
+[ ! STAMP ! ]
+
+@ REQUSET
+pageNo	페이지번호
+numOfRows	페이지당 데이터개수
+ServiceKey	인증키요청변수
+start_date	검색시작일
+end_date	검색종료일
+
+@ RESOPNE
+resultCode	결과코드
+resultMsg	결과메세지
+numOfRows	페이지당 데이터 개수
+pageNo	페이지 번호
+totalCount	전체 게시물 수
+ap_id	ap고유번호
+address	주소
+visit_date	방문일
+visit_count	방문횟수
+
+@ RESPONE EXAMPLE
+<response>
+  <header>
+    <resultCode>00</resultCode>
+    <resultMsg>정상처리</resultMsg>
+  </header>
+  <body>
+    <numOfRows>10</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>208</totalCount>
+    <items>
+      <item>
+        <visit_date>2016-12-14</visit_date>
+        <ap_id>2C:C5:D3:30:9B:20</ap_id>
+        <address>관덕로 25(삼도이동)</address>
+        <ap_group>제주목관아</ap_group>
+        <visit_count>6</visit_count>
+      </item>
+      <item>
+        <visit_date>2016-12-17</visit_date>
+        <ap_id>2C:C5:D3:30:9B:20</ap_id>
+        <address>관덕로 25(삼도이동)</address>
+        <ap_group>제주목관아</ap_group>
+        <visit_count>3</visit_count>
+      </item>
+      <item>
+        <visit_date>2016-12-17</visit_date>
+        <ap_id>74:3E:2B:07:00:C0</ap_id>
+        <address>중문관광로 224 일원</address>
+        <ap_group>주상절리대</ap_group>
+        <visit_count>15</visit_count>
+      </item>
+	</items>
+	</body>
+</response>
+
+
+
+
+
+
+
+
+
+근처 음식점 추천
+GPS비교 후 근처 음식점 리스트출력
+(추후 인터넷연결고려)
+
+
+
+
+
+
+
+
+
+
+
