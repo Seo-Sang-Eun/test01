@@ -1,7 +1,9 @@
-package com.example.p200.getinfotest;
+package com.example.p200.getinfotest.dao;
 
 import android.os.AsyncTask;
-import android.util.Log;
+
+import com.example.p200.getinfotest.dto.DTOJejuWifiVisitCountInfo;
+import com.example.p200.getinfotest.util.IKeyManager;
 
 import java.io.IOException;
 

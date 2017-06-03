@@ -1,4 +1,6 @@
-package com.example.p200.getinfotest;
+package com.example.p200.getinfotest.dao;
+
+import com.example.p200.getinfotest.util.ICallback;
 
 /**
  * Created by P200 on 2017-06-03.

@@ -1,4 +1,6 @@
-package com.example.p200.getinfotest;
+package com.example.p200.getinfotest.dao;
+
+import com.example.p200.getinfotest.dto.DTOJejuWifiVisitCountInfo;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -14,10 +16,10 @@ public interface IDAO {
 
     @GET("openapi/service/apiservice/JejuWifiVisitCountInfo.do")
     Call<DTOJejuWifiVisitCountInfo> getJejuWifiVisitCountInfo(@Query("start_date") String start_date,
-                                                           @Query("end_date") String end_date,
-                                                           @Query(value = "serviceKey",encoded=true) String serviceKey,
-                                                           @Query("numOfRows") String numOfRows,
-                                                           @Query("pageNo") String pageNo);
+                                                              @Query("end_date") String end_date,
+                                                              @Query(value = "serviceKey",encoded=true) String serviceKey,
+                                                              @Query("numOfRows") String numOfRows,
+                                                              @Query("pageNo") String pageNo);
 
     public static final Retrofit retrofit = new Retrofit.Builder().baseUrl("http://jstp.jejutour.go.kr/")
             .addConverterFactory( SimpleXmlConverterFactory.create())

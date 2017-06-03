@@ -1,21 +1,12 @@
 package com.example.p200.getinfotest;
 
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
-import java.io.IOException;
-
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import retrofit2.Call;
-import retrofit2.Retrofit;
+import com.example.p200.getinfotest.dao.DAOJejuWifiVisitCountInfo;
+import com.example.p200.getinfotest.dto.DTOJejuWifiVisitCountInfo;
+import com.example.p200.getinfotest.util.ICallback;
 
 
 public class MainActivity extends AppCompatActivity {

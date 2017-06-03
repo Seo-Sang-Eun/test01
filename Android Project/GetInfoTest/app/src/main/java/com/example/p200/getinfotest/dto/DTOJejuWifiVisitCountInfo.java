@@ -1,4 +1,4 @@
-package com.example.p200.getinfotest;
+package com.example.p200.getinfotest.dto;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
