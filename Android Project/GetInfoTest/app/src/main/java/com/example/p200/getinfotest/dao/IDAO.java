@@ -1,5 +1,6 @@
 package com.example.p200.getinfotest.dao;
 
+import com.example.p200.getinfotest.dto.DTOArtstreetService;
 import com.example.p200.getinfotest.dto.DTOJejuWifiVisitCountInfo;
 
 import retrofit2.Call;
@@ -21,8 +22,20 @@ public interface IDAO {
                                                               @Query("numOfRows") String numOfRows,
                                                               @Query("pageNo") String pageNo);
 
+    // 제주시 문화축제 정보
+    @GET("rest/ArtstreetService/getArtstreetList")
+    Call<DTOArtstreetService> getArtstreetService(@Query("startPage") String startPage,
+                                                  @Query("pageSize") String pageSize,
+                                                  @Query(value = "authApiKey",encoded=true) String authApiKey);
+
+
     public static final Retrofit retrofit = new Retrofit.Builder().baseUrl("http://jstp.jejutour.go.kr/")
             .addConverterFactory( SimpleXmlConverterFactory.create())
             .build();
+
+    public static final Retrofit retrofit2 = new Retrofit.Builder().baseUrl("http://210.99.248.79/")
+            .addConverterFactory( SimpleXmlConverterFactory.create())
+            .build();
+
 
 }

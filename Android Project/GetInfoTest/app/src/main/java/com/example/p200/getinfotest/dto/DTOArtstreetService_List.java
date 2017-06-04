@@ -22,8 +22,8 @@ public class DTOArtstreetService_List {
     private String introduce;
     @Element
     private String name;
-//    @Element
-//    private String telephone;
+    @Element (required = false)
+    private String telephone;
 
     public String getAddress() {
         return address;
@@ -49,7 +49,7 @@ public class DTOArtstreetService_List {
         return name;
     }
 
-//    public String getTelephone() {
-//        return telephone;
-//    }
+    public String getTelephone() {
+        return telephone;
+    }
 }
