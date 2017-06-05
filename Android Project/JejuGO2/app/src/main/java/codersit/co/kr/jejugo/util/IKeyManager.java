@@ -7,4 +7,6 @@ package codersit.co.kr.jejugo.util;
 public interface IKeyManager {
     String JejuWifiVisitCountInfoKey = "qoKxHhmDhu4FlyFZmQRZmVvpLOboA1u80TofSLo7PK%2F5d0Izp%2B4JFXtvb6EmNQo7%2FEUYOtDv6Y29X8iGdQdUDQ%3D%3D"; //상은키
     String ArtstreetServiceKey = "DLVCGYUTQNLKFMU"; //부희키
+    String GeoCodeKey1 = "2iFv15YZ5WyF7Frk9_Ui";
+    String GeoCodeKey2 = "XHhcZLTBi_";
 }

@@ -36,4 +36,6 @@ dependencies {
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'stax', module: 'stax'
     }
+    compile 'com.naver.maps.open:naver-map-api:2.1.2@aar'
+
 }
