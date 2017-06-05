@@ -26,30 +26,47 @@ public class MainFragment extends Fragment {
 
     }
 
-
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View  view = LayoutInflater.from(getActivity()).inflate(R.layout.activity_fragment_main, null);
         ButterKnife.bind(this, view);
 
-
-        return view ;//inflater.inflate(R.layout.activity_fragment_main, container, false);
+        return view ;
+        //inflater.inflate(R.layout.activity_fragment_main, container, false);
 
     }
 
-    @OnClick(R.id.bt_frag_main_stamp)
-    void onClick_bt_frag_main_stamp()
+    @OnClick(R.id.ll_fragment_main_stamp)
+    void onClick_ll_fragment_main_stamp()
     {
         ((MainActivity)getActivity()).callFragmentPage(new StampFragment());
     }
 
-    @OnClick(R.id.bt_frag_main_play_info)
-    void onClick_bt_frag_main_play_info()
+    @OnClick(R.id.ll_fragment_main_hotplace)
+    void onClick_ll_fragment_main_hotplace()
     {
-        ((MainActivity)getActivity()).callFragmentPage(new PlayInfoFragment());
+        ((MainActivity)getActivity()).callFragmentPage(new HotplaceFragment());
     }
+
+    @OnClick(R.id.ll_fragment_main_weather)
+    void onClick_ll_fragment_main_weather()
+    {
+        ((MainActivity)getActivity()).callFragmentPage(new WeatherFragment());
+    }
+
+    @OnClick(R.id.ll_fragment_main_festival)
+    void onClick_ll_fragment_main_festival()
+    {
+        ((MainActivity)getActivity()).callFragmentPage(new FestivalFragment());
+    }
+    @OnClick(R.id.ll_fragment_main_food)
+    void onClick_ll_fragment_main_food()
+    {
+        ((MainActivity)getActivity()).callFragmentPage(new FoodFragment());
+    }
+
+
+
 
 }

@@ -19,7 +19,7 @@ import codersit.co.kr.jejugo.R;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private boolean isQuit;
+    private int isQuit;
 
 
     @Override
@@ -57,13 +57,17 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            if(isQuit==false)
+            if(isQuit==2)
             {
-                Toast.makeText(getApplicationContext(),"백버튼을 한번 더 누르면 앱이 종료됩니다.",Toast.LENGTH_SHORT).show();
                 callFragmentPage(new MainFragment());
-                isQuit=true;
+                isQuit=1;
             }
-            else
+            else if(isQuit==1)
+            {
+                Toast.makeText(getApplicationContext(),"뒤로가기 버튼을 한번 더 누르면 앱이 종료됩니다.",Toast.LENGTH_SHORT).show();
+                isQuit=0;
+            }
+            else if(isQuit==0)
                 super.onBackPressed();
         }
     }
@@ -96,18 +100,18 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_stamp) {
             callFragmentPage(new StampFragment());
-        } else if (id == R.id.nav_gallery) {
-            callFragmentPage(new PlayInfoFragment());
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
+        } else if (id == R.id.nav_hotplace) {
+            callFragmentPage(new HotplaceFragment());
+        } else if (id == R.id.nav_weather) {
+            callFragmentPage(new WeatherFragment());
+        } else if (id == R.id.nav_festival) {
+            callFragmentPage(new FestivalFragment());
+        } else if (id == R.id.nav_food) {
+            callFragmentPage(new FoodFragment());
         } else if (id == R.id.nav_send) {
-
+// 아직 X
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -117,7 +121,7 @@ public class MainActivity extends AppCompatActivity
 
     public void callFragmentPage(Fragment fragment)
     {
-        isQuit=false;
+        isQuit=2;
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -1,12 +1,12 @@
-package com.example.p200.getinfotest.dao;
+package codersit.co.kr.jejugo.dao;
 
 import android.os.AsyncTask;
 
-import com.example.p200.getinfotest.dto.DTOArtstreetService;
-import com.example.p200.getinfotest.util.IKeyManager;
 
 import java.io.IOException;
 
+import codersit.co.kr.jejugo.dto.DTOArtstreetService;
+import codersit.co.kr.jejugo.util.IKeyManager;
 import retrofit2.Call;
 
 /**
@@ -32,7 +32,7 @@ public class DAOArtstreetService extends DAOClass {
         {
             protected Object doInBackground(Object[] objects)
             {
-                Call<DTOArtstreetService> call = IDAO.RetrofitForFestival.create(IDAO.class).getArtstreetService(startPage, pageSize, authApiKey);
+                Call<DTOArtstreetService> call = IDAO.retrofit2.create(IDAO.class).getArtstreetService(startPage, pageSize, authApiKey);
                 try{
                     DTOArtstreetService artstreetService = call.execute().body();
                     iCallback.call(artstreetService);

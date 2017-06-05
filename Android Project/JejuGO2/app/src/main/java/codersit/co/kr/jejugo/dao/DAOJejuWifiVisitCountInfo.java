@@ -1,12 +1,11 @@
-package com.example.p200.getinfotest.dao;
+package codersit.co.kr.jejugo.dao;
 
 import android.os.AsyncTask;
 
-import com.example.p200.getinfotest.dto.DTOJejuWifiVisitCountInfo;
-import com.example.p200.getinfotest.util.IKeyManager;
-
 import java.io.IOException;
 
+import codersit.co.kr.jejugo.dto.DTOJejuWifiVisitCountInfo;
+import codersit.co.kr.jejugo.util.IKeyManager;
 import retrofit2.Call;
 
 /**

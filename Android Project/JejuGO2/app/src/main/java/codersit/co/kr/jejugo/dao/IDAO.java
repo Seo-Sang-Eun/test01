@@ -1,8 +1,7 @@
-package com.example.p200.getinfotest.dao;
+package codersit.co.kr.jejugo.dao;
 
-import com.example.p200.getinfotest.dto.DTOArtstreetService;
-import com.example.p200.getinfotest.dto.DTOJejuWifiVisitCountInfo;
-
+import codersit.co.kr.jejugo.dto.DTOArtstreetService;
+import codersit.co.kr.jejugo.dto.DTOJejuWifiVisitCountInfo;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.SimpleXmlConverterFactory;
@@ -18,7 +17,7 @@ public interface IDAO {
     @GET("openapi/service/apiservice/JejuWifiVisitCountInfo.do")
     Call<DTOJejuWifiVisitCountInfo> getJejuWifiVisitCountInfo(@Query("start_date") String start_date,
                                                               @Query("end_date") String end_date,
-                                                              @Query(value = "serviceKey",encoded=true) String serviceKey,
+                                                              @Query(value = "serviceKey", encoded = true) String serviceKey,
                                                               @Query("numOfRows") String numOfRows,
                                                               @Query("pageNo") String pageNo);
 
@@ -26,7 +25,7 @@ public interface IDAO {
     @GET("rest/ArtstreetService/getArtstreetList")
     Call<DTOArtstreetService> getArtstreetService(@Query("startPage") String startPage,
                                                   @Query("pageSize") String pageSize,
-                                                  @Query(value = "authApiKey",encoded=true) String authApiKey);
+                                                  @Query(value = "authApiKey", encoded = true) String authApiKey);
 
 
     public static final Retrofit RetrofitForHotplace = new Retrofit.Builder().baseUrl("http://jstp.jejutour.go.kr/")
