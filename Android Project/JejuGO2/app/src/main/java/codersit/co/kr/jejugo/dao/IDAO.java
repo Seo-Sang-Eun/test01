@@ -1,11 +1,16 @@
 package codersit.co.kr.jejugo.dao;
 
+import java.util.Map;
+
 import codersit.co.kr.jejugo.dto.DTOArtstreetService;
+import codersit.co.kr.jejugo.dto.DTOGeoCode;
 import codersit.co.kr.jejugo.dto.DTOJejuWifiVisitCountInfo;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.SimpleXmlConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.HeaderMap;
 import retrofit2.http.Query;
 
 /**
@@ -27,12 +32,21 @@ public interface IDAO {
                                                   @Query("pageSize") String pageSize,
                                                   @Query(value = "authApiKey", encoded = true) String authApiKey);
 
+    @GET("v1/map/geocode.xml")
+    Call<DTOGeoCode> getGeoCode(@Query("query") String placeName,
+                                @HeaderMap Map<String, String> headers);
+
+
 
     public static final Retrofit RetrofitForHotplace = new Retrofit.Builder().baseUrl("http://jstp.jejutour.go.kr/")
             .addConverterFactory( SimpleXmlConverterFactory.create())
             .build();
 
     public static final Retrofit RetrofitForFestival = new Retrofit.Builder().baseUrl("http://210.99.248.79/")
+            .addConverterFactory( SimpleXmlConverterFactory.create())
+            .build();
+
+    public static final Retrofit RetrofitForGeoCode = new Retrofit.Builder().baseUrl("https://openapi.naver.com/")
             .addConverterFactory( SimpleXmlConverterFactory.create())
             .build();
 

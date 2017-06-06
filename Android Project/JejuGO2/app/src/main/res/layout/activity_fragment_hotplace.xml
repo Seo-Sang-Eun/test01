@@ -8,4 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView3" />
+
+    <com.nhn.android.maps.NMapView
+        android:layout_width="fill_parent"
+        android:layout_height="313dp"
+        android:id="@+id/nmapview_frag_hotplace"/>
+
 </LinearLayout>
