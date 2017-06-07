@@ -25,8 +25,8 @@ public class DAOGeoCode extends DAOClass {
     public DAOGeoCode(String placeName){
         this.placeName = placeName;
 
-        this.serviceKey1 = IKeyManager.GeoCodeKey1;
-        this.serviceKey2 = IKeyManager.GeoCodeKey2;
+        this.serviceKey1 = IKeyManager.NaverClientID;
+        this.serviceKey2 = IKeyManager.NaverClientSecret;
     }
 
     public void getData()

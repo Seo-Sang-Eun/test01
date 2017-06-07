@@ -12,4 +12,5 @@ public interface IKeyManager {
     String FestivalInquiryServiceKey = "Scsgi4NoalP9HaFNcH6cIynXrXdQsHRUMT5DJBmLnAMqb6xroIyXwBWfEK5mjBxLVJ3gRVbbVB5Fap%2Flvi8S4w%3D%3D"; // 임시키
     String BesteatingKey = "Scsgi4NoalP9HaFNcH6cIynXrXdQsHRUMT5DJBmLnAMqb6xroIyXwBWfEK5mjBxLVJ3gRVbbVB5Fap%2Flvi8S4w%3D%3D";
 
+    String NaverClientID = "2iFv15YZ5WyF7Frk9_Ui";
 }
