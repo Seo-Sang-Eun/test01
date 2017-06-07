@@ -9,5 +9,6 @@ public interface IKeyManager {
     String ArtstreetServiceKey = "Scsgi4NoalP9HaFNcH6cIynXrXdQsHRUMT5DJBmLnAMqb6xroIyXwBWfEK5mjBxLVJ3gRVbbVB5Fap%2Flvi8S4w%3D%3D"; //부희키
     String CultureEventKey = "Scsgi4NoalP9HaFNcH6cIynXrXdQsHRUMT5DJBmLnAMqb6xroIyXwBWfEK5mjBxLVJ3gRVbbVB5Fap%2Flvi8S4w%3D%3D";
     String ArtcenterShowInfoServiceKey = "Scsgi4NoalP9HaFNcH6cIynXrXdQsHRUMT5DJBmLnAMqb6xroIyXwBWfEK5mjBxLVJ3gRVbbVB5Fap%2Flvi8S4w%3D%3D";
-    String FestivalInquiryServiceKey = "DLVCGYUTQNLKFMU"; // 임시키
+    String FestivalInquiryServiceKey = "Scsgi4NoalP9HaFNcH6cIynXrXdQsHRUMT5DJBmLnAMqb6xroIyXwBWfEK5mjBxLVJ3gRVbbVB5Fap%2Flvi8S4w%3D%3D"; // 임시키
+    String BesteatingKey = "Scsgi4NoalP9HaFNcH6cIynXrXdQsHRUMT5DJBmLnAMqb6xroIyXwBWfEK5mjBxLVJ3gRVbbVB5Fap%2Flvi8S4w%3D%3D";
 }
