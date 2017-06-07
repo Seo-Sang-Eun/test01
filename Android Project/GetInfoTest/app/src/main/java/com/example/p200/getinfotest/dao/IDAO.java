@@ -48,6 +48,13 @@ public interface IDAO {
                                                               @Query("pageSize") String pageSize,
                                                               @Query(value = "authApiKey",encoded=true) String authApiKey);
 
+    // 제주 도내의 모범음식점 정보
+    @GET("rest/besteating/getEatingList") // default startpage, pagesize = 1, 10
+    Call<DTOFestivalInquiryService> getBestEating(@Query("startPage") String startPage,
+                                                              @Query("pageSize") String pageSize,
+                                                              @Query(value = "serviceKey",encoded=true) String serviceKey,
+                                                  @Query("dataTitle") String dataTitle);
+
     public static final Retrofit RetrofitForHotplace = new Retrofit.Builder().baseUrl("http://jstp.jejutour.go.kr/")
             .addConverterFactory( SimpleXmlConverterFactory.create())
             .build();
@@ -65,6 +72,10 @@ public interface IDAO {
             .build();
 
     public static final Retrofit RetrofitForFestvalInquiryService = new Retrofit.Builder().baseUrl("http://210.99.248.79/")
+            .addConverterFactory( SimpleXmlConverterFactory.create())
+            .build();
+
+    public static final Retrofit RetrofitForBestEating = new Retrofit.Builder().baseUrl("http://data.jeju.go.kr/")
             .addConverterFactory( SimpleXmlConverterFactory.create())
             .build();
 }
