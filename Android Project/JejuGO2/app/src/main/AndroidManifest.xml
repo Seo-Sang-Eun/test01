@@ -31,7 +31,12 @@
 
         <activity
             android:name=".activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <category android:name="android.intent.category.BROWSABLE" />
+
+            </intent-filter>
+        </activity>
 
         <activity android:name=".activity.JoinActivity"
             android:theme="@style/AppTheme.NoActionBar" />
