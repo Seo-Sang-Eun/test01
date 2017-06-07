@@ -34,7 +34,8 @@ public interface IDAO {
 
     @GET("v1/map/geocode.xml")
     Call<DTOGeoCode> getGeoCode(@Query("query") String placeName,
-                                @HeaderMap Map<String, String> headers);
+                                @Header("X-Naver-Client-Id") String serviceKey1,
+                                @Header("X-Naver-Client-Secret") String serviceKey2);
 
 
 
@@ -49,6 +50,4 @@ public interface IDAO {
     public static final Retrofit RetrofitForGeoCode = new Retrofit.Builder().baseUrl("https://openapi.naver.com/")
             .addConverterFactory( SimpleXmlConverterFactory.create())
             .build();
-
-
 }

@@ -1,5 +1,6 @@
 package codersit.co.kr.jejugo.activity;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.nhn.android.maps.NMapContext;
 import com.nhn.android.maps.NMapController;
@@ -14,16 +16,23 @@ import com.nhn.android.maps.NMapOverlayItem;
 import com.nhn.android.maps.NMapView;
 import com.nhn.android.maps.maplib.NGeoPoint;
 import com.nhn.android.maps.overlay.NMapPOIdata;
+import com.nhn.android.maps.overlay.NMapPOIitem;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
 
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.dao.DAOGeoCode;
 import codersit.co.kr.jejugo.dao.DAOJejuWifiVisitCountInfo;
+import codersit.co.kr.jejugo.dto.DTOGeoCode;
+import codersit.co.kr.jejugo.dto.DTOHotPlace;
 import codersit.co.kr.jejugo.dto.DTOJejuWifiVisitCountInfo;
+import codersit.co.kr.jejugo.util.JejuWifiDataManager;
 import codersit.co.kr.jejugo.util.ICallback;
 import codersit.co.kr.jejugo.util.NMapPOIflagType;
 import codersit.co.kr.jejugo.util.NMapViewerResourceProvider;
 import codersit.co.kr.jejugo.util.Util;
+
+import static codersit.co.kr.jejugo.util.IKeyManager.GeoCodeKey1;
 
 /**
  * Created by P200 on 2017-06-04.
@@ -34,19 +43,19 @@ public class HotplaceFragment extends Fragment {
     final String LOG = "THIS HOTPLACE FRAGMENT";
 
     private NMapContext mMapContext;
-    private static final String CLIENT_ID = "2iFv15YZ5WyF7Frk9_Ui";// 애플리케이션 클라이언트 아이디 값
-
     NMapView mNMapView;
+    NMapViewerResourceProvider mMapViewerResourceProvider;
+    NMapOverlayManager mOverlayManager;
+    int mMarkerId;
+    NMapPOIdata poiData;
+
+
+
+    final int RESULT_MAX_COUNT = 20;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
-
-
-
-
 
 
 
@@ -61,18 +70,17 @@ public class HotplaceFragment extends Fragment {
         mMapContext.onCreate();
     }
 
-
-
     private void initMap()
     {
+//        DisplayService dd  = (DisplayService)getContext().getSystemService(Activity.DISPLAY_SERVICE);
+
         mNMapView = (NMapView)getView().findViewById(R.id.nmapview_frag_hotplace);
-        mNMapView.setClientId(CLIENT_ID);
+        mNMapView.setClientId(GeoCodeKey1);
         mNMapView.setClickable(true);
         mNMapView.setEnabled(true);
         mNMapView.setFocusable(true);
         mNMapView.setFocusableInTouchMode(true);
         mNMapView.requestFocus();
-
 
         mMapContext.setupMapView(mNMapView);
         NMapController nMapController =  mNMapView.getMapController();
@@ -83,42 +91,54 @@ public class HotplaceFragment extends Fragment {
 //        mNMapView.setAutoRotateEnabled(true,false);
 //        mNMapView.setRotateAngle(90);
 
+        mMapViewerResourceProvider = new NMapViewerResourceProvider(super.getActivity());
+
+        mOverlayManager = new NMapOverlayManager(super.getActivity(), mNMapView, mMapViewerResourceProvider);
+        mMarkerId = NMapPOIflagType.PIN;
+        poiData = new NMapPOIdata(RESULT_MAX_COUNT, mMapViewerResourceProvider);
+
+        poiData.beginPOIdata(JejuWifiDataManager.dtoHotPlaceArrayList.size());
 
 
-    }
+        for(int i = 0 ; i < JejuWifiDataManager.dtoHotPlaceArrayList.size();i++ )
+        {
+            DTOHotPlace dtoHotPlace =  JejuWifiDataManager.dtoHotPlaceArrayList.get(i);
 
-    private void setMarker()
-    {
-        NMapViewerResourceProvider mMapViewerResourceProvider = new NMapViewerResourceProvider(super.getActivity());
+            poiData.addPOIitem( Double.parseDouble( dtoHotPlace.getGpsX() ) , Double.parseDouble( dtoHotPlace.getGpsY() ),dtoHotPlace.getPlaceName(),mMarkerId ,0 );
+        }
 
-        NMapOverlayManager mOverlayManager = new NMapOverlayManager(super.getActivity(), mNMapView, mMapViewerResourceProvider);
 
-        int markerId = NMapPOIflagType.PIN;
-
-// set POI data
-        NMapPOIdata poiData = new NMapPOIdata(2, mMapViewerResourceProvider);
-        poiData.beginPOIdata(2);
-        poiData.addPOIitem(127.0630205, 37.5091300, "Pizza 777-111", markerId, 0);
-        poiData.addPOIitem(127.061, 37.51, "Pizza 123-456", markerId, 0);
         poiData.endPOIdata();
 
 // create POI data overlay
         NMapPOIdataOverlay poiDataOverlay = mOverlayManager.createPOIdataOverlay(poiData, null);
 
-        poiDataOverlay.showAllPOIdata(0);
+        poiDataOverlay.setOnStateChangeListener(onStateChangeListener);
+
+//        poiDataOverlay.showAllPOIdata(0);
 
     }
+
+
+    NMapPOIdataOverlay.OnStateChangeListener onStateChangeListener = new NMapPOIdataOverlay.OnStateChangeListener() {
+        @Override
+        public void onFocusChanged(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {
+            Toast.makeText(getActivity(), "onCalloutClick: " + nMapPOIitem.getTitle(), Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onCalloutClick(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {
+
+        }
+    };
 
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         initMap();
-
-        setMarker();
-
     }
+
     @Override
     public void onStart(){
         super.onStart();
@@ -140,10 +160,6 @@ public class HotplaceFragment extends Fragment {
         super.onStop();
     }
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-    @Override
     public void onDestroy() {
         mMapContext.onDestroy();
         super.onDestroy();
@@ -152,26 +168,5 @@ public class HotplaceFragment extends Fragment {
     public HotplaceFragment() {
 
     }
-
-
-    // 원래 메인꺼
-//        String start_date = "20161201";
-//        String end_date = "20161231";
-//        String numOfRows = "10";
-//        String pageNo = "1";
-//        DAOJejuWifiVisitCountInfo daoJejuWifiVisitCountInfo = new DAOJejuWifiVisitCountInfo(start_date,end_date,numOfRows,pageNo);
-//        daoJejuWifiVisitCountInfo.setICallbackListener(iCallback);
-//        daoJejuWifiVisitCountInfo.getData();
-
-//    ICallback iCallback = new ICallback() {
-//        @Override
-//        public void call(Object o) {
-//
-//            DTOJejuWifiVisitCountInfo dtoJejuWifiVisitCountInfo = (DTOJejuWifiVisitCountInfo)o;
-//
-//            Log.i(LOG, dtoJejuWifiVisitCountInfo.getNumOfRows());
-//        }
-//    };
-
 
 }

@@ -35,19 +35,26 @@ public class DAOJejuWifiVisitCountInfo extends DAOClass {
             @Override
             protected Object doInBackground(Object[] objects) {
 
+                DTOJejuWifiVisitCountInfo jejuWifiVisitCountInfo = null;
+
                 Call<DTOJejuWifiVisitCountInfo> call = IDAO.RetrofitForHotplace.create(IDAO.class).getJejuWifiVisitCountInfo(start_date, end_date, serviceKey, numOfRows, pageNo);
 
                 try {
-                    DTOJejuWifiVisitCountInfo jejuWifiVisitCountInfo = call.execute().body();
-
-                    iCallback.call(jejuWifiVisitCountInfo);
-
+                    jejuWifiVisitCountInfo = call.execute().body();
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                return null;
+                return jejuWifiVisitCountInfo;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+
+                iCallback.call(o);
+
+                super.onPostExecute(o);
             }
         }.execute();
 

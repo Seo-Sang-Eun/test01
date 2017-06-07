@@ -35,28 +35,28 @@ public class DAOGeoCode extends DAOClass {
             @Override
             protected Object doInBackground(Object[] objects) {
 
+                DTOGeoCode geoCode = null;
 
-                Map<String, String> map = new HashMap<>();
-                map.put("User-Agent", "curl/7.43.0");
-                map.put("Accept", "*/*");
-                map.put("Content-Type", "text/xml;charset=utf-8");
-                map.put("X-Naver-Client-Id", serviceKey1);
-                map.put("X-Naver-Client-Secret", serviceKey2);
-
-                Call<DTOGeoCode> call = IDAO.RetrofitForGeoCode.create(IDAO.class).getGeoCode(placeName, map);
+                Call<DTOGeoCode> call = IDAO.RetrofitForGeoCode.create(IDAO.class).getGeoCode(placeName, serviceKey1,serviceKey2);
 
                 try {
-                    DTOGeoCode geoCode = call.execute().body();
-
-                    iCallback.call(geoCode);
-
+                    geoCode = call.execute().body();
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                return null;
+                return geoCode;
             }
+
+            @Override
+            protected void onPostExecute(Object o) {
+
+                iCallback.call(o);
+
+                super.onPostExecute(o);
+            }
+
         }.execute();
 
     }

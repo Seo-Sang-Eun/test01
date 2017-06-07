@@ -11,9 +11,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import codersit.co.kr.jejugo.R;
 
@@ -22,8 +25,9 @@ public class MainActivity extends AppCompatActivity
 
     private int isQuit;
 
-    public static Context mContext;
+    String LOG = "MainActivity";
 
+    public static Context mContext;
     public static int RENEW_GPS = 1;
     public static int SEND_PRINT = 2;
 
