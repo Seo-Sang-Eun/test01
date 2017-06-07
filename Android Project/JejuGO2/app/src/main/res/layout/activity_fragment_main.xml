@@ -27,7 +27,7 @@
                 android:layout_height="50dp" />
 
             <TextView
-                android:text="스템프 모으기"
+                android:text="스탬프 북"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center" />
@@ -80,7 +80,7 @@
                     app:srcCompat="@drawable/icon_weather"  />
 
                 <TextView
-                    android:text="제주 기상관측 정보"
+                    android:text="제주 날씨"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center" />

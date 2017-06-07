@@ -11,11 +11,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import butterknife.OnClick;
+=======
+import java.util.ArrayList;
+
+>>>>>>> 024ad51da0cdf104173cbad22898fda5f7c090bd
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
 
@@ -24,8 +30,9 @@ public class MainActivity extends AppCompatActivity
 
     private int isQuit;
 
-    public static Context mContext;
+    String LOG = "MainActivity";
 
+    public static Context mContext;
     public static int RENEW_GPS = 1;
     public static int SEND_PRINT = 2;
 
