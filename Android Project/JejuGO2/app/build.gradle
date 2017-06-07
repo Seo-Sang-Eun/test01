@@ -38,4 +38,5 @@ dependencies {
     }
     compile 'com.naver.maps.open:naver-map-api:2.1.2@aar'
 
+    compile 'com.squareup.okhttp:okhttp:2.7.2'
 }

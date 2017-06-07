@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
 import codersit.co.kr.jejugo.R;
 
 /**
@@ -22,7 +23,15 @@ public class StampFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_fragment_stamp, container, false);
+
+        View view = inflater.inflate(R.layout.activity_fragment_stamp, container, false);
+        ButterKnife.bind(this,view);
+
+
+
+
+
+        return view;
 
     }
 }
