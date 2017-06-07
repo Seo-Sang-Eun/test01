@@ -13,16 +13,16 @@ import codersit.co.kr.jejugo.R;
  * Created by P200 on 2017-06-04.
  */
 
-public class PlayInfoFragment extends Fragment {
+public class WeatherFragment extends Fragment {
 
-    public PlayInfoFragment() {
+    public WeatherFragment() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_fragment_play_info, container, false);
+        return inflater.inflate(R.layout.activity_fragment_weather, container, false);
 
     }
 

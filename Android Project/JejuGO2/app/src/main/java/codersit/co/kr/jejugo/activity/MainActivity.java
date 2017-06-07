@@ -3,6 +3,7 @@ package codersit.co.kr.jejugo.activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,17 +11,26 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+
+
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private boolean isQuit;
+    private int isQuit;
 
+    String LOG = "MainActivity";
+
+    public static Context mContext;
+    public static int RENEW_GPS = 1;
+    public static int SEND_PRINT = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +38,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mContext = this.getApplicationContext();
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -57,13 +69,17 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            if(isQuit==false)
+            if(isQuit==2)
             {
-                Toast.makeText(getApplicationContext(),"백버튼을 한번 더 누르면 앱이 종료됩니다.",Toast.LENGTH_SHORT).show();
                 callFragmentPage(new MainFragment());
-                isQuit=true;
+                isQuit=1;
             }
-            else
+            else if(isQuit==1)
+            {
+                Toast.makeText(getApplicationContext(),"뒤로가기 버튼을 한번 더 누르면 앱이 종료됩니다.",Toast.LENGTH_SHORT).show();
+                isQuit=0;
+            }
+            else if(isQuit==0)
                 super.onBackPressed();
         }
     }
@@ -96,18 +112,18 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_stamp) {
             callFragmentPage(new StampFragment());
-        } else if (id == R.id.nav_gallery) {
-            callFragmentPage(new PlayInfoFragment());
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
+        } else if (id == R.id.nav_hotplace) {
+            callFragmentPage(new HotplaceFragment());
+        } else if (id == R.id.nav_weather) {
+            callFragmentPage(new WeatherFragment());
+        } else if (id == R.id.nav_festival) {
+            callFragmentPage(new FestivalFragment());
+        } else if (id == R.id.nav_food) {
+            callFragmentPage(new FoodFragment());
         } else if (id == R.id.nav_send) {
-
+// 아직 X
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -117,13 +133,14 @@ public class MainActivity extends AppCompatActivity
 
     public void callFragmentPage(Fragment fragment)
     {
-        isQuit=false;
+        isQuit=2;
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout,fragment);
         fragmentTransaction.commit();
     }
+
 
 
 }

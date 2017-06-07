@@ -36,7 +36,7 @@ public class DAOJejuWifiVisitCountInfo extends DAOClass {
             @Override
             protected Object doInBackground(Object[] objects) {
 
-                Call<DTOJejuWifiVisitCountInfo> call = IDAO.retrofit.create(IDAO.class).getJejuWifiVisitCountInfo(start_date, end_date, serviceKey, numOfRows, pageNo);
+                Call<DTOJejuWifiVisitCountInfo> call = IDAO.RetrofitForHotplace.create(IDAO.class).getJejuWifiVisitCountInfo(start_date, end_date, serviceKey, numOfRows, pageNo);
 
                 try {
                     DTOJejuWifiVisitCountInfo jejuWifiVisitCountInfo = call.execute().body();

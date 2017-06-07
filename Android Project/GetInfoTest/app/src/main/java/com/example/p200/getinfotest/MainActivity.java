@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         final String start_date = "20161201";
         final String end_date = "20161231";
         final String numOfRows = "10";
@@ -34,7 +35,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void call(Object o) {
 
-        DTOJejuWifiVisitCountInfo dtoJejuWifiVisitCountInfo = (DTOJejuWifiVisitCountInfo)o;
+    DTOJejuWifiVisitCountInfo dtoJejuWifiVisitCountInfo = (DTOJejuWifiVisitCountInfo)o;
+
+
+
 
 
         Log.i("THIS MainActivity", dtoJejuWifiVisitCountInfo.getNumOfRows());
