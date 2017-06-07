@@ -33,7 +33,7 @@ public class DAOArtstreetService extends DAOClass {
             protected Object doInBackground(Object[] objects)
             {
                 DTOArtstreetService artstreetService = null;
-                Call<DTOArtstreetService> call = IDAO.RetrofitForFestival.create(IDAO.class).getArtstreetService(startPage, pageSize, authApiKey);
+                Call<DTOArtstreetService> call = IDAO.RetrofitForJejuArtStreet.create(IDAO.class).getArtstreetService(startPage, pageSize, authApiKey);
                 try{
                     artstreetService = call.execute().body();
                 } catch(IOException e) {

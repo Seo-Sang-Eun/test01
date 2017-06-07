@@ -16,12 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-<<<<<<< HEAD
-import butterknife.OnClick;
-=======
-import java.util.ArrayList;
 
->>>>>>> 024ad51da0cdf104173cbad22898fda5f7c090bd
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
 
