@@ -8,11 +8,11 @@ import org.simpleframework.xml.Root;
 import java.util.ArrayList;
 
 /**
- * Created by BooHee on 2017-06-04.
+ * Created by BooHee on 2017-06-05.
  */
 
 @Root(name = "rfcOpenApi")
-public class DTOArtstreetService {
+public class DTOArtcenterShowInfoService {
     @Path("header")
     @Element
     private String resultCode;
@@ -38,31 +38,26 @@ public class DTOArtstreetService {
     private String totalCount;
 
     @Path("body")
-    @ElementList (required = false)
-    private ArrayList<DTOArtstreetService_List> data;
+    @ElementList(required = false)
+    private ArrayList<DTOArtcenterShowInfoService_List> data;
 
-    public String getResultCode()
-    {
+    public String getResultCode() {
         return resultCode;
     }
 
-    public String getResultMsg()
-    {
+    public String getResultMsg() {
         return resultMsg;
     }
 
-    public String getPageIndex()
-    {
+    public String getPageIndex() {
         return pageIndex;
     }
 
-    public String getPageSize()
-    {
+    public String getPageSize() {
         return pageSize;
     }
 
-    public String getStartPage()
-    {
+    public String getStartPage() {
         return startPage;
     }
 
@@ -70,9 +65,7 @@ public class DTOArtstreetService {
         return totalCount;
     }
 
-    public ArrayList<DTOArtstreetService_List> getData() {
+    public ArrayList<DTOArtcenterShowInfoService_List> getData() {
         return data;
     }
 }
-
-
