@@ -1,5 +1,6 @@
 package codersit.co.kr.jejugo.activity.festival;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +19,23 @@ public class JejuArtcenterAdapter extends BaseAdapter {
     private DTOArtcenterShowInfoService dtoArtcenterShowInfoService;
 
     public JejuArtcenterAdapter(DTOArtcenterShowInfoService dtoArtcenterShowInfoService ) {
+
+        Log.i("AAA","111");
+
         this.dtoArtcenterShowInfoService = dtoArtcenterShowInfoService;
     }
 
     @Override
     public int getCount() {
+
+        Log.i("AAA","222");
         return dtoArtcenterShowInfoService.getData().size();
     }
 
     @Override
     public Object getItem(int position) {
+        Log.i("AAA","333");
+
         return dtoArtcenterShowInfoService.getData().get(position);
     }
 
@@ -38,7 +46,9 @@ public class JejuArtcenterAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        Log.i("AAA","444");
         JejuArtCenterCustomViewHolder holder;
+
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.jae_artcenter_item, null, false);
 
@@ -55,7 +65,11 @@ public class JejuArtcenterAdapter extends BaseAdapter {
 
         dtoArtcenterShowInfoService.getData().get(position).getP_IMG();
 
-        ImageLoaderTask imageLoaderTask = new ImageLoaderTask(holder.jejuArtcenterImage,dtoArtcenterShowInfoService.getData().get(position).getP_IMG());
+//        String tmpStr = dtoArtcenterShowInfoService.getData().get(position).getP_IMG();
+//
+//        Log.i("ASDASD",tmpStr);
+
+        ImageLoaderTask imageLoaderTask = new ImageLoaderTask(holder.jejuArtcenterImage ,dtoArtcenterShowInfoService.getData().get(position).getP_IMG());
         imageLoaderTask.execute();
 
         holder.jejuArtcenterTitle.setText(dtoArtcenterShowInfoService.getData().get(position).getP_NM());

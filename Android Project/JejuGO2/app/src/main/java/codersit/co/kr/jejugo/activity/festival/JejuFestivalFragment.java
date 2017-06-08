@@ -3,6 +3,7 @@ package codersit.co.kr.jejugo.activity.festival;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import codersit.co.kr.jejugo.util.ICallback;
  */
 
 public class JejuFestivalFragment extends Fragment {
+
+    String LOG = "JejuFestivalFragment";
 
     private JejuFestivalAdapter jejuFestivalAdapter;
     private ListView jejuFestivalListview;
@@ -50,6 +53,10 @@ public class JejuFestivalFragment extends Fragment {
         public void call(Object o) {
 
             DTOFestivalInquiryService dtoFestivalInquiryService = (DTOFestivalInquiryService) o;
+
+            for(int i = 0 ; i <dtoFestivalInquiryService.getData().size();i++)
+                Log.i("LOG",dtoFestivalInquiryService.getData().get(i).getInfo());
+
             jejuFestivalAdapter = new JejuFestivalAdapter(dtoFestivalInquiryService);
 
             view_action_sms.setAdapter(jejuFestivalAdapter);

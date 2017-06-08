@@ -1,7 +1,7 @@
 package codersit.co.kr.jejugo.dao;
 
 import android.os.AsyncTask;
-
+import android.util.Log;
 
 
 import java.io.IOException;
@@ -30,15 +30,25 @@ public class DAOCultureEvent extends DAOClass {
         {
             protected Object doInBackground(Object[] objects)
             {
+                DTOCultureEvent cultureEvent =null;
+
                 Call<DTOCultureEvent> call = IDAO.RetrofitForSeogwipoCultureEvent.create(IDAO.class).getCultureEvent(serviceKey);
                 try{
-                    DTOCultureEvent cultureEvent = call.execute().body();
-                    iCallback.call(cultureEvent);
+                     cultureEvent = call.execute().body();
                 } catch(IOException e) {
                     e.printStackTrace();
                 }
-                return null;
+                return cultureEvent;
             }
+
+            @Override
+            protected void onPostExecute(Object o) {
+
+                iCallback.call(o);
+
+                super.onPostExecute(o);
+            }
+
         }.execute();
     }
 }

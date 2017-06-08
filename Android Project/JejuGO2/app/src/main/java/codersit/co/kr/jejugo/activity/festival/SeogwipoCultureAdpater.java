@@ -25,12 +25,12 @@ public class SeogwipoCultureAdpater extends BaseAdapter {
     // ListView에 보여질 Item 수
     @Override
     public int getCount() {
-        return dtoCultureEvent.getData().size();
+        return dtoCultureEvent.getItems().size();
     }
     // 하나의 Item(ImageView 1, TextView 2)
     @Override
     public Object getItem(int position) {
-        return dtoCultureEvent.getData().get(position);
+        return dtoCultureEvent.getItems().get(position);
     }
     // Item의 id : Item을 구별하기 위한 것으로 position 사용
     @Override
@@ -56,10 +56,10 @@ public class SeogwipoCultureAdpater extends BaseAdapter {
         }
 
 
-        holder.seogwipoCultureSubject.setText(dtoCultureEvent.getData().get(position).getISubject());
-        holder.seogwipoCultureAddress.setText(dtoCultureEvent.getData().get(position).getILocation());
-        holder.seogwipoCultureStartDate.setText(dtoCultureEvent.getData().get(position).getISdate());
-        holder.seogwipoCultureEndDate.setText(dtoCultureEvent.getData().get(position).getIEdate());
+        holder.seogwipoCultureSubject.setText(dtoCultureEvent.getItems().get(position).getISubject());
+        holder.seogwipoCultureAddress.setText(dtoCultureEvent.getItems().get(position).getILocation());
+        holder.seogwipoCultureStartDate.setText(dtoCultureEvent.getItems().get(position).getISdate());
+        holder.seogwipoCultureEndDate.setText(dtoCultureEvent.getItems().get(position).getIEdate());
 
         return convertView;
     }

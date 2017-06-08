@@ -30,15 +30,27 @@ public class DAOFestivalInquiryService extends DAOClass {
         {
             protected Object doInBackground(Object[] objects)
             {
+                DTOFestivalInquiryService festivalInquiryService=null;
                 Call<DTOFestivalInquiryService> call = IDAO.RetrofitForFestvalInquiryService.create(IDAO.class).getFestivalInquiryService(startPage, pageSize, authApiKey);
                 try{
-                    DTOFestivalInquiryService festivalInquiryService = call.execute().body();
-                    iCallback.call(festivalInquiryService);
+                    festivalInquiryService = call.execute().body();
                 } catch(IOException e) {
                     e.printStackTrace();
                 }
-                return null;
+                return festivalInquiryService;
+
+
             }
+
+            @Override
+            protected void onPostExecute(Object o) {
+
+                iCallback.call(o);
+
+                super.onPostExecute(o);
+            }
+
+
         }.execute();
     }
 }

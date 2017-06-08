@@ -3,6 +3,7 @@ package codersit.co.kr.jejugo.activity.festival;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import butterknife.ButterKnife;
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.dao.DAOCultureEvent;
 import codersit.co.kr.jejugo.dto.DTOCultureEvent;
+import codersit.co.kr.jejugo.dto.DTOFestivalInquiryService;
 import codersit.co.kr.jejugo.util.ICallback;
 
 /**
@@ -22,7 +24,7 @@ import codersit.co.kr.jejugo.util.ICallback;
 public class SeogwipoCultureFragment extends Fragment {
     private SeogwipoCultureAdpater seogwipoCultureAdpater;
     private ListView seogwipoCultureListView;
-
+    String LOG="SeogwipoCultureFragment";
     //listView해
     @Bind(R.id.jeju_listView2)
     ListView view_action_sms;
@@ -51,6 +53,12 @@ public class SeogwipoCultureFragment extends Fragment {
         public void call(Object o) {
 
             DTOCultureEvent dtoCultureEvent = (DTOCultureEvent) o;
+
+//            Log.i(LOG,dtoCultureEvent.getData().get(0).getPAdddate());
+//            Log.i(LOG,dtoCultureEvent.getData().get(0).getIContents());
+//            Log.i(LOG,dtoCultureEvent.getData().get(0).getILocation());
+
+
             seogwipoCultureAdpater = new SeogwipoCultureAdpater(dtoCultureEvent);
 
             view_action_sms.setAdapter(seogwipoCultureAdpater);
