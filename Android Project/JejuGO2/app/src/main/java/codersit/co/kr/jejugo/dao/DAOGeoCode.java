@@ -31,7 +31,7 @@ public class DAOGeoCode extends DAOClass {
 //17.6.8 12시 에러나서 주석처리.
     public void getData()
     {
-    /*    new AsyncTask<Object, Void, Object>() {
+     new AsyncTask<Object, Void, Object>() {
             @Override
             protected Object doInBackground(Object[] objects) {
 
@@ -57,7 +57,7 @@ public class DAOGeoCode extends DAOClass {
                 super.onPostExecute(o);
             }
 
-        }.execute();*/
+        }.execute();
 
     }
 
