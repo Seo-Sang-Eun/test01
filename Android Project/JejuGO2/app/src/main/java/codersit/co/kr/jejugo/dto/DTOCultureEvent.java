@@ -36,6 +36,9 @@ public class DTOCultureEvent {
     @Element
     private String totalCount;
 
+    @Path("body")
+    @ElementList (required = false)
+    private ArrayList<DTOCultureEvent_Item> data;
 
     public String getResultCode() {
         return resultCode;
@@ -59,5 +62,9 @@ public class DTOCultureEvent {
 
     public String getTotalCount() {
         return totalCount;
+    }
+
+    public ArrayList<DTOCultureEvent_Item> getData() {
+        return data;
     }
 }

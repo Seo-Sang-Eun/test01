@@ -31,33 +31,48 @@ public class FestivalFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_fragment_festival, container, false);
         ButterKnife.bind(this, view);
 
-
         return view;
-
-
     }
 
 
 
-
-    @OnClick(R.id.jejuBtn)
-    void onClick_jejuBtn()
+    @OnClick(R.id.artCenter_btn)
+    void onClick_artCenterBtn()
     {
         Log.i("TT","TT");
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,new JejuPerformanceFragment());
+        fragmentTransaction.replace(R.id.frame_layout,new JejuArtcenterFragment());
         fragmentTransaction.commit();
     }
 
-
-    @OnClick(R.id.seogwipoBtn)
-    void onClick_seogwipoBtn()
+    @OnClick(R.id.cultureStreet_btn)
+    void onClick_cultureStreetBtn()
     {
         Log.i("TT","TT");
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,new SeoPerformanceFragment());
+        fragmentTransaction.replace(R.id.frame_layout,new JejuCultureStreetFragment());
+        fragmentTransaction.commit();
+    }
+
+    @OnClick(R.id.jejuFest_btn)
+    void onClick_jejuFestBtn()
+    {
+        Log.i("TT","TT");
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout,new JejuFestivalFragment());
+        fragmentTransaction.commit();
+    }
+
+    @OnClick(R.id.seogwipoFest_btn)
+    void onClick_seogwipoFestBtn()
+    {
+        Log.i("TT","TT");
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout,new SeogwipoCultureFragment());
         fragmentTransaction.commit();
     }
 
