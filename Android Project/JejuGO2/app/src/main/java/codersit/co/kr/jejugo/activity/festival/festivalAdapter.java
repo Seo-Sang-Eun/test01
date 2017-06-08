@@ -51,9 +51,9 @@ public class festivalAdapter extends BaseAdapter {
             holder = (CustomViewHolder) convertView.getTag();
         }
 
-       // dtoArtstreetService.getData().get(position).getImg_url();
+        //dtoArtstreetService.getData().get(position).getImg_url();
 
-       // ImageLoaderTask imageLoaderTask = new ImageLoaderTask(holder.imageView,dtoArtstreetService.getData().get(position).getImg_url());
+        // ImageLoaderTask imageLoaderTask = new ImageLoaderTask(holder.imageView,dtoArtstreetService.getData().get(position).getImg_url());
         //imageLoaderTask.execute();
 
         holder.textTitle.setText(dtoFestivalInquiryService.getData().get(position).getTitle());

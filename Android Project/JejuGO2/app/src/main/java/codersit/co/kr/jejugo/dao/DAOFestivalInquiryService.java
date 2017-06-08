@@ -1,8 +1,6 @@
 package codersit.co.kr.jejugo.dao;
 
 import android.os.AsyncTask;
-
-
 import java.io.IOException;
 
 import codersit.co.kr.jejugo.dto.DTOFestivalInquiryService;
