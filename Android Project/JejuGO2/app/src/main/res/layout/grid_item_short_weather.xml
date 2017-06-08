@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:gravity="center">
+
+    <TextView
+        android:textColor="#000000"
+        android:text="03시 (목)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_grid_item_short_weather_txt1"
+        android:textSize="12sp"
+        tools:text="03시 (목)" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        app:srcCompat="@drawable/we_su_cloud"
+        android:id="@+id/iv_grid_item_short_weather_img"
+        android:layout_height="35dp" />
+
+    <TextView
+        android:textColor="#0099ff"
+        android:text="26℃"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_grid_item_short_weather_txt2"
+        android:textSize="14sp"
+        tools:text="26℃" />
+
+
+</LinearLayout>

@@ -59,6 +59,11 @@ public interface IDAO {
                                                   @Query(value = "serviceKey",encoded=true) String serviceKey,
                                                   @Query("dataTitle") String dataTitle);
 
+    @GET("v1/map/geocode.xml")
+    Call<DTOGeoCode> getGeoCode(@Query("query") String placeName,
+                                @Header("X-Naver-Client-Id") String serviceKey1,
+                                @Header("X-Naver-Client-Secret") String serviceKey2);
+
     public static final Retrofit RetrofitForHotplace = new Retrofit.Builder().baseUrl("http://jstp.jejutour.go.kr/")
             .addConverterFactory( SimpleXmlConverterFactory.create())
             .build();
@@ -80,6 +85,10 @@ public interface IDAO {
             .build();
 
     public static final Retrofit RetrofitForBestEating = new Retrofit.Builder().baseUrl("http://data.jeju.go.kr/")
+            .addConverterFactory( SimpleXmlConverterFactory.create())
+            .build();
+
+    public static final Retrofit RetrofitForGeoCode = new Retrofit.Builder().baseUrl("https://openapi.naver.com/")
             .addConverterFactory( SimpleXmlConverterFactory.create())
             .build();
 }
