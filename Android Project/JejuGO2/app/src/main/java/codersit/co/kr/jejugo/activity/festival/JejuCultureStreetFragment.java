@@ -12,29 +12,26 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.dao.DAOArtstreetService;
-import codersit.co.kr.jejugo.dao.DAOFestivalInquiryService;
 import codersit.co.kr.jejugo.dto.DTOArtstreetService;
-import codersit.co.kr.jejugo.dto.DTOFestivalInquiryService;
 import codersit.co.kr.jejugo.util.ICallback;
 
 /**
- * Created by P200 on 2017-06-04.
+ * Created by admin on 2017-06-08.
  */
 
-public class JejuPerformanceFragment extends Fragment {
+public class JejuCultureStreetFragment extends Fragment {
 
-    private festivalAdapter myAdapter;
+    private JejuCultureStreetAdpater jejuCultureStreetAdpater;
     private ListView myListView;
 
- //listView해
-   @Bind(R.id.jeju_listView2)
+    @Bind(R.id.jeju_listView2)
     ListView view_action_sms;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.jeju_listview, container, false);
+        View view = inflater.inflate(R.layout.jae_listview, container, false);
         ButterKnife.bind(this, view);
 
 
@@ -43,10 +40,10 @@ public class JejuPerformanceFragment extends Fragment {
         return view;
     }
     private void setData() {
-        DAOFestivalInquiryService daoFestivalInquiryService = new DAOFestivalInquiryService("1","10");
-        daoFestivalInquiryService.setICallbackListener(iCallback);
+        DAOArtstreetService daoArtstreetService = new DAOArtstreetService("1","10");
+        daoArtstreetService.setICallbackListener(iCallback);
 
-        daoFestivalInquiryService.getData();
+        daoArtstreetService.getData();
     }
 
 
@@ -54,16 +51,12 @@ public class JejuPerformanceFragment extends Fragment {
         @Override
         public void call(Object o) {
 
-            DTOFestivalInquiryService dtoFestivalInquiryService = (DTOFestivalInquiryService) o;
-            myAdapter = new festivalAdapter(dtoFestivalInquiryService);
+            DTOArtstreetService dtoArtstreetService = (DTOArtstreetService) o;
+            jejuCultureStreetAdpater = new JejuCultureStreetAdpater(dtoArtstreetService);
 
-            view_action_sms.setAdapter(myAdapter);
+            view_action_sms.setAdapter(jejuCultureStreetAdpater);
 
-            myAdapter.notifyDataSetChanged();
+            jejuCultureStreetAdpater.notifyDataSetChanged();
         }
     };
-
-
-
-
 }

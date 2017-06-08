@@ -33,16 +33,25 @@ public class DAOJejuArtcenterShowInfoService extends DAOClass{
         new AsyncTask<Object, Void, Object>()
         {
             protected Object doInBackground(Object[] objects)
-            {
+            {DTOArtcenterShowInfoService artcenterShowInfoService =null;
                 Call<DTOArtcenterShowInfoService> call = IDAO.RetrofitForJeJuArtcenterShowInfoService.create(IDAO.class).getArtcenterShowInfoService(startPage, serviceKey, pageSize, authApiKey);
                 try{
-                    DTOArtcenterShowInfoService artcenterShowInfoService = call.execute().body();
-                    iCallback.call(artcenterShowInfoService);
+                    artcenterShowInfoService = call.execute().body();
                 } catch(IOException e) {
                     e.printStackTrace();
                 }
-                return null;
+                return artcenterShowInfoService;
             }
+
+
+            @Override
+            protected void onPostExecute(Object o) {
+
+                iCallback.call(o);
+
+                super.onPostExecute(o);
+            }
+
         }.execute();
     }
 }

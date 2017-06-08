@@ -28,6 +28,10 @@ public class DTOCultureEvent_Item {
     private String PAdddate;
     @Element(required = false)
     private String PSn;
+    @Element(required = false)
+    private String ISdate;
+    @Element(required = false)
+    private String IEdate;
 
     public String getIChair() {
         return IChair;
@@ -67,5 +71,13 @@ public class DTOCultureEvent_Item {
 
     public String getPSn() {
         return PSn;
+    }
+
+    public String getISdate() {
+        return ISdate;
+    }
+
+    public String getIEdate() {
+        return IEdate;
     }
 }

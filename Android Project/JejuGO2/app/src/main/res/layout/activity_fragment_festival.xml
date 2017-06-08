@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
 
     <Button
-        android:id="@+id/jejuBtn"
-        android:layout_width="190dp"
-        android:layout_height="260dp"
-        android:text="jejuBtn"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/artCenter_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.27"
+        android:text="artCenter_btn" />
 
     <Button
-        android:id="@+id/seogwipoBtn"
-        android:layout_width="190dp"
-        android:layout_height="260dp"
-        android:text="seogwipoBtn"
-        android:layout_toEndOf="@+id/jejuBtn"
-        android:layout_below="@+id/jejuBtn" />
-</RelativeLayout>
+        android:id="@+id/cultureStreet_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.26"
+        android:text="cultureStreet_btn" />
+
+    <Button
+        android:id="@+id/jejuFest_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.26"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/seogwipoFest_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.27"
+        android:text="Button" />
+</LinearLayout>

@@ -4,7 +4,7 @@
     android:padding="10dp">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView_cultureStreet"
         android:layout_width="100dp"
         android:layout_height="70dp"
         android:layout_marginRight="10dp"
@@ -13,20 +13,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/text_title"
+            android:id="@+id/text_cultureStreet_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="title"
-            android:textSize="16sp"/>
+            android:textSize="25sp" />
 
         <TextView
-            android:id="@+id/text_content"
+            android:id="@+id/text_cultureStreet_adress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="content"/>
+            android:text="content"
+            android:layout_weight="0.27" />
+
     </LinearLayout>
 </LinearLayout>
