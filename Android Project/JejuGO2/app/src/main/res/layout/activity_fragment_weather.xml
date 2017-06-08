@@ -1,29 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:padding="3dp"
+            android:text="현 재 날 씨"
+            android:textColor="#ffffff"
+            android:background="#4699ff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView6"
+            android:textAlignment="center" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true">
 
+                <TextView
+                    android:text="2017. 06. 08 12:34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView2"
+                    android:gravity="center"
+                    android:textSize="30sp" />
 
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
 
+                    <ImageView
+                        android:layout_width="100dp"
+                        app:srcCompat="@drawable/we_su_cloud"
+                        android:id="@+id/imageView2"
+                        android:layout_height="100dp" />
 
+                    <TextView
+                        android:text="27℃"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView4"
+                        android:textSize="36sp" />
 
+                </LinearLayout>
 
+            </LinearLayout>
+        </RelativeLayout>
 
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:padding="3dp"
+            android:text="최 근 날 씨"
+            android:textColor="#ffffff"
+            android:background="#4699ff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true">
 
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_vertical_bar"/>
+                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_vertical_bar"/>
+                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_vertical_bar"/>
+                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_vertical_bar"/>
+                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_vertical_bar"/>
+                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_vertical_bar"/>
+                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_vertical_bar"/>
+                    <include layout="@layout/grid_item_short_weather"/>
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_vertical_bar"/>
+                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_vertical_bar"/>
+                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_vertical_bar"/>
+                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_vertical_bar"/>
+                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_vertical_bar"/>
+                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_vertical_bar"/>
+                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_vertical_bar"/>
+                    <include layout="@layout/grid_item_short_weather"/>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
 
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:padding="3dp"
+            android:text="주 간 날 씨"
+            android:textColor="#ffffff"
+            android:background="#4699ff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"  />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true">
+                <include layout="@layout/grid_item_long_weather"/>
+                <include layout="@layout/grid_item_vertical_bar"/>
+                <include layout="@layout/grid_item_long_weather"/>
+                <include layout="@layout/grid_item_vertical_bar"/>
+                <include layout="@layout/grid_item_long_weather"/>
+                <include layout="@layout/grid_item_vertical_bar"/>
+                <include layout="@layout/grid_item_long_weather"/>
+                <include layout="@layout/grid_item_vertical_bar"/>
+                <include layout="@layout/grid_item_long_weather"/>
+                <include layout="@layout/grid_item_vertical_bar"/>
+                <include layout="@layout/grid_item_long_weather"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
 
 
 </LinearLayout>
