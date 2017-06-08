@@ -1,58 +1,48 @@
 package codersit.co.kr.jejugo.activity;
 
-import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nhn.android.maps.NMapCompassManager;
 import com.nhn.android.maps.NMapContext;
 import com.nhn.android.maps.NMapController;
-import com.nhn.android.maps.NMapOverlayItem;
+import com.nhn.android.maps.NMapLocationManager;
 import com.nhn.android.maps.NMapView;
 import com.nhn.android.maps.maplib.NGeoPoint;
 import com.nhn.android.maps.overlay.NMapPOIdata;
 import com.nhn.android.maps.overlay.NMapPOIitem;
+import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
-
-import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
-import codersit.co.kr.jejugo.dao.DAOGeoCode;
-import codersit.co.kr.jejugo.dao.DAOJejuWifiVisitCountInfo;
-import codersit.co.kr.jejugo.dto.DTOGeoCode;
-import codersit.co.kr.jejugo.dto.DTOHotPlace;
-import codersit.co.kr.jejugo.dto.DTOJejuWifiVisitCountInfo;
+import codersit.co.kr.jejugo.dto.DTOStampPlace;
 import codersit.co.kr.jejugo.util.JejuWifiDataManager;
-import codersit.co.kr.jejugo.util.ICallback;
 import codersit.co.kr.jejugo.util.NMapPOIflagType;
 import codersit.co.kr.jejugo.util.NMapViewerResourceProvider;
-import codersit.co.kr.jejugo.util.Util;
+import codersit.co.kr.jejugo.util.StampDataManager;
 
 import static codersit.co.kr.jejugo.util.IKeyManager.NaverClientID;
+import static codersit.co.kr.jejugo.util.StampDataManager.dtoStampPlaceArrayList;
 
 /**
  * Created by P200 on 2017-06-04.
  */
 
-public class HotplaceFragment extends Fragment {
+public class StampGetFragment extends Fragment {
 
-    final String LOG = "THIS HOTPLACE FRAGMENT";
+
+    final String LOG = "StampFragment";
 
     private NMapContext mMapContext;
     NMapView mNMapView;
@@ -61,62 +51,17 @@ public class HotplaceFragment extends Fragment {
     int mMarkerId;
     NMapPOIdata poiData;
 
-    String curQuery = null;
+    NMapLocationManager mMapLocationManager;
+    NMapCompassManager mMapCompassManager;
+    NMapMyLocationOverlay mMyLocationOverlay;
+//    MapContainerView  mMapContainerView;
 
     final int RESULT_MAX_COUNT = 20;
 
-    @Bind(R.id.tv_fragment_hotplace_title)
-    TextView tv_fragment_hotplace_title;
-    @Bind(R.id.tv_fragment_hotplace_tmptitle1)
-    TextView tv_fragment_hotplace_tmptitle1;
-    @Bind(R.id.tv_fragment_hotplace_tmptitle2)
-    TextView tv_fragment_hotplace_tmptitle2;
-    @Bind(R.id.ll_fragment_hotplace_for_bt_ll)
-    LinearLayout ll_fragment_hotplace_for_bt_ll;
 
-    void searchBrowser(String url)
-    {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(intent);
-    }
 
-    @OnClick(R.id.ll_fragment_hotplace_search_ll)
-    void onClick_ll_fragment_hotplace_search_ll()
-    {
-        searchBrowser("https://search.naver.com/search.naver?ie=UTF-8&query="+curQuery);
-    }
 
-    @OnClick(R.id.ll_fragment_hotplace_blog_ll)
-    void onClick_ll_fragment_hotplace_blog_ll()
-    {
-        searchBrowser("https://search.naver.com/search.naver?where=post&sm=tab_jum&ie=utf8&query="+curQuery);
-    }
-
-    @OnClick(R.id.ll_fragment_hotplace_image_ll)
-    void onClick_ll_fragment_hotplace_image_ll()
-    {
-        searchBrowser("https://search.naver.com/search.naver?where=image&sm=tab_jum&ie=utf8&query="+curQuery);
-    }
-
-    @OnClick(R.id.ll_fragment_hotplace_news_ll)
-    void onClick_ll_fragment_hotplace_news_ll()
-    {
-        searchBrowser("https://search.naver.com/search.naver?where=news&sm=tab_jum&ie=utf8&query="+curQuery);
-    }
-
-    @OnClick(R.id.ll_fragment_hotplace_place_ll)
-    void onClick_ll_fragment_hotplace_place_ll()
-    {
-        searchBrowser("http://map.naver.com/index.nhn?query="+curQuery);
-    }
-
-    @OnClick(R.id.ll_fragment_hotplace_cafe_ll)
-    void onClick_ll_fragment_hotplace_cafe_ll()
-    {
-        searchBrowser("https://search.naver.com/search.naver?where=article&sm=tab_jum&ie=utf8&query=" + curQuery);
-    }
-
-    public HotplaceFragment() {
+    public StampGetFragment() {
 
     }
 
@@ -124,10 +69,15 @@ public class HotplaceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_fragment_hotplace, container, false);
-        ButterKnife.bind(this, view);
+        View view = inflater.inflate(R.layout.activity_fragment_stamp_get, container, false);
+        ButterKnife.bind(this,view);
+
+
+
+
 
         return view;
+
     }
 
 
@@ -138,11 +88,12 @@ public class HotplaceFragment extends Fragment {
         mMapContext.onCreate();
     }
 
+
     private void initMap()
     {
 //        DisplayService dd  = (DisplayService)getContext().getSystemService(Activity.DISPLAY_SERVICE);
 
-        mNMapView = (NMapView)getView().findViewById(R.id.nmapview_frag_hotplace);
+        mNMapView = (NMapView)getView().findViewById(R.id.nmapview_frag_stamp_get);
         mNMapView.setClientId(NaverClientID);
         mNMapView.setClickable(true);
         mNMapView.setEnabled(true);
@@ -165,33 +116,14 @@ public class HotplaceFragment extends Fragment {
         mMarkerId = NMapPOIflagType.PIN;
         poiData = new NMapPOIdata(RESULT_MAX_COUNT, mMapViewerResourceProvider);
 
-        poiData.beginPOIdata(JejuWifiDataManager.dtoHotPlaceArrayList.size());
+        poiData.beginPOIdata(dtoStampPlaceArrayList.size());
 
-        ArrayList<Double> tmpListForCheckCnt = new ArrayList<>();
 
-        for(int i = 0 ; i < JejuWifiDataManager.dtoHotPlaceArrayList.size();i++ )
+        for(int i = 0 ; i < dtoStampPlaceArrayList.size();i++ )
         {
-            DTOHotPlace dtoHotPlace =  JejuWifiDataManager.dtoHotPlaceArrayList.get(i);
-
-            boolean isFind=false;
-
-            for(int j = 0 ; j < tmpListForCheckCnt.size();j++)
-            {
-                if(tmpListForCheckCnt.get(j)== Double.parseDouble( dtoHotPlace.getGpsX()) )
-                {
-                    isFind=true;
-                    break;
-                }
-            }
-
-            if(isFind == false)
-                tmpListForCheckCnt.add( Double.parseDouble( dtoHotPlace.getGpsX() ) );
-
-            poiData.addPOIitem( Double.parseDouble( dtoHotPlace.getGpsX() ) , Double.parseDouble( dtoHotPlace.getGpsY() ),dtoHotPlace.getPlaceName(),mMarkerId ,0 );
+            DTOStampPlace tmpDtoStampPlace = dtoStampPlaceArrayList.get(i);
+            poiData.addPOIitem( Double.parseDouble( tmpDtoStampPlace.getGpsX() ) , Double.parseDouble( tmpDtoStampPlace.getGpsY() ),tmpDtoStampPlace.getPlaceName(),mMarkerId ,0 );
         }
-
-        tv_fragment_hotplace_tmptitle1.setText("스마트관광플랫폼\n(http://jstp.jejutour.go.kr)\n에서 제공하는 제주도에서\n가장 많이 방문하는 "+
-                tmpListForCheckCnt.size() +"개 지역입니다");
 
         poiData.endPOIdata();
 
@@ -202,7 +134,36 @@ public class HotplaceFragment extends Fragment {
 
 
 //        poiDataOverlay.showAllPOIdata(0);
+
+        mMapLocationManager = new NMapLocationManager(super.getActivity());
+        mMapLocationManager.setOnLocationChangeListener(onLocationChangeListener);
+
+        mMapCompassManager = new NMapCompassManager(super.getActivity());
+        mMyLocationOverlay = mOverlayManager.createMyLocationOverlay(mMapLocationManager, mMapCompassManager);
+
+
+
     }
+
+    NMapLocationManager.OnLocationChangeListener onLocationChangeListener = new NMapLocationManager.OnLocationChangeListener() {
+        @Override
+        public boolean onLocationChanged(NMapLocationManager nMapLocationManager, NGeoPoint nGeoPoint) {
+            return false;
+        }
+
+        @Override
+        public void onLocationUpdateTimeout(NMapLocationManager nMapLocationManager) {
+
+        }
+
+        @Override
+        public void onLocationUnavailableArea(NMapLocationManager nMapLocationManager, NGeoPoint nGeoPoint) {
+
+        }
+    };
+
+
+
 
 
     NMapPOIdataOverlay.OnStateChangeListener onStateChangeListener = new NMapPOIdataOverlay.OnStateChangeListener() {
@@ -215,17 +176,6 @@ public class HotplaceFragment extends Fragment {
 //                Log.i(LOG, nMapPOIitem.getTailText());
 //                Log.i(LOG, nMapPOIitem.getTitle() + " " + nMapPOIitem.getPoint().latitude + " " + nMapPOIitem.getPoint().longitude);
 
-                if(curQuery==null)
-                {
-                    curQuery = nMapPOIitem.getTitle();
-
-                    tv_fragment_hotplace_title.setText(curQuery);
-
-                    ll_fragment_hotplace_for_bt_ll.setVisibility(View.VISIBLE);
-                    tv_fragment_hotplace_title.setVisibility(View.VISIBLE);
-                    tv_fragment_hotplace_tmptitle1.setVisibility(View.GONE);
-                    tv_fragment_hotplace_tmptitle2.setVisibility(View.GONE);
-                }
 
             } else {
                 Log.i(LOG, "onFocusChanged: ");
@@ -243,11 +193,73 @@ public class HotplaceFragment extends Fragment {
 
 
 
+    private void startMyLocation() {
+
+        if (mMyLocationOverlay != null) {
+            if (!mOverlayManager.hasOverlay(mMyLocationOverlay)) {
+                mOverlayManager.addOverlay(mMyLocationOverlay);
+            }
+
+            if (mMapLocationManager.isMyLocationEnabled()) {
+
+                if (!mNMapView.isAutoRotateEnabled()) {
+                    mMyLocationOverlay.setCompassHeadingVisible(true);
+
+                    mMapCompassManager.enableCompass();
+
+                    mNMapView.setAutoRotateEnabled(true, false);
+
+//                    mMapContainerView.requestLayout();
+                    mNMapView.requestLayout();
+                } else {
+                    stopMyLocation();
+                }
+
+                mNMapView.postInvalidate();
+            } else {
+                boolean isMyLocationEnabled = mMapLocationManager.enableMyLocation(true);
+                if (!isMyLocationEnabled) {
+
+                    Intent goToSettings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(goToSettings);
+
+                    return;
+                }
+            }
+        }
+    }
+
+    private void stopMyLocation() {
+        if (mMyLocationOverlay != null) {
+            mMapLocationManager.disableMyLocation();
+
+            if (mNMapView.isAutoRotateEnabled()) {
+                mMyLocationOverlay.setCompassHeadingVisible(false);
+
+                mMapCompassManager.disableCompass();
+
+                mNMapView.setAutoRotateEnabled(false, false);
+
+                mNMapView.requestLayout();
+            }
+        }
+    }
+
+
+
+
+
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        StampDataManager.initData();
         initMap();
+
+
+        startMyLocation();
+
     }
 
     @Override
@@ -275,6 +287,8 @@ public class HotplaceFragment extends Fragment {
         mMapContext.onDestroy();
         super.onDestroy();
     }
+
+
 
 
 }

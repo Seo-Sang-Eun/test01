@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
+import codersit.co.kr.jejugo.activity.hotplace.HotplaceFragment;
 import codersit.co.kr.jejugo.util.GPSTracker;
 
 /**
@@ -108,7 +109,7 @@ public class MainFragment extends Fragment {
     @OnClick(R.id.ll_fragment_main_stamp)
     void onClick_ll_fragment_main_stamp()
     {
-        ((MainActivity)getActivity()).callFragmentPage(new StampFragment());
+        ((MainActivity)getActivity()).callFragmentPage(new StampGetFragment());
     }
 
     @OnClick(R.id.ll_fragment_main_hotplace)

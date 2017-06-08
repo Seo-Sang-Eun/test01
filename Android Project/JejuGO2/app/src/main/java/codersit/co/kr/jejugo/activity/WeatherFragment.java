@@ -156,7 +156,7 @@ public class WeatherFragment extends Fragment {
 
             ArrayList<DTOShortWeather> dtoShortWeathers = (ArrayList<DTOShortWeather> )o;
 
-            tv_fragment_weather_cur_date.setText(Util.getCurrentDate("MM월 dd일 hh시 mm분"));
+            tv_fragment_weather_cur_date.setText(Util.getCurrentDate("MM월 dd일 HH시 mm분"));
             iv_fragment_weather_cur_img.setImageResource(getWeatherImageId(dtoShortWeathers.get(0).getWfKor()));
             tv_fragment_weather_cur_c.setText(dtoShortWeathers.get(0).getTemp()+"℃");
 
