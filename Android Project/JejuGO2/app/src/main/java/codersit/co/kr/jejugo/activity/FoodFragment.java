@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.zip.Inflater;
 
 import codersit.co.kr.jejugo.R;
-import codersit.co.kr.jejugo.dao.DAOGeoCode;
+//import codersit.co.kr.jejugo.dao.DAOGeoCode;
 import codersit.co.kr.jejugo.dao.DAOJejuWifiVisitCountInfo;
 import codersit.co.kr.jejugo.dto.DTOGeoCode;
 import codersit.co.kr.jejugo.dto.DTOJejuWifiVisitCountInfo;

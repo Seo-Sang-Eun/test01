@@ -21,17 +21,17 @@ public class DAOGeoCode extends DAOClass {
     private String placeName;
     private String serviceKey1;
     private String serviceKey2;
-
     public DAOGeoCode(String placeName){
+
         this.placeName = placeName;
 
         this.serviceKey1 = IKeyManager.NaverClientID;
         this.serviceKey2 = IKeyManager.NaverClientSecret;
     }
-
+//17.6.8 12시 에러나서 주석처리.
     public void getData()
     {
-        new AsyncTask<Object, Void, Object>() {
+    /*    new AsyncTask<Object, Void, Object>() {
             @Override
             protected Object doInBackground(Object[] objects) {
 
@@ -57,7 +57,7 @@ public class DAOGeoCode extends DAOClass {
                 super.onPostExecute(o);
             }
 
-        }.execute();
+        }.execute();*/
 
     }
 

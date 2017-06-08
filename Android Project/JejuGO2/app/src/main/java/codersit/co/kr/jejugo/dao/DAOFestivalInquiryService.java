@@ -1,13 +1,10 @@
 package codersit.co.kr.jejugo.dao;
 
 import android.os.AsyncTask;
-
-import com.example.p200.getinfotest.dto.DTOArtstreetService;
-import com.example.p200.getinfotest.dto.DTOFestivalInquiryService;
-import com.example.p200.getinfotest.util.IKeyManager;
-
 import java.io.IOException;
 
+import codersit.co.kr.jejugo.dto.DTOFestivalInquiryService;
+import codersit.co.kr.jejugo.util.IKeyManager;
 import retrofit2.Call;
 
 /**

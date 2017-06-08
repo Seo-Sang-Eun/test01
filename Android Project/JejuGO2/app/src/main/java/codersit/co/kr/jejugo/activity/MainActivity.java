@@ -17,10 +17,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 45140e8b0232806a68364c6369f3a2835e228dc9
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
 
