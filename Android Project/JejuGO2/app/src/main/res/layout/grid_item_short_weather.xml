@@ -2,19 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_weight="1"
     android:gravity="center">
 
     <TextView
         android:textColor="#000000"
-        android:text="03시 (목)"
+        android:text="03시(목)"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_grid_item_short_weather_txt1"
-        android:textSize="12sp"
-        tools:text="03시 (목)" />
+        android:id="@+id/tv_grid_item_short_weather_date"
+        android:textSize="10sp"
+        tools:text="03시(목)"
+        android:textAlignment="center" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -27,8 +29,8 @@
         android:text="26℃"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_grid_item_short_weather_txt2"
-        android:textSize="14sp"
+        android:id="@+id/tv_grid_item_short_weather_c"
+        android:textSize="10sp"
         tools:text="26℃" />
 
 

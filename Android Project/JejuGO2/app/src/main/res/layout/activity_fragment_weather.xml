@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_fragment_weather_all_layout"
+    android:visibility="invisible"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -34,10 +36,11 @@
                 android:layout_alignParentStart="true">
 
                 <TextView
+                    android:textColor="#000000"
                     android:text="2017. 06. 08 12:34"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView2"
+                    android:id="@+id/tv_fragment_weather_cur_date"
                     android:gravity="center"
                     android:textSize="30sp" />
 
@@ -48,17 +51,18 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="100dp"
+                        android:layout_width="120dp"
                         app:srcCompat="@drawable/we_su_cloud"
-                        android:id="@+id/imageView2"
-                        android:layout_height="100dp" />
+                        android:id="@+id/iv_fragment_weather_cur_img"
+                        android:layout_height="120dp" />
 
                     <TextView
+                        android:textColor="#0071c7"
                         android:text="27℃"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView4"
-                        android:textSize="36sp" />
+                        android:id="@+id/tv_fragment_weather_cur_c"
+                        android:textSize="40sp" />
 
                 </LinearLayout>
 
@@ -99,21 +103,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_01" />
                     <include layout="@layout/grid_item_vertical_bar"/>
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_02" />
                     <include layout="@layout/grid_item_vertical_bar"/>
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_03" />
+                    <include layout="@layout/grid_item_vertical_bar" />
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_04" />
                     <include layout="@layout/grid_item_vertical_bar"/>
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_05" />
                     <include layout="@layout/grid_item_vertical_bar"/>
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_06" />
                     <include layout="@layout/grid_item_vertical_bar"/>
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_07" />
                     <include layout="@layout/grid_item_vertical_bar"/>
-                    <include layout="@layout/grid_item_short_weather"/>
-                    <include layout="@layout/grid_item_vertical_bar"/>
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_08" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -122,21 +134,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_09" />
                     <include layout="@layout/grid_item_vertical_bar"/>
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_10" />
                     <include layout="@layout/grid_item_vertical_bar"/>
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_11" />
                     <include layout="@layout/grid_item_vertical_bar"/>
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_12" />
                     <include layout="@layout/grid_item_vertical_bar"/>
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_13" />
                     <include layout="@layout/grid_item_vertical_bar"/>
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_14" />
                     <include layout="@layout/grid_item_vertical_bar"/>
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_15" />
                     <include layout="@layout/grid_item_vertical_bar"/>
-                    <include layout="@layout/grid_item_short_weather"/>
+                    <include layout="@layout/grid_item_short_weather"
+                        android:id="@+id/ll_fragment_weather_short_16" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
@@ -170,17 +190,23 @@
                 android:layout_marginRight="5dp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true">
-                <include layout="@layout/grid_item_long_weather"/>
+                <include layout="@layout/grid_item_long_weather"
+                    android:id="@+id/ll_fragment_weather_long_1" />
                 <include layout="@layout/grid_item_vertical_bar"/>
-                <include layout="@layout/grid_item_long_weather"/>
+                <include layout="@layout/grid_item_long_weather"
+                    android:id="@+id/ll_fragment_weather_long_2"/>
                 <include layout="@layout/grid_item_vertical_bar"/>
-                <include layout="@layout/grid_item_long_weather"/>
+                <include layout="@layout/grid_item_long_weather"
+                    android:id="@+id/ll_fragment_weather_long_3"/>
                 <include layout="@layout/grid_item_vertical_bar"/>
-                <include layout="@layout/grid_item_long_weather"/>
+                <include layout="@layout/grid_item_long_weather"
+                    android:id="@+id/ll_fragment_weather_long_4"/>
                 <include layout="@layout/grid_item_vertical_bar"/>
-                <include layout="@layout/grid_item_long_weather"/>
+                <include layout="@layout/grid_item_long_weather"
+                    android:id="@+id/ll_fragment_weather_long_5"/>
                 <include layout="@layout/grid_item_vertical_bar"/>
-                <include layout="@layout/grid_item_long_weather"/>
+                <include layout="@layout/grid_item_long_weather"
+                    android:id="@+id/ll_fragment_weather_long_6"/>
             </LinearLayout>
         </RelativeLayout>
 
