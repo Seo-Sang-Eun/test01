@@ -203,7 +203,7 @@ public class FoodFragment extends Fragment {
         @Override
         public void onFocusChanged(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {
 
-            if (nMapPOIitem != null) {
+//            if (nMapPOIitem != null) {
 //                Log.i(LOG, nMapPOIitem.getHeadText());
 //                Log.i(LOG, nMapPOIitem.getSnippet());
 //                Log.i(LOG, nMapPOIitem.getTailText());
@@ -236,9 +236,9 @@ public class FoodFragment extends Fragment {
                 tv_fragment_food_tmptitle2.setVisibility(View.GONE);
 
 
-            } else {
-                Log.i(LOG, "onFocusChanged: ");
-            }
+//            } else {
+//                Log.i(LOG, "onFocusChanged: ");
+//            }
         }
 
         @Override

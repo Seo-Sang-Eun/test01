@@ -7,7 +7,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.dto.DTOStampPlace;
@@ -22,6 +28,10 @@ import static codersit.co.kr.jejugo.util.StampDataManager.dtoStampPlaceArrayList
 
 public class StampBookFragment extends Fragment {
 
+    @Bind(R.id.stamp_place_view)
+    ListView stamp_place_view;
+    @Bind(R.id.stamp_num_view)
+    TextView stamp_num_view;
 
     final String LOG = "StampBookFragment";
 
@@ -53,15 +63,26 @@ public class StampBookFragment extends Fragment {
         }
 
 
+        ArrayList<String> tempArray = new ArrayList<>();
+
         for(int i = 0 ; i < StampDataManager.dtoStampPlaceArrayList.size();i++)
         {
-            Log.i(LOG," ");
-            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getId()+"");
-            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getPlaceName()+"");
-            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getGpsX()+"");
-            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getGpsY()+"");
-            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getGet()+"");
+            if(StampDataManager.dtoStampPlaceArrayList.get(i).getGet() == true)
+            {
+                tempArray.add(StampDataManager.dtoStampPlaceArrayList.get(i).getPlaceName());
+            }
+//            Log.i(LOG," ");
+//            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getId()+"");
+//            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getPlaceName()+"");
+//            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getGpsX()+"");
+//            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getGpsY()+"");
+//            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getGet()+"");
+
         }
+
+        stamp_num_view.setText(String.valueOf(tempArray.size()));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>( ((MainActivity)getActivity()) , android.R.layout.simple_list_item_1, tempArray);
+        stamp_place_view.setAdapter(adapter);
 
 
 
