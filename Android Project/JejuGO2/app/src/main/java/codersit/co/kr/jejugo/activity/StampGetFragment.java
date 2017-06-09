@@ -1,16 +1,22 @@
 package codersit.co.kr.jejugo.activity;
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nhn.android.maps.NMapCompassManager;
@@ -68,9 +74,108 @@ public class StampGetFragment extends Fragment {
 
     int mCurArrayPos;
     String mCurPlace;
+    Boolean isEnable;
 
-    @Bind(R.id.button)
-    Button tmpButton;
+
+    @Bind(R.id.tv_fragment_stam_get_place)
+    TextView tv_fragment_stam_get_place;
+
+    @Bind(R.id.iv_fragment_stam_get_stamp)
+    ImageView iv_fragment_stam_get_stamp;
+
+    @OnClick(R.id.iv_fragment_stam_get_stamp)
+    void OnClickIv_fragment_stam_get_stamp()
+    {
+        if(isEnable==false)
+            return;
+
+//        mCurArrayPos
+//        mCurPlace
+        SaveDataManager saveDataManager = new SaveDataManager(getActivity().getApplicationContext());
+
+        String tmpStr = "stamp";
+
+        if( mCurArrayPos <10)
+            tmpStr += "0" + mCurArrayPos;
+        else
+            tmpStr +=  "" + mCurArrayPos;
+
+        saveDataManager.putData(tmpStr,"true");
+
+        int tmpInt = Integer.parseInt( saveDataManager.getData("stampCount") );
+        tmpInt++;
+        saveDataManager.putData("stampCount",tmpInt+"");
+
+        String tmpRstMsg = "";
+
+        if(tmpInt <= 2)
+        {
+            tmpRstMsg = "3개 중 "+ tmpInt +"개 스템프 획득!";
+        }
+        else if (tmpInt == 3)
+        {
+            tmpRstMsg = "스템프 3개 획득!\n제휴 5% 할인쿠폰 획득";
+        }
+        else if(tmpInt <= 5)
+        {
+            tmpRstMsg = "6개 중 "+ tmpInt +"개 스템프 획득!";
+        }
+        else if (tmpInt == 6)
+        {
+            tmpRstMsg = "스템프 6개 획득!\n제휴 5% 할인쿠폰 획득";
+        }
+        else if(tmpInt <= 8)
+        {
+            tmpRstMsg = "9개 중 "+ tmpInt +"개 스템프 획득!";
+        }
+        else if (tmpInt == 9)
+        {
+            tmpRstMsg = "스템프 9개 획득!\n제휴 15% 할인쿠폰 획득";
+        }
+
+        AlertDialog alertDialog = new AlertDialog.Builder( getActivity()).create();
+
+        alertDialog.setTitle("스템프 모으기");
+        alertDialog.setMessage( tmpRstMsg);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                        ((MainActivity)getActivity()).callFragmentPage(new StampBookFragment());
+
+                    }
+                });
+        alertDialog.show();
+
+
+
+
+
+
+        // 마커 뜨는게 false 인부분 즉 스탬프 안찍은 마커만 뜨게했고
+        // 마커 받았을떄 세어드프리퍼런스로 true만들고
+        // 북페이지로 화면전환
+        // 다시 일로와도 방금받은 스탬프마커는 업어짐
+
+    }
+
+    void disableStamp()
+    {
+        isEnable=false;
+        tv_fragment_stam_get_place.setTextColor(Color.rgb(157,157,157));
+        tv_fragment_stam_get_place.setText("마커 근처에 가면 스템프가 활성화 됩니다");
+        iv_fragment_stam_get_stamp.setImageResource(R.drawable.stamp_off);
+    }
+
+    void enableStamp(String stampInfo)
+    {
+        isEnable=true;
+        tv_fragment_stam_get_place.setTextColor(Color.rgb(189,1,2));
+        tv_fragment_stam_get_place.setText("[ " + stampInfo+" ] 스템프를 획득가능");
+        iv_fragment_stam_get_stamp.setImageResource(R.drawable.stamp_on);
+    }
+
 
     public StampGetFragment() {
 
@@ -82,6 +187,8 @@ public class StampGetFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_fragment_stamp_get, container, false);
         ButterKnife.bind(this,view);
+
+        disableStamp();
 
         return view;
 
@@ -181,8 +288,8 @@ public class StampGetFragment extends Fragment {
         double doubleLon = Double.parseDouble(lon);
         double doubleLat = Double.parseDouble(lat);
 
-        Log.i(LOG,nGeoPoint.longitude + " " + nGeoPoint.latitude );
-        Log.i(LOG,doubleLon + " " + doubleLat );
+//        Log.i(LOG,nGeoPoint.longitude + " " + nGeoPoint.latitude );
+//        Log.i(LOG,doubleLon + " " + doubleLat );
 
         if( sqrt((nGeoPoint.longitude - doubleLon) * (nGeoPoint.longitude - doubleLon )
                 + (nGeoPoint.latitude - doubleLat )*(nGeoPoint.latitude - doubleLat ) )
@@ -204,8 +311,9 @@ public class StampGetFragment extends Fragment {
             for (int i = 0; i < StampDataManager.dtoStampPlaceArrayList.size(); i++)
             {
 
-                boolean isChecked = isArriveCheck(nGeoPoint,   StampDataManager.dtoStampPlaceArrayList.get(i).getGpsX() , StampDataManager.dtoStampPlaceArrayList.get(i).getGpsY() );
+                if( StampDataManager.dtoStampPlaceArrayList.get(i).getGet() == true ) continue;
 
+                boolean isChecked = isArriveCheck(nGeoPoint,   StampDataManager.dtoStampPlaceArrayList.get(i).getGpsX() , StampDataManager.dtoStampPlaceArrayList.get(i).getGpsY() );
 
                 if(isChecked == true)
                 {
@@ -216,14 +324,12 @@ public class StampGetFragment extends Fragment {
 
             if( mCurArrayPos == -1)
             {
-                tmpButton.setText("마커 근처가면 스탬프받기가 활성화됩니당 ");
-                tmpButton.setEnabled(false);
+                disableStamp();
             }
             else
             {
-                tmpButton.setEnabled(true);
                 mCurPlace = StampDataManager.dtoStampPlaceArrayList.get(mCurArrayPos).getPlaceName();
-                tmpButton.setText( mCurPlace + " 스탬프받으세욤ㅎ ");
+                enableStamp(mCurPlace);
             }
 
 
@@ -336,7 +442,7 @@ public class StampGetFragment extends Fragment {
         initMap();
         startMyLocation();
 
-        tmpButton.setEnabled(false);
+        disableStamp();
     }
 
     @Override
@@ -367,32 +473,5 @@ public class StampGetFragment extends Fragment {
         super.onDestroy();
     }
 
-
-    @OnClick(R.id.button)
-    void onClickbutton()
-    {
-//        mCurArrayPos
-//        mCurPlace
-        SaveDataManager saveDataManager = new SaveDataManager(getActivity().getApplicationContext());
-
-        String tmpStr = "stamp";
-
-        if( mCurArrayPos <10)
-            tmpStr += "0" + mCurArrayPos;
-        else
-            tmpStr +=  "" + mCurArrayPos;
-
-        Log.i(LOG,"AAAAAAAAAAAAA : " + tmpStr);
-
-        saveDataManager.putData(tmpStr,"true");
-
-        ((MainActivity)getActivity()).callFragmentPage(new StampBookFragment());
-
-        // 마커 뜨는게 false 인부분 즉 스탬프 안찍은 마커만 뜨게했고
-        // 마커 받았을떄 세어드프리퍼런스로 true만들고
-        // 북페이지로 화면전환
-        // 다시 일로와도 방금받은 스탬프마커는 업어짐
-
-    }
 
 }

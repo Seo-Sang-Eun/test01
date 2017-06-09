@@ -31,6 +31,8 @@ public class SaveDataManager {
         editor.commit();
     }
 
+
+
     public void delData(String key)
     {
         SharedPreferences.Editor editor = mPref.edit();

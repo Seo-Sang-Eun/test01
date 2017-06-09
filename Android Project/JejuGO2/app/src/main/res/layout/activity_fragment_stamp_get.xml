@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,10 +10,28 @@
         android:id="@+id/nmapview_frag_stamp_get"
         android:layout_height="250dp" />
 
-    <Button
-        android:text="Button"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_margin="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/stamp_off"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/iv_fragment_stam_get_stamp" />
+
+        <TextView
+            android:textColor="#9d9d9d"
+            android:text="txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_fragment_stam_get_stamp"
+            android:layout_alignStart="@+id/iv_fragment_stam_get_stamp"
+            android:id="@+id/tv_fragment_stam_get_place"
+            android:textSize="18sp" />
+    </RelativeLayout>
 
 </LinearLayout>
