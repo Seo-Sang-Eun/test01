@@ -10,12 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
+import codersit.co.kr.jejugo.activity.food.FoodFragment;
 import codersit.co.kr.jejugo.activity.hotplace.HotplaceFragment;
 //import codersit.co.kr.jejugo.util.GPSTracker;
 

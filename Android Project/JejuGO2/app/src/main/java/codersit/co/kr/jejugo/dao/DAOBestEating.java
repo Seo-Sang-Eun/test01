@@ -18,11 +18,10 @@ public class DAOBestEating extends DAOClass {
     private String serviceKey;
     private String dataTitle;
 
-    public DAOBestEating(String startPage, String pageSize, String dataTitle)
+    public DAOBestEating(String startPage, String pageSize)
     {
         this.startPage = startPage;
         this.pageSize = pageSize;
-        this.dataTitle = dataTitle;
         this.serviceKey = IKeyManager.BesteatingKey;
     }
 
@@ -33,7 +32,7 @@ public class DAOBestEating extends DAOClass {
             protected Object doInBackground(Object[] objects)
             {
                 DTOBestEating bestEating = null;
-                Call<DTOBestEating> call = IDAO.RetrofitForBestEating.create(IDAO.class).getBestEating(startPage, pageSize, serviceKey, dataTitle);
+                Call<DTOBestEating> call = IDAO.RetrofitForBestEating.create(IDAO.class).getBestEating(serviceKey, startPage, pageSize);
                 try{
                     bestEating = call.execute().body();
                 } catch(IOException e) {
