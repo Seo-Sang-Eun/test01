@@ -1,6 +1,7 @@
 package codersit.co.kr.jejugo.dao;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import codersit.co.kr.jejugo.dto.DTOArtcenterShowInfoService;
 import codersit.co.kr.jejugo.dto.DTOArtstreetService;
@@ -9,6 +10,7 @@ import codersit.co.kr.jejugo.dto.DTOCultureEvent;
 import codersit.co.kr.jejugo.dto.DTOFestivalInquiryService;
 import codersit.co.kr.jejugo.dto.DTOGeoCode;
 import codersit.co.kr.jejugo.dto.DTOJejuWifiVisitCountInfo;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.SimpleXmlConverterFactory;
@@ -55,10 +57,9 @@ public interface IDAO {
 
     // 제주 도내의 모범음식점 정보
     @GET("rest/besteating/getEatingList") // default startpage, pagesize = 1, 10
-    Call<DTOBestEating> getBestEating(@Query("startPage") String startPage,
-                                      @Query("pageSize") String pageSize,
-                                      @Query(value = "serviceKey",encoded=true) String serviceKey,
-                                      @Query("dataTitle") String dataTitle);
+    Call<DTOBestEating> getBestEating(@Query(value = "serviceKey",encoded=true) String serviceKey,
+                                      @Query("startPage") String startPage,
+                                      @Query("pageSize")String pageSize);
 
     @GET("v1/map/geocode.xml")
     Call<DTOGeoCode> getGeoCode(@Query("query") String placeName,
@@ -85,8 +86,15 @@ public interface IDAO {
             .addConverterFactory( SimpleXmlConverterFactory.create())
             .build();
 
+
+
     public static final Retrofit RetrofitForBestEating = new Retrofit.Builder().baseUrl("http://data.jeju.go.kr/")
             .addConverterFactory( SimpleXmlConverterFactory.create())
+            .client(
+                    new OkHttpClient.Builder().readTimeout(25,TimeUnit.SECONDS)
+                    .writeTimeout(25,TimeUnit.SECONDS)
+                    .connectTimeout(25,TimeUnit.SECONDS)
+                    .build())
             .build();
 
     public static final Retrofit RetrofitForGeoCode = new Retrofit.Builder().baseUrl("https://openapi.naver.com/")

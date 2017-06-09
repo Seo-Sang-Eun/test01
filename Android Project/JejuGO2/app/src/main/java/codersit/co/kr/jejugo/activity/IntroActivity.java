@@ -9,6 +9,7 @@ import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.util.JejuFoodManager;
 import codersit.co.kr.jejugo.util.JejuWifiDataManager;
 import codersit.co.kr.jejugo.util.SaveDataManager;
 import codersit.co.kr.jejugo.util.StampDataManager;
@@ -22,6 +23,7 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
 
         JejuWifiDataManager.initData();
+        JejuFoodManager.initData();
 
         Handler mHandler = new Handler();
         mHandler.postDelayed(new Runnable()  {
