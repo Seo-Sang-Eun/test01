@@ -3,15 +3,17 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_stamp"
+            android:id="@+id/nav_stamp_get"
             android:title="스템프 모으기" />
-
         <item
             android:id="@+id/nav_hotplace"
             android:title="제주 HOT 플레이스" />
         <item
             android:id="@+id/nav_weather"
-            android:title="제주 기상관측 정보" />
+            android:title="제주 날씨" />
+        <item
+            android:id="@+id/nav_stamp_book"
+            android:title="스템프 북" />
         <item
             android:id="@+id/nav_festival"
             android:title="공연행사정보" />

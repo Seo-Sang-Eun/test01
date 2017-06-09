@@ -1,13 +1,12 @@
-package com.example.p200.getinfotest.dto;
+package codersit.co.kr.jejugo.dto;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 /**
- * Created by BooHee on 2017-06-06.
+ * Created by BooHee on 2017-06-09.
  */
-
-@Root(name = "list")
+@Root(name ="list")
 public class DTOBestEating_List {
 
     @Element(required = false)

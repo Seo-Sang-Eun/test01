@@ -1,7 +1,6 @@
-package codersit.co.kr.jejugo.activity;
+package codersit.co.kr.jejugo.activity.food;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -10,8 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.nhn.android.maps.NMapCompassManager;
 import com.nhn.android.maps.NMapContext;
@@ -25,31 +24,44 @@ import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
 
+import java.util.ArrayList;
+import java.util.zip.Inflater;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
+//import codersit.co.kr.jejugo.dao.DAOGeoCode;
+import codersit.co.kr.jejugo.activity.MainActivity;
+import codersit.co.kr.jejugo.activity.hotplace.HotplaceDetailFragment;
+import codersit.co.kr.jejugo.dao.DAOBestEating;
+import codersit.co.kr.jejugo.dao.DAOGeoCode;
+import codersit.co.kr.jejugo.dao.DAOJejuWifiVisitCountInfo;
+import codersit.co.kr.jejugo.dto.DTOBestEating;
+import codersit.co.kr.jejugo.dto.DTOGeoCode;
+import codersit.co.kr.jejugo.dto.DTOJejuWifiVisitCountInfo;
 import codersit.co.kr.jejugo.dto.DTOStampPlace;
+import codersit.co.kr.jejugo.util.ICallback;
+import codersit.co.kr.jejugo.util.JejuFoodManager;
 import codersit.co.kr.jejugo.util.JejuWifiDataManager;
 import codersit.co.kr.jejugo.util.NMapPOIflagType;
 import codersit.co.kr.jejugo.util.NMapViewerResourceProvider;
-import codersit.co.kr.jejugo.util.SaveDataManager;
 import codersit.co.kr.jejugo.util.StampDataManager;
+import codersit.co.kr.jejugo.util.Util;
 
 import static codersit.co.kr.jejugo.util.IKeyManager.NaverClientID;
 import static codersit.co.kr.jejugo.util.StampDataManager.dtoStampPlaceArrayList;
-import static java.lang.Math.abs;
 import static java.lang.Math.sqrt;
 
 /**
  * Created by P200 on 2017-06-04.
  */
 
-public class StampGetFragment extends Fragment {
+public class FoodFragment extends Fragment {
 
+    String LOG ="FoodFragment";
 
-    final String LOG = "StampGetFragment";
-
+    String curQuery = null;
     private NMapContext mMapContext;
     NMapView mNMapView;
     NMapViewerResourceProvider mMapViewerResourceProvider;
@@ -64,29 +76,35 @@ public class StampGetFragment extends Fragment {
 
     final int RESULT_MAX_COUNT = 20;
 
+
+    @Bind(R.id.tv_fragment_food_title)
+    TextView tv_fragment_food_title;
+    @Bind(R.id.tv_fragment_food_tmptitle1)
+    TextView tv_fragment_food_tmptitle1;
+    @Bind(R.id.tv_fragment_food_tmptitle2)
+    TextView tv_fragment_food_tmptitle2;
+    @Bind(R.id.ll_fragment_food_for_bt_ll)
+    LinearLayout ll_fragment_food_for_bt_ll;
+    @Bind(R.id.textInfoView)
+    TextView textInfoView;
+
     final double GPS_INTERVAL_FOR_CALC = 0.01;//0.0025;
 
-    int mCurArrayPos;
-    String mCurPlace;
-
-    @Bind(R.id.button)
-    Button tmpButton;
-
-    public StampGetFragment() {
-
+    public FoodFragment() {
     }
+
+    TextView tvFood;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_fragment_stamp_get, container, false);
+        View view = inflater.inflate(R.layout.activity_fragment_food, container, false);
         ButterKnife.bind(this,view);
 
         return view;
 
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,12 +113,11 @@ public class StampGetFragment extends Fragment {
         mMapContext.onCreate();
     }
 
-
     private void initMap()
     {
 //        DisplayService dd  = (DisplayService)getContext().getSystemService(Activity.DISPLAY_SERVICE);
 
-        mNMapView = (NMapView)getView().findViewById(R.id.nmapview_frag_stamp_get);
+        mNMapView = (NMapView)getView().findViewById(R.id.nmapview_frag_food);
         mNMapView.setClientId(NaverClientID);
         mNMapView.setClickable(true);
         mNMapView.setEnabled(true);
@@ -123,31 +140,22 @@ public class StampGetFragment extends Fragment {
         mMarkerId = NMapPOIflagType.PIN;
         poiData = new NMapPOIdata(RESULT_MAX_COUNT, mMapViewerResourceProvider);
 
-        poiData.beginPOIdata(dtoStampPlaceArrayList.size());
+        // **
+        poiData.beginPOIdata( JejuFoodManager.staticDtoBestEating.getData().size());
 
 
-        SaveDataManager saveDataManager = new SaveDataManager(getActivity().getApplicationContext());
-
-
-
-
-        for(int i = 0 ; i < dtoStampPlaceArrayList.size();i++ )
+        for(int i = 0 ; i < JejuFoodManager.staticDtoBestEating.getData().size();i++ )
         {
 
-            String tmpStr = "stamp";
-
-            if( mCurArrayPos <10)
-                tmpStr += "0" + i;
-            else
-                tmpStr +=  "" + i;
-
-            if(saveDataManager.getData(tmpStr).compareTo("false")==0)
-            {
-                DTOStampPlace tmpDtoStampPlace = dtoStampPlaceArrayList.get(i);
-                poiData.addPOIitem( Double.parseDouble( tmpDtoStampPlace.getGpsX() ) , Double.parseDouble( tmpDtoStampPlace.getGpsY() ),tmpDtoStampPlace.getPlaceName(),mMarkerId ,0 );
-            }
-
+            poiData.addPOIitem(
+                    Double.parseDouble( JejuFoodManager.staticDtoBestEating.getData().get(i).getLo() ) ,
+                    Double.parseDouble( JejuFoodManager.staticDtoBestEating.getData().get(i).getLa() ),
+                    JejuFoodManager.staticDtoBestEating.getData().get(i).getDataTitle(),
+                    mMarkerId ,
+                    0
+            );
         }
+        // **
 
         poiData.endPOIdata();
 
@@ -167,31 +175,9 @@ public class StampGetFragment extends Fragment {
         mMyLocationOverlay = mOverlayManager.createMyLocationOverlay(mMapLocationManager, mMapCompassManager);
 
 
-
+        startMyLocation();
     }
 
-    boolean isArriveCheck(NGeoPoint nGeoPoint, String lon, String lat)
-    {
-        //     *(다른부분)
-        // 33.4535   ,   126.346 = > 130.6998407736
-        // 33.4435   ,   126.346 = > 130.6972815641
-        //
-        // 차이 : 0.0025 (인식률떨어짐 ) -> 0.01
-
-        double doubleLon = Double.parseDouble(lon);
-        double doubleLat = Double.parseDouble(lat);
-
-        Log.i(LOG,nGeoPoint.longitude + " " + nGeoPoint.latitude );
-        Log.i(LOG,doubleLon + " " + doubleLat );
-
-        if( sqrt((nGeoPoint.longitude - doubleLon) * (nGeoPoint.longitude - doubleLon )
-                + (nGeoPoint.latitude - doubleLat )*(nGeoPoint.latitude - doubleLat ) )
-                < GPS_INTERVAL_FOR_CALC )
-        {
-            return true;
-        }
-        return false;
-    }
 
     NMapLocationManager.OnLocationChangeListener onLocationChangeListener = new NMapLocationManager.OnLocationChangeListener() {
         @Override
@@ -199,66 +185,60 @@ public class StampGetFragment extends Fragment {
 
             Log.i(LOG,  "LOCATION IS CHANGED");
 
-            mCurArrayPos= -1;
-
-            for (int i = 0; i < StampDataManager.dtoStampPlaceArrayList.size(); i++)
-            {
-
-                boolean isChecked = isArriveCheck(nGeoPoint,   StampDataManager.dtoStampPlaceArrayList.get(i).getGpsX() , StampDataManager.dtoStampPlaceArrayList.get(i).getGpsY() );
-
-
-                if(isChecked == true)
-                {
-                    mCurArrayPos=i;
-                    break;
-                }
-            }
-
-            if( mCurArrayPos == -1)
-            {
-                tmpButton.setText("마커 근처가면 스탬프받기가 활성화됩니당 ");
-                tmpButton.setEnabled(false);
-            }
-            else
-            {
-                tmpButton.setEnabled(true);
-                mCurPlace = StampDataManager.dtoStampPlaceArrayList.get(mCurArrayPos).getPlaceName();
-                tmpButton.setText( mCurPlace + " 스탬프받으세욤ㅎ ");
-            }
-
 
             return true;
         }
 
         @Override
         public void onLocationUpdateTimeout(NMapLocationManager nMapLocationManager) {
-
         }
 
         @Override
         public void onLocationUnavailableArea(NMapLocationManager nMapLocationManager, NGeoPoint nGeoPoint) {
-
         }
     };
-
-
-
 
 
     NMapPOIdataOverlay.OnStateChangeListener onStateChangeListener = new NMapPOIdataOverlay.OnStateChangeListener() {
         @Override
         public void onFocusChanged(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {
 
-            if (nMapPOIitem != null) {
+//            if (nMapPOIitem != null) {
 //                Log.i(LOG, nMapPOIitem.getHeadText());
 //                Log.i(LOG, nMapPOIitem.getSnippet());
 //                Log.i(LOG, nMapPOIitem.getTailText());
 //                Log.i(LOG, nMapPOIitem.getTitle() + " " + nMapPOIitem.getPoint().latitude + " " + nMapPOIitem.getPoint().longitude);
 
+                curQuery = nMapPOIitem.getTitle();
 
-            } else {
-                Log.i(LOG, "onFocusChanged: ");
-            }
+                tv_fragment_food_title.setText(curQuery);
+
+                for(int i = 0; i< JejuFoodManager.staticDtoBestEating.getData().size(); i++)
+                {
+                    if(curQuery.equals(JejuFoodManager.staticDtoBestEating.getData().get(i).getDataTitle()) &&
+                            ( String.valueOf(nMapPOIitem.getPoint().getLatitude()).equals(JejuFoodManager.staticDtoBestEating.getData().get(i).getLa())))
+                    {
+                        if(JejuFoodManager.staticDtoBestEating.getData().get(i).getTelNo().equals(" ") || JejuFoodManager.staticDtoBestEating.getData().get(i).getTelNo() == null)
+                        textInfoView.setText("Menu : " + JejuFoodManager.staticDtoBestEating.getData().get(i).getMenu()+"\n" +
+                        "주소 : " + JejuFoodManager.staticDtoBestEating.getData().get(i).getAdres());
+                        else
+                        {
+                            textInfoView.setText("Menu : " + JejuFoodManager.staticDtoBestEating.getData().get(i).getMenu()+"\n" +
+                                    "주소 : " + JejuFoodManager.staticDtoBestEating.getData().get(i).getAdres()+"\n" +
+                            "전화번호 : " + JejuFoodManager.staticDtoBestEating.getData().get(i).getTelNo());
+                        }
+                    }
+                }
+
+                ll_fragment_food_for_bt_ll.setVisibility(View.VISIBLE);
+                tv_fragment_food_title.setVisibility(View.VISIBLE);
+                tv_fragment_food_tmptitle1.setVisibility(View.GONE);
+                tv_fragment_food_tmptitle2.setVisibility(View.GONE);
+
+
+//            } else {
+//                Log.i(LOG, "onFocusChanged: ");
+//            }
         }
 
         @Override
@@ -325,18 +305,11 @@ public class StampGetFragment extends Fragment {
     }
 
 
-
-
-
-
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initMap();
-        startMyLocation();
 
-        tmpButton.setEnabled(false);
     }
 
     @Override
@@ -367,32 +340,21 @@ public class StampGetFragment extends Fragment {
         super.onDestroy();
     }
 
-
-    @OnClick(R.id.button)
-    void onClickbutton()
+    @OnClick(R.id.ll_fragment_food_search_ll)
+    void onClick_ll_fragment_food_search_ll()
     {
-//        mCurArrayPos
-//        mCurPlace
-        SaveDataManager saveDataManager = new SaveDataManager(getActivity().getApplicationContext());
-
-        String tmpStr = "stamp";
-
-        if( mCurArrayPos <10)
-            tmpStr += "0" + mCurArrayPos;
-        else
-            tmpStr +=  "" + mCurArrayPos;
-
-        Log.i(LOG,"AAAAAAAAAAAAA : " + tmpStr);
-
-        saveDataManager.putData(tmpStr,"true");
-
-        ((MainActivity)getActivity()).callFragmentPage(new StampBookFragment());
-
-        // 마커 뜨는게 false 인부분 즉 스탬프 안찍은 마커만 뜨게했고
-        // 마커 받았을떄 세어드프리퍼런스로 true만들고
-        // 북페이지로 화면전환
-        // 다시 일로와도 방금받은 스탬프마커는 업어짐
+        searchBrowser("https://search.naver.com/search.naver?ie=UTF-8&query=" + "제주 " + curQuery, "통합검색 결과");
 
     }
+
+    void searchBrowser(String url, String detailInfo)
+    {
+        ArrayList<String> strings = new ArrayList<String>();
+        strings.add(url); // [ url ]
+        strings.add(curQuery + " " + detailInfo); // ex) [ 제주서귀포 블로그검색 결과 ]
+
+        ((MainActivity)getActivity()).callFragmentPageWithData(new FoodDetailFragment(),strings);
+    }
+
 
 }

@@ -21,9 +21,9 @@ public class StampDataManager {
 
     public static void initData(){
 
-        dtoStampPlaceArrayList.add(new DTOStampPlace("126.5118814","33.5161459","제주 용두암"));
-        dtoStampPlaceArrayList.add(new DTOStampPlace("126.46859300000006","33.508095","제주 도두봉"));
-        dtoStampPlaceArrayList.add(new DTOStampPlace("126.34555399999999","33.4534765","애월 더럭분교"));
+        dtoStampPlaceArrayList.add(new DTOStampPlace(0,"126.5118814","33.5161459","제주 용두암",false));
+        dtoStampPlaceArrayList.add(new DTOStampPlace(1,"126.46859300000006","33.508095","제주 도두봉",false));
+        dtoStampPlaceArrayList.add(new DTOStampPlace(2,"126.34555399999999","33.4534765","애월 더럭분교",false));
 
 
 
