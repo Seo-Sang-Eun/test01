@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="350dp"
+    android:layout_height="450dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.80"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/seo_dialog_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="seo_dialog_Title" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4.09"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/seo_dialog_content"
+            android:layout_width="217dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.61"
+            android:text="Contents" />
+
+        <TextView
+            android:id="@+id/seo_dialog_iprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="price" />
+        <TextView
+            android:id="@+id/seo_dialog_ihomepage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="homepage" />
+        <TextView
+            android:id="@+id/seo_dialog_ihelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="phonenum" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal" android:layout_weight="1"
+        android:layout_width="match_parent" android:padding="15dp"
+        android:layout_height="0dp">
+
+
+            <Button
+                android:id="@+id/artcenter_okButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OK"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
+</LinearLayout>

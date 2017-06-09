@@ -11,6 +11,7 @@ import android.widget.ListView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.activity.MainActivity;
 import codersit.co.kr.jejugo.dao.DAOJejuArtcenterShowInfoService;
 import codersit.co.kr.jejugo.dto.DTOArtcenterShowInfoService;
 import codersit.co.kr.jejugo.util.ICallback;
@@ -22,7 +23,6 @@ import codersit.co.kr.jejugo.util.ICallback;
 public class JejuArtcenterFragment extends Fragment {
 
     private JejuArtcenterAdapter jejuArtcenterAdapter;
-    private ListView jejuArtcenterListView;
 
     //listView해
     @Bind(R.id.jeju_listView2)
@@ -53,11 +53,13 @@ public class JejuArtcenterFragment extends Fragment {
         public void call(Object o) {
 
             DTOArtcenterShowInfoService dtoArtcenterShowInfoService = (DTOArtcenterShowInfoService) o;
-            jejuArtcenterAdapter = new JejuArtcenterAdapter(dtoArtcenterShowInfoService);
+            jejuArtcenterAdapter = new JejuArtcenterAdapter(dtoArtcenterShowInfoService, (MainActivity)getActivity());
 
             view_action_sms.setAdapter(jejuArtcenterAdapter);
 
             jejuArtcenterAdapter.notifyDataSetChanged();
+
+
         }
     };
 

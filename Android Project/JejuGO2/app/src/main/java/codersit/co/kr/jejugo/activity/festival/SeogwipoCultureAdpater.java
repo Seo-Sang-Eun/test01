@@ -1,10 +1,13 @@
 package codersit.co.kr.jejugo.activity.festival;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import codersit.co.kr.jejugo.R;
@@ -46,11 +49,26 @@ public class SeogwipoCultureAdpater extends BaseAdapter {
 
             holder = new SeogwipoCultureCustomViewHolder();
 
+            holder.ll_asdf = (LinearLayout)convertView.findViewById(R.id.seogwipo_item) ;
             holder.seogwipoCultureSubject = (TextView) convertView.findViewById(R.id.text_seo_subject);
             holder.seogwipoCultureAddress = (TextView) convertView.findViewById(R.id.text_seo_adress);
             holder.seogwipoCultureStartDate = (TextView) convertView.findViewById(R.id.text_seo_startDay);
-            holder.seogwipoCultureEndDate = (TextView) convertView.findViewById(R.id.text_seo_endDay);
+         //   holder.seogwipoCultureEndDate = (TextView) convertView.findViewById(R.id.text_seo_endDay);
+
+            holder.ll_asdf.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+
+
+
+
+            });
+
             convertView.setTag(holder);
+
+
         } else {
             holder = (SeogwipoCultureCustomViewHolder) convertView.getTag();
         }
@@ -58,8 +76,8 @@ public class SeogwipoCultureAdpater extends BaseAdapter {
 
         holder.seogwipoCultureSubject.setText(dtoCultureEvent.getItems().get(position).getISubject());
         holder.seogwipoCultureAddress.setText(dtoCultureEvent.getItems().get(position).getILocation());
-        holder.seogwipoCultureStartDate.setText(dtoCultureEvent.getItems().get(position).getISdate());
-        holder.seogwipoCultureEndDate.setText(dtoCultureEvent.getItems().get(position).getIEdate());
+        holder.seogwipoCultureStartDate.setText(dtoCultureEvent.getItems().get(position).getIPeriodText());
+     //   holder.seogwipoCultureEndDate.setText(dtoCultureEvent.getItems().get(position).getIEdate());
 
         return convertView;
     }
@@ -68,7 +86,8 @@ public class SeogwipoCultureAdpater extends BaseAdapter {
         TextView seogwipoCultureSubject;
         TextView seogwipoCultureAddress;
         TextView seogwipoCultureStartDate;
-        TextView seogwipoCultureEndDate;
+      //  TextView seogwipoCultureEndDate;
+        LinearLayout ll_asdf;
     }
 
 

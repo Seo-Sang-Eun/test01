@@ -46,7 +46,7 @@ public class JejuFestivalAdapter extends BaseAdapter {
             holder = new JejuFestCustomViewHolder();
             holder.jejuFestName = (TextView) convertView.findViewById(R.id.text_jejuFest_name);
             holder.jejuFestStartDate = (TextView) convertView.findViewById(R.id.text_jejuFest_startDate);
-            holder.jejuFestEndDate = (TextView) convertView.findViewById(R.id.text_jejuFest_endDate);
+          //  holder.jejuFestEndDate = (TextView) convertView.findViewById(R.id.text_jejuFest_endDate);
             holder.jejuFestLocation = (TextView) convertView.findViewById(R.id.text_jejuFest_location);
 
             convertView.setTag(holder);
@@ -55,8 +55,8 @@ public class JejuFestivalAdapter extends BaseAdapter {
         }
 
         holder.jejuFestName.setText(dtoFestivalInquiryService.getData().get(position).getTitle());
-        holder.jejuFestStartDate.setText(dtoFestivalInquiryService.getData().get(position).getSdate());
-        holder.jejuFestEndDate.setText(dtoFestivalInquiryService.getData().get(position).getEdate());
+        holder.jejuFestStartDate.setText(dtoFestivalInquiryService.getData().get(position).getSdate()+" ~ "+dtoFestivalInquiryService.getData().get(position).getEdate());
+       // holder.jejuFestEndDate.setText(dtoFestivalInquiryService.getData().get(position).getEdate());
         holder.jejuFestLocation.setText(dtoFestivalInquiryService.getData().get(position).getLocation());
 
         return convertView;
