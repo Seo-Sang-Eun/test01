@@ -33,6 +33,7 @@ import codersit.co.kr.jejugo.dto.DTOStampPlace;
 import codersit.co.kr.jejugo.util.JejuWifiDataManager;
 import codersit.co.kr.jejugo.util.NMapPOIflagType;
 import codersit.co.kr.jejugo.util.NMapViewerResourceProvider;
+import codersit.co.kr.jejugo.util.SaveDataManager;
 import codersit.co.kr.jejugo.util.StampDataManager;
 
 import static codersit.co.kr.jejugo.util.IKeyManager.NaverClientID;
@@ -47,7 +48,7 @@ import static java.lang.Math.sqrt;
 public class StampGetFragment extends Fragment {
 
 
-    final String LOG = "StampFragment";
+    final String LOG = "StampGetFragment";
 
     private NMapContext mMapContext;
     NMapView mNMapView;
@@ -71,7 +72,6 @@ public class StampGetFragment extends Fragment {
     @Bind(R.id.button)
     Button tmpButton;
 
-
     public StampGetFragment() {
 
     }
@@ -82,10 +82,6 @@ public class StampGetFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_fragment_stamp_get, container, false);
         ButterKnife.bind(this,view);
-
-
-
-
 
         return view;
 
@@ -130,10 +126,27 @@ public class StampGetFragment extends Fragment {
         poiData.beginPOIdata(dtoStampPlaceArrayList.size());
 
 
+        SaveDataManager saveDataManager = new SaveDataManager(getActivity().getApplicationContext());
+
+
+
+
         for(int i = 0 ; i < dtoStampPlaceArrayList.size();i++ )
         {
-            DTOStampPlace tmpDtoStampPlace = dtoStampPlaceArrayList.get(i);
-            poiData.addPOIitem( Double.parseDouble( tmpDtoStampPlace.getGpsX() ) , Double.parseDouble( tmpDtoStampPlace.getGpsY() ),tmpDtoStampPlace.getPlaceName(),mMarkerId ,0 );
+
+            String tmpStr = "stamp";
+
+            if( mCurArrayPos <10)
+                tmpStr += "0" + i;
+            else
+                tmpStr +=  "" + i;
+
+            if(saveDataManager.getData(tmpStr).compareTo("false")==0)
+            {
+                DTOStampPlace tmpDtoStampPlace = dtoStampPlaceArrayList.get(i);
+                poiData.addPOIitem( Double.parseDouble( tmpDtoStampPlace.getGpsX() ) , Double.parseDouble( tmpDtoStampPlace.getGpsY() ),tmpDtoStampPlace.getPlaceName(),mMarkerId ,0 );
+            }
+
         }
 
         poiData.endPOIdata();
@@ -320,7 +333,6 @@ public class StampGetFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        StampDataManager.initData();
         initMap();
         startMyLocation();
 
@@ -361,11 +373,26 @@ public class StampGetFragment extends Fragment {
     {
 //        mCurArrayPos
 //        mCurPlace
+        SaveDataManager saveDataManager = new SaveDataManager(getActivity().getApplicationContext());
 
+        String tmpStr = "stamp";
 
+        if( mCurArrayPos <10)
+            tmpStr += "0" + mCurArrayPos;
+        else
+            tmpStr +=  "" + mCurArrayPos;
+
+        Log.i(LOG,"AAAAAAAAAAAAA : " + tmpStr);
+
+        saveDataManager.putData(tmpStr,"true");
+
+        ((MainActivity)getActivity()).callFragmentPage(new StampBookFragment());
+
+        // 마커 뜨는게 false 인부분 즉 스탬프 안찍은 마커만 뜨게했고
+        // 마커 받았을떄 세어드프리퍼런스로 true만들고
+        // 북페이지로 화면전환
+        // 다시 일로와도 방금받은 스탬프마커는 업어짐
 
     }
-
-
 
 }

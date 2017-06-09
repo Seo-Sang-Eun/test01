@@ -106,10 +106,16 @@ public class MainFragment extends Fragment {
 
 
 
-    @OnClick(R.id.ll_fragment_main_stamp)
-    void onClick_ll_fragment_main_stamp()
+    @OnClick(R.id.ll_fragment_main_stamp_get)
+    void onClick_ll_fragment_main_stamp_get()
     {
         ((MainActivity)getActivity()).callFragmentPage(new StampGetFragment());
+    }
+
+    @OnClick(R.id.ll_fragment_main_stamp_book)
+    void onClick_ll_fragment_main_stamp_book()
+    {
+        ((MainActivity)getActivity()).callFragmentPage(new StampBookFragment());
     }
 
     @OnClick(R.id.ll_fragment_main_hotplace)

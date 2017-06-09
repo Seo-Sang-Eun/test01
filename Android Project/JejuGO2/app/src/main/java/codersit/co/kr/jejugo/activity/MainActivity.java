@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity
         callFragmentPage(new MainFragment());
     }
 
-
     @Override
     public void onBackPressed() {
 
@@ -131,7 +130,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_stamp) {
+        if (id == R.id.nav_stamp_get) {
             callFragmentPage(new StampGetFragment());
         } else if (id == R.id.nav_hotplace) {
             callFragmentPage(new HotplaceFragment());
@@ -141,8 +140,8 @@ public class MainActivity extends AppCompatActivity
             callFragmentPage(new FestivalFragment());
         } else if (id == R.id.nav_food) {
             callFragmentPage(new FoodFragment());
-        } else if (id == R.id.nav_send) {
-// 아직 X
+        } else if (id == R.id.nav_stamp_book) {
+            callFragmentPage(new StampBookFragment());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

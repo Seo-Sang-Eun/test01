@@ -11,6 +11,7 @@ import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.util.JejuWifiDataManager;
 import codersit.co.kr.jejugo.util.SaveDataManager;
+import codersit.co.kr.jejugo.util.StampDataManager;
 
 public class IntroActivity extends AppCompatActivity {
 
@@ -34,11 +35,24 @@ public class IntroActivity extends AppCompatActivity {
 
         SaveDataManager saveDataManager = new SaveDataManager(this);
 
+        StampDataManager.initData();
+
         for(int i = 0 ; i < 20;i++)
         {
-            if(saveDataManager.getData("stamp"+i) == null)
+            if(i<10)
             {
-                saveDataManager.putData("stamp"+i,  "false");
+                if(saveDataManager.getData("stamp0"+i) == null)
+                {
+                    saveDataManager.putData("stamp0"+i,  "false");
+                }
+
+            }
+            else
+            {
+                if(saveDataManager.getData("stamp"+i) == null)
+                {
+                    saveDataManager.putData("stamp"+i,  "false");
+                }
             }
         }
 
