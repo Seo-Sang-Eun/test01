@@ -10,6 +10,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.util.JejuWifiDataManager;
+import codersit.co.kr.jejugo.util.SaveDataManager;
 
 public class IntroActivity extends AppCompatActivity {
 
@@ -30,6 +31,17 @@ public class IntroActivity extends AppCompatActivity {
                 IntroActivity.this.finish();
             }
         }, 3000);
+
+        SaveDataManager saveDataManager = new SaveDataManager(this);
+
+        for(int i = 0 ; i < 20;i++)
+        {
+            if(saveDataManager.getData("stamp"+i) == null)
+            {
+                saveDataManager.putData("stamp"+i,  "false");
+            }
+        }
+
     }
 
 }

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.nhn.android.maps.NMapCompassManager;
@@ -24,7 +25,9 @@ import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.dto.DTOStampPlace;
 import codersit.co.kr.jejugo.util.JejuWifiDataManager;
@@ -34,6 +37,8 @@ import codersit.co.kr.jejugo.util.StampDataManager;
 
 import static codersit.co.kr.jejugo.util.IKeyManager.NaverClientID;
 import static codersit.co.kr.jejugo.util.StampDataManager.dtoStampPlaceArrayList;
+import static java.lang.Math.abs;
+import static java.lang.Math.sqrt;
 
 /**
  * Created by P200 on 2017-06-04.
@@ -58,7 +63,13 @@ public class StampGetFragment extends Fragment {
 
     final int RESULT_MAX_COUNT = 20;
 
+    final double GPS_INTERVAL_FOR_CALC = 0.01;//0.0025;
 
+    int mCurArrayPos;
+    String mCurPlace;
+
+    @Bind(R.id.button)
+    Button tmpButton;
 
 
     public StampGetFragment() {
@@ -138,6 +149,7 @@ public class StampGetFragment extends Fragment {
         mMapLocationManager = new NMapLocationManager(super.getActivity());
         mMapLocationManager.setOnLocationChangeListener(onLocationChangeListener);
 
+
         mMapCompassManager = new NMapCompassManager(super.getActivity());
         mMyLocationOverlay = mOverlayManager.createMyLocationOverlay(mMapLocationManager, mMapCompassManager);
 
@@ -145,10 +157,64 @@ public class StampGetFragment extends Fragment {
 
     }
 
+    boolean isArriveCheck(NGeoPoint nGeoPoint, String lon, String lat)
+    {
+        //     *(다른부분)
+        // 33.4535   ,   126.346 = > 130.6998407736
+        // 33.4435   ,   126.346 = > 130.6972815641
+        //
+        // 차이 : 0.0025 (인식률떨어짐 ) -> 0.01
+
+        double doubleLon = Double.parseDouble(lon);
+        double doubleLat = Double.parseDouble(lat);
+
+        Log.i(LOG,nGeoPoint.longitude + " " + nGeoPoint.latitude );
+        Log.i(LOG,doubleLon + " " + doubleLat );
+
+        if( sqrt((nGeoPoint.longitude - doubleLon) * (nGeoPoint.longitude - doubleLon )
+                + (nGeoPoint.latitude - doubleLat )*(nGeoPoint.latitude - doubleLat ) )
+                < GPS_INTERVAL_FOR_CALC )
+        {
+            return true;
+        }
+        return false;
+    }
+
     NMapLocationManager.OnLocationChangeListener onLocationChangeListener = new NMapLocationManager.OnLocationChangeListener() {
         @Override
         public boolean onLocationChanged(NMapLocationManager nMapLocationManager, NGeoPoint nGeoPoint) {
-            return false;
+
+            Log.i(LOG,  "LOCATION IS CHANGED");
+
+            mCurArrayPos= -1;
+
+            for (int i = 0; i < StampDataManager.dtoStampPlaceArrayList.size(); i++)
+            {
+
+                boolean isChecked = isArriveCheck(nGeoPoint,   StampDataManager.dtoStampPlaceArrayList.get(i).getGpsX() , StampDataManager.dtoStampPlaceArrayList.get(i).getGpsY() );
+
+
+                if(isChecked == true)
+                {
+                    mCurArrayPos=i;
+                    break;
+                }
+            }
+
+            if( mCurArrayPos == -1)
+            {
+                tmpButton.setText("마커 근처가면 스탬프받기가 활성화됩니당 ");
+                tmpButton.setEnabled(false);
+            }
+            else
+            {
+                tmpButton.setEnabled(true);
+                mCurPlace = StampDataManager.dtoStampPlaceArrayList.get(mCurArrayPos).getPlaceName();
+                tmpButton.setText( mCurPlace + " 스탬프받으세욤ㅎ ");
+            }
+
+
+            return true;
         }
 
         @Override
@@ -256,10 +322,9 @@ public class StampGetFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         StampDataManager.initData();
         initMap();
-
-
         startMyLocation();
 
+        tmpButton.setEnabled(false);
     }
 
     @Override
@@ -279,15 +344,27 @@ public class StampGetFragment extends Fragment {
     }
     @Override
     public void onStop() {
+
         mMapContext.onStop();
         super.onStop();
     }
     @Override
     public void onDestroy() {
         mMapContext.onDestroy();
+        stopMyLocation();
         super.onDestroy();
     }
 
+
+    @OnClick(R.id.button)
+    void onClickbutton()
+    {
+//        mCurArrayPos
+//        mCurPlace
+
+
+
+    }
 
 
 
