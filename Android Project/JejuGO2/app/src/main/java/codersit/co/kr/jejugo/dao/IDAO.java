@@ -4,6 +4,7 @@ import java.util.Map;
 
 import codersit.co.kr.jejugo.dto.DTOArtcenterShowInfoService;
 import codersit.co.kr.jejugo.dto.DTOArtstreetService;
+import codersit.co.kr.jejugo.dto.DTOBestEating;
 import codersit.co.kr.jejugo.dto.DTOCultureEvent;
 import codersit.co.kr.jejugo.dto.DTOFestivalInquiryService;
 import codersit.co.kr.jejugo.dto.DTOGeoCode;
@@ -54,10 +55,10 @@ public interface IDAO {
 
     // 제주 도내의 모범음식점 정보
     @GET("rest/besteating/getEatingList") // default startpage, pagesize = 1, 10
-    Call<DTOFestivalInquiryService> getBestEating(@Query("startPage") String startPage,
-                                                  @Query("pageSize") String pageSize,
-                                                  @Query(value = "serviceKey",encoded=true) String serviceKey,
-                                                  @Query("dataTitle") String dataTitle);
+    Call<DTOBestEating> getBestEating(@Query("startPage") String startPage,
+                                      @Query("pageSize") String pageSize,
+                                      @Query(value = "serviceKey",encoded=true) String serviceKey,
+                                      @Query("dataTitle") String dataTitle);
 
     @GET("v1/map/geocode.xml")
     Call<DTOGeoCode> getGeoCode(@Query("query") String placeName,

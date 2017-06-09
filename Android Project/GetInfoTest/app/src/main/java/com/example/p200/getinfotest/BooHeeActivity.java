@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.p200.getinfotest.dao.DAOArtstreetService;
+import com.example.p200.getinfotest.dao.DAOBestEating;
 import com.example.p200.getinfotest.dao.DAOCultureEvent;
 import com.example.p200.getinfotest.dao.DAOFestivalInquiryService;
 import com.example.p200.getinfotest.dao.DAOJejuArtcenterShowInfoService;
 import com.example.p200.getinfotest.dao.DAOJejuWifiVisitCountInfo;
 import com.example.p200.getinfotest.dto.DTOArtcenterShowInfoService;
 import com.example.p200.getinfotest.dto.DTOArtstreetService;
+import com.example.p200.getinfotest.dto.DTOBestEating;
 import com.example.p200.getinfotest.dto.DTOCultureEvent;
 import com.example.p200.getinfotest.dto.DTOFestivalInquiryService;
 import com.example.p200.getinfotest.dto.DTOJejuWifiVisitCountInfo;
@@ -25,17 +27,18 @@ public class BooHeeActivity extends AppCompatActivity {
 
         final String startPage = "1";
         final String pageSize = "10";
+        final String dataTitle = "";
 
-        DAOFestivalInquiryService daoFestivalInquiryService = new DAOFestivalInquiryService(startPage, pageSize);
-        daoFestivalInquiryService.setICallbackListener(iCallback);
+        DAOBestEating daoBestEating = new DAOBestEating(startPage, pageSize, dataTitle);
+        daoBestEating.setICallbackListener(iCallback);
 
-        daoFestivalInquiryService.getData();
+        daoBestEating.getData();
     }
     ICallback iCallback = new ICallback() {
         @Override
         public void call(Object o) {
-            DTOFestivalInquiryService dtoFestivalInquiryService = (DTOFestivalInquiryService) o;
-            Log.i("THIS MainActivity", dtoFestivalInquiryService.getTotalCount());
+            DTOBestEating dtoBestEating = (DTOBestEating) o;
+            Log.i("THIS MainActivity", dtoBestEating.getTotalCount());
         }
     };
 }

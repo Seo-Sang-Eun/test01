@@ -2,6 +2,7 @@ package com.example.p200.getinfotest.dao;
 
 import com.example.p200.getinfotest.dto.DTOArtcenterShowInfoService;
 import com.example.p200.getinfotest.dto.DTOArtstreetService;
+import com.example.p200.getinfotest.dto.DTOBestEating;
 import com.example.p200.getinfotest.dto.DTOCultureEvent;
 import com.example.p200.getinfotest.dto.DTOFestivalInquiryService;
 import com.example.p200.getinfotest.dto.DTOJejuWifiVisitCountInfo;
@@ -50,10 +51,11 @@ public interface IDAO {
 
     // 제주 도내의 모범음식점 정보
     @GET("rest/besteating/getEatingList") // default startpage, pagesize = 1, 10
-    Call<DTOFestivalInquiryService> getBestEating(@Query("startPage") String startPage,
-                                                              @Query("pageSize") String pageSize,
-                                                              @Query(value = "serviceKey",encoded=true) String serviceKey,
-                                                  @Query("dataTitle") String dataTitle);
+    Call<DTOBestEating> getBestEating(@Query("startPage") String startPage,
+                                      @Query("pageSize") String pageSize,
+                                      @Query(value = "serviceKey",encoded=true) String serviceKey,
+                                      @Query("dataTitle") String dataTitle);
+
 
     public static final Retrofit RetrofitForHotplace = new Retrofit.Builder().baseUrl("http://jstp.jejutour.go.kr/")
             .addConverterFactory( SimpleXmlConverterFactory.create())
