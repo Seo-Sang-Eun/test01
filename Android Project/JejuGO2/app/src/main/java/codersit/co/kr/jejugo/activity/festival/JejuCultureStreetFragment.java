@@ -11,6 +11,7 @@ import android.widget.ListView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.activity.MainActivity;
 import codersit.co.kr.jejugo.dao.DAOArtstreetService;
 import codersit.co.kr.jejugo.dto.DTOArtstreetService;
 import codersit.co.kr.jejugo.util.ICallback;
@@ -22,7 +23,6 @@ import codersit.co.kr.jejugo.util.ICallback;
 public class JejuCultureStreetFragment extends Fragment {
 
     private JejuCultureStreetAdpater jejuCultureStreetAdpater;
-    private ListView myListView;
 
     @Bind(R.id.jeju_listView2)
     ListView view_action_sms;
@@ -34,13 +34,12 @@ public class JejuCultureStreetFragment extends Fragment {
         View view = inflater.inflate(R.layout.jae_listview, container, false);
         ButterKnife.bind(this, view);
 
-
         setData();
 
         return view;
     }
     private void setData() {
-        DAOArtstreetService daoArtstreetService = new DAOArtstreetService("1","10");
+        DAOArtstreetService daoArtstreetService = new DAOArtstreetService("1","30");
         daoArtstreetService.setICallbackListener(iCallback);
 
         daoArtstreetService.getData();
@@ -52,7 +51,7 @@ public class JejuCultureStreetFragment extends Fragment {
         public void call(Object o) {
 
             DTOArtstreetService dtoArtstreetService = (DTOArtstreetService) o;
-            jejuCultureStreetAdpater = new JejuCultureStreetAdpater(dtoArtstreetService);
+            jejuCultureStreetAdpater = new JejuCultureStreetAdpater(dtoArtstreetService,(MainActivity)getActivity());
 
             view_action_sms.setAdapter(jejuCultureStreetAdpater);
 

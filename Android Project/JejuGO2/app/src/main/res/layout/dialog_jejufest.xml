@@ -26,7 +26,7 @@
         android:weightSum="1">
 
         <TextView
-            android:id="@+id/jejufest_dialog_intro"
+            android:id="@+id/jejufest_dialog_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.46"
@@ -47,7 +47,7 @@
         android:padding="15dp">
 
             <Button
-                android:id="@+id/artcenter_okButton"
+                android:id="@+id/jejufest_okButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="OK"

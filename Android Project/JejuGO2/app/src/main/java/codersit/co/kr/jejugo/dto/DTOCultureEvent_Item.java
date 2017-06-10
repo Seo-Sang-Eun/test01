@@ -32,6 +32,14 @@ public class DTOCultureEvent_Item {
     private String ISdate;
     @Element(required = false)
     private String IEdate;
+    @Element(required = false)
+    private String Ihomepage;
+    @Element(required = false)
+    private String IPrice;
+
+    public String getIhomepage(){return Ihomepage;}
+
+    public String getIPrice(){return IPrice;}
 
     public String getIChair() {
         return IChair;

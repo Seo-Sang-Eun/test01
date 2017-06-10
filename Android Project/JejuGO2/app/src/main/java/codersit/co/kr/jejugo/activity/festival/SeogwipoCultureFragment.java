@@ -12,6 +12,7 @@ import android.widget.ListView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.activity.MainActivity;
 import codersit.co.kr.jejugo.dao.DAOCultureEvent;
 import codersit.co.kr.jejugo.dto.DTOCultureEvent;
 import codersit.co.kr.jejugo.dto.DTOFestivalInquiryService;
@@ -59,7 +60,7 @@ public class SeogwipoCultureFragment extends Fragment {
 //            Log.i(LOG,dtoCultureEvent.getData().get(0).getILocation());
 
 
-            seogwipoCultureAdpater = new SeogwipoCultureAdpater(dtoCultureEvent);
+            seogwipoCultureAdpater = new SeogwipoCultureAdpater(dtoCultureEvent,(MainActivity)getActivity());
 
             view_action_sms.setAdapter(seogwipoCultureAdpater);
 

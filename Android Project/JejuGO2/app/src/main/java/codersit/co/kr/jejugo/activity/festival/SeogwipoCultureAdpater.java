@@ -2,6 +2,7 @@ package codersit.co.kr.jejugo.activity.festival;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,11 @@ import codersit.co.kr.jejugo.dto.DTOCultureEvent;
 public class SeogwipoCultureAdpater extends BaseAdapter {
 
     private DTOCultureEvent dtoCultureEvent;
+    Context mContext;
 
-    public SeogwipoCultureAdpater(DTOCultureEvent dtoCultureEvent ) {
+    public SeogwipoCultureAdpater(DTOCultureEvent dtoCultureEvent, Context context ) {
+
+        mContext = context;
         this.dtoCultureEvent = dtoCultureEvent;
     }
 
@@ -44,31 +48,23 @@ public class SeogwipoCultureAdpater extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         SeogwipoCultureCustomViewHolder holder;
+
+        final String m_title;
+        final String m_help;
+        final String m_content;
+        final String homepage;
+        final String price;
+
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.jae_seogwipo_item, null, false);
 
             holder = new SeogwipoCultureCustomViewHolder();
 
-            holder.ll_asdf = (LinearLayout)convertView.findViewById(R.id.seogwipo_item) ;
+            holder.ll_seo_culture_outlayout= (LinearLayout)convertView.findViewById(R.id.seogwipo_item) ;
             holder.seogwipoCultureSubject = (TextView) convertView.findViewById(R.id.text_seo_subject);
             holder.seogwipoCultureAddress = (TextView) convertView.findViewById(R.id.text_seo_adress);
             holder.seogwipoCultureStartDate = (TextView) convertView.findViewById(R.id.text_seo_startDay);
-         //   holder.seogwipoCultureEndDate = (TextView) convertView.findViewById(R.id.text_seo_endDay);
-
-            holder.ll_asdf.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-
-
-
-
-            });
-
             convertView.setTag(holder);
-
-
         } else {
             holder = (SeogwipoCultureCustomViewHolder) convertView.getTag();
         }
@@ -77,17 +73,34 @@ public class SeogwipoCultureAdpater extends BaseAdapter {
         holder.seogwipoCultureSubject.setText(dtoCultureEvent.getItems().get(position).getISubject());
         holder.seogwipoCultureAddress.setText(dtoCultureEvent.getItems().get(position).getILocation());
         holder.seogwipoCultureStartDate.setText(dtoCultureEvent.getItems().get(position).getIPeriodText());
-     //   holder.seogwipoCultureEndDate.setText(dtoCultureEvent.getItems().get(position).getIEdate());
+
+
+
+        m_title = dtoCultureEvent.getItems().get(position).getISubject();
+        m_help= dtoCultureEvent.getItems().get(position).getIHelp();
+        m_content = dtoCultureEvent.getItems().get(position).getIContents();
+        homepage = dtoCultureEvent.getItems().get(position).getIhomepage();
+        price = dtoCultureEvent.getItems().get(position).getIPrice();
+
+        holder.ll_seo_culture_outlayout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                SeogwipoCultureDialog seogwipoCultureDialog = new SeogwipoCultureDialog( mContext, m_help, homepage, price, m_content,m_title);
+                seogwipoCultureDialog.show();
+            }
+        });
+
+
 
         return convertView;
     }
 
     class SeogwipoCultureCustomViewHolder {
+        LinearLayout ll_seo_culture_outlayout;
         TextView seogwipoCultureSubject;
         TextView seogwipoCultureAddress;
         TextView seogwipoCultureStartDate;
-      //  TextView seogwipoCultureEndDate;
-        LinearLayout ll_asdf;
     }
 
 

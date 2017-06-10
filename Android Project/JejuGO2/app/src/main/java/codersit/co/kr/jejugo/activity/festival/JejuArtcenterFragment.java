@@ -41,7 +41,7 @@ public class JejuArtcenterFragment extends Fragment {
     }
 
     private void setData() {
-        DAOJejuArtcenterShowInfoService daoJejuArtcenterShowInfoService = new DAOJejuArtcenterShowInfoService("1","10");
+        DAOJejuArtcenterShowInfoService daoJejuArtcenterShowInfoService = new DAOJejuArtcenterShowInfoService("1","30");
         daoJejuArtcenterShowInfoService.setICallbackListener(iCallback);
 
         daoJejuArtcenterShowInfoService.getData();

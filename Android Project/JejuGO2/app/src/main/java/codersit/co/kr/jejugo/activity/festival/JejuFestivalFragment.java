@@ -12,6 +12,7 @@ import android.widget.ListView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.activity.MainActivity;
 import codersit.co.kr.jejugo.dao.DAOFestivalInquiryService;
 import codersit.co.kr.jejugo.dto.DTOFestivalInquiryService;
 import codersit.co.kr.jejugo.util.ICallback;
@@ -57,7 +58,7 @@ public class JejuFestivalFragment extends Fragment {
             for(int i = 0 ; i <dtoFestivalInquiryService.getData().size();i++)
                 Log.i("LOG",dtoFestivalInquiryService.getData().get(i).getInfo());
 
-            jejuFestivalAdapter = new JejuFestivalAdapter(dtoFestivalInquiryService);
+            jejuFestivalAdapter = new JejuFestivalAdapter(dtoFestivalInquiryService,(MainActivity)getActivity());
 
             view_action_sms.setAdapter(jejuFestivalAdapter);
 
