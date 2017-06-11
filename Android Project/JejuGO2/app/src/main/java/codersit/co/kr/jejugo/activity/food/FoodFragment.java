@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,15 +34,21 @@ import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
 //import codersit.co.kr.jejugo.dao.DAOGeoCode;
 import codersit.co.kr.jejugo.activity.MainActivity;
+import codersit.co.kr.jejugo.activity.festival.JejuCultureStreetAdpater;
 import codersit.co.kr.jejugo.activity.hotplace.HotplaceDetailFragment;
+import codersit.co.kr.jejugo.dao.DAOArtstreetService;
 import codersit.co.kr.jejugo.dao.DAOBestEating;
 import codersit.co.kr.jejugo.dao.DAOGeoCode;
+import codersit.co.kr.jejugo.dao.DAOImage;
 import codersit.co.kr.jejugo.dao.DAOJejuWifiVisitCountInfo;
+import codersit.co.kr.jejugo.dto.DTOArtstreetService;
 import codersit.co.kr.jejugo.dto.DTOBestEating;
 import codersit.co.kr.jejugo.dto.DTOGeoCode;
+import codersit.co.kr.jejugo.dto.DTOImage;
 import codersit.co.kr.jejugo.dto.DTOJejuWifiVisitCountInfo;
 import codersit.co.kr.jejugo.dto.DTOStampPlace;
 import codersit.co.kr.jejugo.util.ICallback;
+import codersit.co.kr.jejugo.util.ImageLoaderTask;
 import codersit.co.kr.jejugo.util.JejuFoodManager;
 import codersit.co.kr.jejugo.util.JejuWifiDataManager;
 import codersit.co.kr.jejugo.util.NMapPOIflagType;
@@ -85,15 +92,17 @@ public class FoodFragment extends Fragment {
     TextView tv_fragment_food_tmptitle2;
     @Bind(R.id.ll_fragment_food_for_bt_ll)
     LinearLayout ll_fragment_food_for_bt_ll;
-    @Bind(R.id.textInfoView)
-    TextView textInfoView;
+    @Bind(R.id.tv_fragment_food_info)
+    TextView tv_fragment_food_info;
+    @Bind(R.id.tv_fragment_food_adress)
+    TextView tv_fragment_food_adress;
+    @Bind(R.id.iv_fragment_food_image)
+    ImageView iv_fragment_food_image;
 
     final double GPS_INTERVAL_FOR_CALC = 0.01;//0.0025;
 
     public FoodFragment() {
     }
-
-    TextView tvFood;
 
     @Nullable
     @Override
@@ -101,6 +110,9 @@ public class FoodFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_fragment_food, container, false);
         ButterKnife.bind(this,view);
+
+
+
 
         return view;
 
@@ -203,11 +215,12 @@ public class FoodFragment extends Fragment {
         @Override
         public void onFocusChanged(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem nMapPOIitem) {
 
-//            if (nMapPOIitem != null) {
+            if (nMapPOIitem != null) {
 //                Log.i(LOG, nMapPOIitem.getHeadText());
 //                Log.i(LOG, nMapPOIitem.getSnippet());
 //                Log.i(LOG, nMapPOIitem.getTailText());
 //                Log.i(LOG, nMapPOIitem.getTitle() + " " + nMapPOIitem.getPoint().latitude + " " + nMapPOIitem.getPoint().longitude);
+
 
                 curQuery = nMapPOIitem.getTitle();
 
@@ -215,18 +228,52 @@ public class FoodFragment extends Fragment {
 
                 for(int i = 0; i< JejuFoodManager.staticDtoBestEating.getData().size(); i++)
                 {
-                    if(curQuery.equals(JejuFoodManager.staticDtoBestEating.getData().get(i).getDataTitle()) &&
-                            ( String.valueOf(nMapPOIitem.getPoint().getLatitude()).equals(JejuFoodManager.staticDtoBestEating.getData().get(i).getLa())))
+                    if(curQuery.equals(JejuFoodManager.staticDtoBestEating.getData().get(i).getDataTitle()) )
+//                    && ( String.valueOf(nMapPOIitem.getPoint().getLatitude()).equals(JejuFoodManager.staticDtoBestEating.getData().get(i).getLa())))
                     {
-                        if(JejuFoodManager.staticDtoBestEating.getData().get(i).getTelNo().equals(" ") || JejuFoodManager.staticDtoBestEating.getData().get(i).getTelNo() == null)
-                        textInfoView.setText("Menu : " + JejuFoodManager.staticDtoBestEating.getData().get(i).getMenu()+"\n" +
-                        "주소 : " + JejuFoodManager.staticDtoBestEating.getData().get(i).getAdres());
-                        else
+                        tv_fragment_food_adress.setText("("+JejuFoodManager.staticDtoBestEating.getData().get(i).getAdres()+")");
+
+                        String phoneNum=""; // 010-12345-1234
+                        String foodType=""; // 한식 중식
+                        String foodMenuWithText=""; // 통닭
+                        String foodMenu="";
+
+
+                        if(!(JejuFoodManager.staticDtoBestEating.getData().get(i).getMenu().equals("") || JejuFoodManager.staticDtoBestEating.getData().get(i).getMenu() == null))
                         {
-                            textInfoView.setText("Menu : " + JejuFoodManager.staticDtoBestEating.getData().get(i).getMenu()+"\n" +
-                                    "주소 : " + JejuFoodManager.staticDtoBestEating.getData().get(i).getAdres()+"\n" +
-                            "전화번호 : " + JejuFoodManager.staticDtoBestEating.getData().get(i).getTelNo());
+                            foodMenuWithText = "주요메뉴    " + JejuFoodManager.staticDtoBestEating.getData().get(i).getMenu();
+                            foodMenu = JejuFoodManager.staticDtoBestEating.getData().get(i).getMenu();
                         }
+
+                        if(!(JejuFoodManager.staticDtoBestEating.getData().get(i).getBizcnd().equals("") || JejuFoodManager.staticDtoBestEating.getData().get(i).getBizcnd() == null))
+                        {
+                            foodType = "음식종류    " + JejuFoodManager.staticDtoBestEating.getData().get(i).getBizcnd();
+                        }
+
+                        if(!(JejuFoodManager.staticDtoBestEating.getData().get(i).getTelNo().equals("") || JejuFoodManager.staticDtoBestEating.getData().get(i).getTelNo() == null))
+                        {
+                            phoneNum = "전화번호    " + JejuFoodManager.staticDtoBestEating.getData().get(i).getTelNo();
+                        }
+
+//                        Log.i(LOG,JejuFoodManager.staticDtoBestEating.getData().get(i).getDataTitle()+"__"+foodMenu+"__"+foodType + "__"+phoneNum);
+                        tv_fragment_food_info.setText( foodMenuWithText+"\n"+foodType + "\n"+phoneNum);
+
+//                        Log.i(LOG,"MENU : " + JejuFoodManager.staticDtoBestEating.getData().get(i).getMenu());
+
+
+                        // 감자,고구마     처럼 , 로되있을때
+                        if(foodMenu.split(",").length>=1)
+                        {
+                            foodMenu = foodMenu.split(",")[0];
+                        }
+
+                        DAOImage daoImage = new DAOImage(foodMenu);
+                        daoImage.setICallbackListener(iCallback);
+
+                        daoImage.getData();
+
+
+                        break;
                     }
                 }
 
@@ -236,9 +283,10 @@ public class FoodFragment extends Fragment {
                 tv_fragment_food_tmptitle2.setVisibility(View.GONE);
 
 
-//            } else {
-//                Log.i(LOG, "onFocusChanged: ");
-//            }
+
+            } else {
+                Log.i(LOG, "onFocusChanged: ");
+            }
         }
 
         @Override
@@ -250,6 +298,26 @@ public class FoodFragment extends Fragment {
         }
     };
 
+
+    ICallback iCallback = new ICallback() {
+        @Override
+        public void call(Object o) {
+
+            DTOImage dtoImage = (DTOImage) o;
+
+            if( dtoImage != null && dtoImage.getItem() != null) {
+
+                iv_fragment_food_image.setVisibility(View.VISIBLE);
+
+//                Log.i(LOG, dtoImage.getItem().get(0).getLink() );
+
+                ImageLoaderTask imageLoaderTask = new ImageLoaderTask(iv_fragment_food_image, dtoImage.getItem().get(0).getLink() );
+                imageLoaderTask.execute();
+            }
+            else
+                iv_fragment_food_image.setVisibility(View.GONE);
+        }
+    };
 
 
     private void startMyLocation() {
@@ -340,10 +408,10 @@ public class FoodFragment extends Fragment {
         super.onDestroy();
     }
 
-    @OnClick(R.id.ll_fragment_food_search_ll)
-    void onClick_ll_fragment_food_search_ll()
+    @OnClick(R.id.bt_fragment_food_search_bt)
+    void onClick_bt_fragment_food_search_bt()
     {
-        searchBrowser("https://search.naver.com/search.naver?ie=UTF-8&query=" + "제주 " + curQuery, "통합검색 결과");
+        searchBrowser("https://search.naver.com/search.naver?ie=UTF-8&query=" + "제주 " + curQuery, "모범음식 검색 결과");
 
     }
 

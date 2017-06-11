@@ -1,7 +1,6 @@
 package codersit.co.kr.jejugo.activity.festival;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import android.widget.TextView;
 
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.dto.DTOArtstreetService;
+import codersit.co.kr.jejugo.util.ImageLoaderTask;
 
 /**
  * Created by admin on 2017-06-08.
@@ -68,8 +68,14 @@ public class JejuCultureStreetAdpater extends BaseAdapter {
 
         dtoArtstreetService.getData().get(position).getImg_url();
 
-        ImageLoaderTask imageLoaderTask = new ImageLoaderTask(holder.JejuCultureStreetImageView,dtoArtstreetService.getData().get(position).getImg_url());
+//        ImageBackgroundLoaderTask imageBackgroundLoaderTask =
+//                new ImageBackgroundLoaderTask(mContext,holder.JejuCultureStreetImageView,dtoArtstreetService.getData().get(position).getImg_url());
+//        imageBackgroundLoaderTask.execute();
+
+        ImageLoaderTask imageLoaderTask =
+                new ImageLoaderTask(holder.JejuCultureStreetImageView,dtoArtstreetService.getData().get(position).getImg_url());
         imageLoaderTask.execute();
+
 
         holder.JejuCultureStreetName.setText(dtoArtstreetService.getData().get(position).getName());
         holder.JejuCultureStreetAdress.setText(dtoArtstreetService.getData().get(position).getAddress());

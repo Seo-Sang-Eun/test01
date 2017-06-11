@@ -220,17 +220,14 @@ public class HotplaceFragment extends Fragment {
 //                Log.i(LOG, nMapPOIitem.getTailText());
 //                Log.i(LOG, nMapPOIitem.getTitle() + " " + nMapPOIitem.getPoint().latitude + " " + nMapPOIitem.getPoint().longitude);
 
-                if(curQuery==null)
-                {
-                    curQuery = nMapPOIitem.getTitle();
+                curQuery = nMapPOIitem.getTitle();
 
-                    tv_fragment_hotplace_title.setText(curQuery);
+                tv_fragment_hotplace_title.setText(curQuery);
 
-                    ll_fragment_hotplace_for_bt_ll.setVisibility(View.VISIBLE);
-                    tv_fragment_hotplace_title.setVisibility(View.VISIBLE);
-                    tv_fragment_hotplace_tmptitle1.setVisibility(View.GONE);
-                    tv_fragment_hotplace_tmptitle2.setVisibility(View.GONE);
-                }
+                ll_fragment_hotplace_for_bt_ll.setVisibility(View.VISIBLE);
+                tv_fragment_hotplace_title.setVisibility(View.VISIBLE);
+                tv_fragment_hotplace_tmptitle1.setVisibility(View.GONE);
+                tv_fragment_hotplace_tmptitle2.setVisibility(View.GONE);
 
             } else {
                 Log.i(LOG, "onFocusChanged: ");

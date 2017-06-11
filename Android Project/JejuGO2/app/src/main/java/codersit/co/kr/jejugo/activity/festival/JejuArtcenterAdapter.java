@@ -2,17 +2,12 @@ package codersit.co.kr.jejugo.activity.festival;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,6 +17,7 @@ import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.activity.MainActivity;
 import codersit.co.kr.jejugo.activity.hotplace.HotplaceDetailFragment;
 import codersit.co.kr.jejugo.dto.DTOArtcenterShowInfoService;
+import codersit.co.kr.jejugo.util.ImageLoaderTask;
 
 /**
  * Created by admin on 2017-06-08.
@@ -38,8 +34,14 @@ public class JejuArtcenterAdapter extends BaseAdapter {
     private DTOArtcenterShowInfoService dtoArtcenterShowInfoService;
 
 
+//<<<<<<< HEAD
+//    public JejuArtcenterAdapter(DTOArtcenterShowInfoService dtoArtcenterShowInfoService , Context context) {
+//
+//        mContext= context;
+//=======
     public JejuArtcenterAdapter(DTOArtcenterShowInfoService dtoArtcenterShowInfoService , Activity activity) {
         mActivity= activity;
+//>>>>>>> f7fa4fc2ef635a4791ad4017dba276f92a7261ba
         this.dtoArtcenterShowInfoService = dtoArtcenterShowInfoService;
     }
 

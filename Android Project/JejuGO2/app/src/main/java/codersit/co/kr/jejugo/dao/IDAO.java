@@ -9,6 +9,7 @@ import codersit.co.kr.jejugo.dto.DTOBestEating;
 import codersit.co.kr.jejugo.dto.DTOCultureEvent;
 import codersit.co.kr.jejugo.dto.DTOFestivalInquiryService;
 import codersit.co.kr.jejugo.dto.DTOGeoCode;
+import codersit.co.kr.jejugo.dto.DTOImage;
 import codersit.co.kr.jejugo.dto.DTOJejuWifiVisitCountInfo;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -66,6 +67,13 @@ public interface IDAO {
                                 @Header("X-Naver-Client-Id") String serviceKey1,
                                 @Header("X-Naver-Client-Secret") String serviceKey2);
 
+    @GET("v1/search/image.xml")
+    Call<DTOImage> getImage(@Query("query") String placeName,
+                            @Query("display") String display,
+                            @Query("filter") String filter,
+                            @Header("X-Naver-Client-Id") String serviceKey1,
+                            @Header("X-Naver-Client-Secret") String serviceKey2);
+
     public static final Retrofit RetrofitForHotplace = new Retrofit.Builder().baseUrl("http://jstp.jejutour.go.kr/")
             .addConverterFactory( SimpleXmlConverterFactory.create())
             .build();
@@ -86,8 +94,6 @@ public interface IDAO {
             .addConverterFactory( SimpleXmlConverterFactory.create())
             .build();
 
-
-
     public static final Retrofit RetrofitForBestEating = new Retrofit.Builder().baseUrl("http://data.jeju.go.kr/")
             .addConverterFactory( SimpleXmlConverterFactory.create())
             .client(
@@ -100,4 +106,9 @@ public interface IDAO {
     public static final Retrofit RetrofitForGeoCode = new Retrofit.Builder().baseUrl("https://openapi.naver.com/")
             .addConverterFactory( SimpleXmlConverterFactory.create())
             .build();
+
+    public static final Retrofit RetrofitForImage = new Retrofit.Builder().baseUrl("https://openapi.naver.com/")
+            .addConverterFactory( SimpleXmlConverterFactory.create())
+            .build();
+
 }
