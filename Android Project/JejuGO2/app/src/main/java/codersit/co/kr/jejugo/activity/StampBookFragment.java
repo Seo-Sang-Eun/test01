@@ -18,6 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.activity.coupon.CouponFragment;
 import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
 import codersit.co.kr.jejugo.activity.hotplace.HotplaceDetailFragment;
 import codersit.co.kr.jejugo.dto.DTOStampPlace;
@@ -100,6 +101,12 @@ public class StampBookFragment extends Fragment {
     void onClickstoreBtn()
     {
         ((MainActivity)getActivity()).callFragmentPage(new PartnerStoreFragment());
+    }
+
+    @OnClick(R.id.couponBtn)
+    void onClickCouponBtn()
+    {
+        ((MainActivity)getActivity()).callFragmentPage(new CouponFragment());
     }
 
 

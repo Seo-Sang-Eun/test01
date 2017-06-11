@@ -7,11 +7,13 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.util.SaveDataManager;
 
 /**
  * Created by BooHee on 2017-06-12.
@@ -19,35 +21,48 @@ import codersit.co.kr.jejugo.R;
 
 public class CouponDialog extends Dialog {
 
-    private String name;
-    private String startDate;
-    private String endDate;
-    private String couponNo;
+    String m_name;
+    String m_date;
+    String m_couponNum;
 
-    @Bind(R.id.coupon_name_view)
-    TextView coupon_name_view;
-    @Bind(R.id.startdate_view)
-    TextView startdate_view;
-    @Bind(R.id.enddate_view)
-    TextView enddate_view;
-    @Bind(R.id.coupon_no_view)
-    TextView coupon_no_view;
-    @Bind(R.id.exitbtn)
-    Button exitbtn;
+    @Bind(R.id.dialog_coupon_name)
+    TextView dialogName;
 
-    public CouponDialog(@NonNull Context context) {
-        super(context);
-    }
+    @Bind(R.id.dialog_coupon_date)
+    TextView dialogDate;
 
-    public CouponDialog(@NonNull Context context, String name, String startDate, String couponNo)
+    @Bind(R.id.dialog_coupon_num)
+    TextView dialogCouponNum;
+
+    @Bind(R.id.dialog_coupon_image)
+    ImageView dialogImage;
+
+    @Bind(R.id.dialog_coupon_useButton)
+    Button dialogUseBtn;
+
+    @Bind(R.id.dialog_coupon_cancelButton)
+    Button dialogCancelBtn;
+
+    int position;
+    Context m_context;
+
+    public CouponDialog(@NonNull Context context)
     {
         super(context);
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = "쿠폰 발행일로부터 3일 이내";
-        this.couponNo = couponNo;
     }
 
+    public CouponDialog(@NonNull Context context, String m_name,String m_date, int position)
+    {
+        super(context);
+        this.m_name = m_name;
+        this.m_date = m_date;
+        this.m_couponNum = String.valueOf(position) + "번 쿠폰";
+
+        this.position = position;
+        this.m_context = context;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -55,21 +70,37 @@ public class CouponDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.dialog_coupon);
-
         ButterKnife.bind(this);
 
-        coupon_name_view.setText(name);
-        startdate_view.setText(startDate);
-        enddate_view.setText(endDate);
-        coupon_no_view.setText(couponNo);
+        dialogName.setText(m_name);
+        dialogDate.setText(m_date);
+        dialogCouponNum.setText(m_couponNum);
 
-        exitbtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
+        if(position >= 1 && position < 4)
+            dialogImage.setImageDrawable(m_context.getResources().getDrawable(R.drawable.icon_book));
+        else if(position >= 4 && position < 7)
+            dialogImage.setImageDrawable(m_context.getResources().getDrawable(R.drawable.icon_book));
+        else if(position >= 7 && position < 10)
+            dialogImage.setImageDrawable(m_context.getResources().getDrawable(R.drawable.icon_book));
+
+
+
+        dialogCancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 dismiss();
             }
         });
 
-        //사용하기 버튼 기능 구현
+        dialogUseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SaveDataManager saveDataManager = new SaveDataManager(m_context.getApplicationContext());
+                saveDataManager.putData("stampInfo"+position,"false");
+                dismiss();
+            }
+        });
+
     }
 
 }

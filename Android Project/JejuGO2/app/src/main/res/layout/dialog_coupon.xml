@@ -1,58 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/coupon_dialog_layout"
-    android:layout_width="350dp"
-    android:layout_height="350dp"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:weightSum="1">
 
-    <TextView
-        android:id="@+id/coupon_name_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
+        android:background="#008bda"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-        android:text="TextView"
-        android:textSize="15sp" />
+        <TextView
+            android:id="@+id/coupon_dialog_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dialog_Title"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/startdate_view"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="TextView"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/enddate_view"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-
-        android:text="TextView"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/coupon_no_view"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-
-        android:text="TextView"
-        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_weight="4.89"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
 
-        <Button
-            android:id="@+id/usebtn"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:text="사용하기" />
+        <ImageView
+            android:id="@+id/dialog_coupon_image"
+            android:layout_width="81dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/ic_launcher" />
 
-        <Button
-            android:id="@+id/exitbtn"
-            android:layout_width="175dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="닫기" />
+            android:layout_weight="4.89"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/dialog_coupon_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="couponName"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/dialog_coupon_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="couponDate"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/dialog_coupon_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="coupon_num"
+                android:textColor="#000000" />
+        </LinearLayout>
     </LinearLayout>
+    >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/dialog_coupon_useButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="42dp"
+            android:text="use" />
+
+        <Button
+            android:id="@+id/dialog_coupon_cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="33dp"
+            android:layout_toEndOf="@+id/dialog_coupon_useButton"
+            android:text="cancel" />
+
+
+    </RelativeLayout>
 </LinearLayout>
