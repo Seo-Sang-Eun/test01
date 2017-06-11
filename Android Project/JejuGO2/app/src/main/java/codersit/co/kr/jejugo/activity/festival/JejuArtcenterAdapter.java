@@ -36,7 +36,6 @@ public class JejuArtcenterAdapter extends BaseAdapter {
 
     public JejuArtcenterAdapter(DTOArtcenterShowInfoService dtoArtcenterShowInfoService , Activity activity) {
         mActivity= activity;
-//>>>>>>> f7fa4fc2ef635a4791ad4017dba276f92a7261ba
         this.dtoArtcenterShowInfoService = dtoArtcenterShowInfoService;
     }
 
