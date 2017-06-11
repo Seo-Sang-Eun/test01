@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/coupon_dialog_layout"
+    android:layout_width="350dp"
+    android:layout_height="350dp"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/coupon_name_view"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+
+        android:text="TextView"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/startdate_view"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="TextView"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/enddate_view"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+
+        android:text="TextView"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/coupon_no_view"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+
+        android:text="TextView"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/usebtn"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:text="사용하기" />
+
+        <Button
+            android:id="@+id/exitbtn"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:text="닫기" />
+    </LinearLayout>
+
+</LinearLayout>

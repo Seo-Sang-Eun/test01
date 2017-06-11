@@ -52,6 +52,12 @@ public class StampBookFragment extends Fragment {
 
         SaveDataManager saveDataManager = new SaveDataManager(getActivity().getApplicationContext());
 
+        String stampCnt = saveDataManager.getData("stampCount");
+//        String bb = saveDataManager.getData("stampInfo1"); // false or 2011-11-11
+//        String 1b = saveDataManager.getData("stampInfo2"); // false or 2011-11-11
+//        String 2b = saveDataManager.getData("stampInfo3"); // false or 2011-11-11
+//        String bb = saveDataManager.getData("stampInfo4"); // false or 2011-11-11
+
         for(int i = 0 ; i < StampDataManager.dtoStampPlaceArrayList.size();i++)
         {
             String tmpStr = "stamp";
@@ -76,16 +82,10 @@ public class StampBookFragment extends Fragment {
             {
                 tempArray.add(StampDataManager.dtoStampPlaceArrayList.get(i).getPlaceName());
             }
-//            Log.i(LOG," ");
-//            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getId()+"");
-//            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getPlaceName()+"");
-//            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getGpsX()+"");
-//            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getGpsY()+"");
-//            Log.i(LOG,StampDataManager.dtoStampPlaceArrayList.get(i).getGet()+"");
 
         }
 
-        stamp_num_view.setText(String.valueOf(tempArray.size()));
+        stamp_num_view.setText(stampCnt);
         ArrayAdapter<String> adapter = new ArrayAdapter<>( ((MainActivity)getActivity()) , android.R.layout.simple_list_item_1, tempArray);
         stamp_place_view.setAdapter(adapter);
 

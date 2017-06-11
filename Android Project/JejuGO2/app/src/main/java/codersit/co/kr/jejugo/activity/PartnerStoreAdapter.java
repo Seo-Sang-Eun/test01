@@ -55,7 +55,6 @@ public class PartnerStoreAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-
         convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.partnerstore_item, parent, false);
 
         TextView txt1 = (TextView)convertView.findViewById(R.id.store_title);
