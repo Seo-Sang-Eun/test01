@@ -23,30 +23,7 @@
         android:layout_height="match_parent">
 
         <TextView
-
-            android:visibility="gone"
-            android:padding="10dp"
-            android:text="ㅌㅌㅌㅌㅌㅌㅌㅌㅌ지역"
-            android:textColor="#008bda"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_fragment_food_title"
-            android:textAlignment="center"
-            android:textSize="15sp" />
-
-        <TextView
-            android:visibility="gone"
-            android:padding="25dp"
-            android:text="공공데이터포털\n(http://www.data.go.kr)\n에서 제공하는 모범음식점입니다"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_fragment_food_tmptitle1"
-            android:textColor="#008bda"
-            android:textAlignment="center"
-            android:textSize="20sp" />
-
-        <TextView
-            android:visibility="gone"
+            android:visibility="visible"
             android:padding="25dp"
             android:textColor="#333333"
             android:text="지도위의 마커를 눌러\n음식점을 확인하세요"
@@ -56,50 +33,97 @@
             android:textAlignment="center"
             android:textSize="28sp" />
 
-        <LinearLayout
+        <TextView
             android:visibility="visible"
+            android:padding="25dp"
+            android:text="공공데이터포털\n(http://www.data.go.kr)\n에서 제공하는 모범음식점입니다"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_fragment_food_tmptitle1"
+            android:textColor="#008bda"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:visibility="gone"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/ll_fragment_food_for_bt_ll">
 
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            android:layout_margin="3dp"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textInfoView"
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="식당 정보가 뜨는 곳입니다." />
+                    android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/ll_fragment_food_search_ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="96dp"
-                    android:layout_margin="3dp"
-                    android:background="#ffffff"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:srcCompat="@drawable/na_icon_search" />
-
-                    <TextView
+                    <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="통합검색"
-                        android:textAlignment="center"
-                        android:textSize="14sp" />
+                        android:layout_height="match_parent">
 
-                </LinearLayout>
+
+                        <TextView
+
+                            android:layout_marginTop="10dp"
+                            android:text="화연이네"
+                            android:textColor="#008bda"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_fragment_food_title"
+                            android:textAlignment="center"
+                            android:textSize="24sp"/>
+
+                        <TextView
+
+                            android:text="애월읍 애월해안로 224"
+                            android:textColor="#008bda"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_fragment_food_adress"
+                            android:textAlignment="center"
+                            android:textSize="12sp"/>
+
+                        <ImageView
+                            android:layout_margin="10dp"
+                            android:visibility="invisible"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/iv_fragment_food_image" />
+
+                        <TextView
+                            android:textColor="#000000"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/tv_fragment_food_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:text="메뉴 INFO" />
+
+                        <Button
+                            android:id="@+id/bt_fragment_food_search_bt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="통합검색"
+                            android:textAlignment="center"
+                            android:textSize="14sp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+
+                        </Button>
+                    </LinearLayout>
+
+                </ScrollView>
 
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 

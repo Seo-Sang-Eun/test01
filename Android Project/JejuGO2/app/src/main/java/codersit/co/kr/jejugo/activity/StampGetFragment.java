@@ -41,6 +41,7 @@ import codersit.co.kr.jejugo.util.NMapPOIflagType;
 import codersit.co.kr.jejugo.util.NMapViewerResourceProvider;
 import codersit.co.kr.jejugo.util.SaveDataManager;
 import codersit.co.kr.jejugo.util.StampDataManager;
+import codersit.co.kr.jejugo.util.Util;
 
 import static codersit.co.kr.jejugo.util.IKeyManager.NaverClientID;
 import static codersit.co.kr.jejugo.util.StampDataManager.dtoStampPlaceArrayList;
@@ -115,6 +116,12 @@ public class StampGetFragment extends Fragment {
         else if (tmpInt == 3)
         {
             tmpRstMsg = "스템프 3개 획득!\n제휴 5% 할인쿠폰 획득";
+
+            saveDataManager.putData("stampInfo1", Util.getCurrentDate("yyyy-MM-dd"));
+            saveDataManager.putData("stampInfo2", Util.getCurrentDate("yyyy-MM-dd"));
+            saveDataManager.putData("stampInfo3", Util.getCurrentDate("yyyy-MM-dd"));
+
+
         }
         else if(tmpInt <= 5)
         {
@@ -122,7 +129,10 @@ public class StampGetFragment extends Fragment {
         }
         else if (tmpInt == 6)
         {
-            tmpRstMsg = "스템프 6개 획득!\n제휴 5% 할인쿠폰 획득";
+            tmpRstMsg = "스템프 6개 획득!\n제휴 10% 할인쿠폰 획득";
+            saveDataManager.putData("stampInfo4", Util.getCurrentDate("yyyy-MM-dd"));
+            saveDataManager.putData("stampInfo5", Util.getCurrentDate("yyyy-MM-dd"));
+            saveDataManager.putData("stampInfo6", Util.getCurrentDate("yyyy-MM-dd"));
         }
         else if(tmpInt <= 8)
         {
@@ -131,6 +141,9 @@ public class StampGetFragment extends Fragment {
         else if (tmpInt == 9)
         {
             tmpRstMsg = "스템프 9개 획득!\n제휴 15% 할인쿠폰 획득";
+            saveDataManager.putData("stampInfo7", Util.getCurrentDate("yyyy-MM-dd"));
+            saveDataManager.putData("stampInfo8", Util.getCurrentDate("yyyy-MM-dd"));
+            saveDataManager.putData("stampInfo9", Util.getCurrentDate("yyyy-MM-dd"));
         }
 
         AlertDialog alertDialog = new AlertDialog.Builder( getActivity()).create();
@@ -160,6 +173,95 @@ public class StampGetFragment extends Fragment {
 
     }
 
+    @OnClick(R.id.bt_test)
+    void OnClickbt_test()
+    {
+        Log.i(LOG,"BT_TEST");
+
+//        mCurArrayPos
+//        mCurPlace
+        SaveDataManager saveDataManager = new SaveDataManager(getActivity().getApplicationContext());
+
+        String tmpStr = "stamp";
+
+        if( mCurArrayPos <10)
+            tmpStr += "0" + mCurArrayPos;
+        else
+            tmpStr +=  "" + mCurArrayPos;
+
+        saveDataManager.putData(tmpStr,"true");
+
+        int tmpInt = Integer.parseInt( saveDataManager.getData("stampCount") );
+
+
+        tmpInt++;
+        saveDataManager.putData("stampCount",tmpInt+"");
+
+        String tmpRstMsg = "";
+
+        if(tmpInt <= 2)
+        {
+            tmpRstMsg = "3개 중 "+ tmpInt +"개 스템프 획득!";
+        }
+        else if (tmpInt == 3)
+        {
+            tmpRstMsg = "스템프 3개 획득!\n제휴 5% 할인쿠폰 획득";
+
+            saveDataManager.putData("stampInfo1", Util.getCurrentDate("yyyy-MM-dd"));
+            saveDataManager.putData("stampInfo2", Util.getCurrentDate("yyyy-MM-dd"));
+            saveDataManager.putData("stampInfo3", Util.getCurrentDate("yyyy-MM-dd"));
+
+
+        }
+        else if(tmpInt <= 5)
+        {
+            tmpRstMsg = "6개 중 "+ tmpInt +"개 스템프 획득!";
+        }
+        else if (tmpInt == 6)
+        {
+            tmpRstMsg = "스템프 6개 획득!\n제휴 10% 할인쿠폰 획득";
+            saveDataManager.putData("stampInfo4", Util.getCurrentDate("yyyy-MM-dd"));
+            saveDataManager.putData("stampInfo5", Util.getCurrentDate("yyyy-MM-dd"));
+            saveDataManager.putData("stampInfo6", Util.getCurrentDate("yyyy-MM-dd"));
+        }
+        else if(tmpInt <= 8)
+        {
+            tmpRstMsg = "9개 중 "+ tmpInt +"개 스템프 획득!";
+        }
+        else if (tmpInt == 9)
+        {
+            tmpRstMsg = "스템프 9개 획득!\n제휴 15% 할인쿠폰 획득";
+            saveDataManager.putData("stampInfo7", Util.getCurrentDate("yyyy-MM-dd"));
+            saveDataManager.putData("stampInfo8", Util.getCurrentDate("yyyy-MM-dd"));
+            saveDataManager.putData("stampInfo9", Util.getCurrentDate("yyyy-MM-dd"));
+        }
+
+        AlertDialog alertDialog = new AlertDialog.Builder( getActivity()).create();
+
+        alertDialog.setTitle("스템프 모으기");
+        alertDialog.setMessage( tmpRstMsg);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                        ((MainActivity)getActivity()).callFragmentPage(new StampBookFragment());
+
+                    }
+                });
+        alertDialog.show();
+
+
+
+
+
+
+        // 마커 뜨는게 false 인부분 즉 스탬프 안찍은 마커만 뜨게했고
+        // 마커 받았을떄 세어드프리퍼런스로 true만들고
+        // 북페이지로 화면전환
+        // 다시 일로와도 방금받은 스탬프마커는 업어짐
+
+    }
     void disableStamp()
     {
         isEnable=false;

@@ -33,7 +33,7 @@
             android:textColor="#ffffff"
             android:textColorHint="#f2f2f2"
             android:ems="10"
-            android:id="@+id/et_login_id" />
+            android:id="@+id/et_join_id" />
 
         <TextView
             android:text="ID CHECK"
@@ -55,13 +55,16 @@
             android:textColor="#ffffff"
             android:hint="PW"
             android:textColorHint="#f2f2f2"
+            android:password="true"
             android:ems="10"
             android:id="@+id/et_join_pw" />
+
         <EditText
             android:layout_width="273dp"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:textColor="#ffffff"
+            android:password="true"
             android:hint="PW CHECK"
             android:textColorHint="#f2f2f2"
             android:ems="10"

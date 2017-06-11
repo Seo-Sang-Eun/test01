@@ -23,7 +23,8 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
 
         JejuWifiDataManager.initData();
-        JejuFoodManager.initData();
+//        JejuFoodManager.initData();
+
 
         Handler mHandler = new Handler();
         mHandler.postDelayed(new Runnable()  {
@@ -43,6 +44,14 @@ public class IntroActivity extends AppCompatActivity {
         {
             saveDataManager.putData("stampCount", "0" );
         }
+
+        for(int i = 1 ;i<=9;i++)
+        {
+            if(saveDataManager.getData("stampInfo"+i)==null)
+                saveDataManager.putData("stampInfo"+i,"false");
+
+        }
+
 
         for(int i = 0 ; i < 20;i++)
         {

@@ -20,10 +20,17 @@ import java.util.ArrayList;
 
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
+import codersit.co.kr.jejugo.activity.festival.JejuArtcenterFragment;
+import codersit.co.kr.jejugo.activity.festival.JejuArtcenterSearchFragment;
+import codersit.co.kr.jejugo.activity.festival.JejuCultureStreetFragment;
+import codersit.co.kr.jejugo.activity.festival.JejuFestivalFragment;
+import codersit.co.kr.jejugo.activity.festival.SeogwipoCultureFragment;
 import codersit.co.kr.jejugo.activity.food.FoodDetailFragment;
 import codersit.co.kr.jejugo.activity.food.FoodFragment;
 import codersit.co.kr.jejugo.activity.hotplace.HotplaceDetailFragment;
 import codersit.co.kr.jejugo.activity.hotplace.HotplaceFragment;
+import codersit.co.kr.jejugo.activity.setting.AboutFragment;
+import codersit.co.kr.jejugo.activity.setting.InfoFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -89,6 +96,19 @@ public class MainActivity extends AppCompatActivity
                 callFragmentPage(new FoodFragment());
                 return;
             }
+            else if(curFragment instanceof JejuArtcenterSearchFragment)
+            {
+                callFragmentPage(new JejuArtcenterFragment());
+                return;
+            }
+            else if(curFragment instanceof JejuArtcenterFragment
+                    || curFragment instanceof JejuCultureStreetFragment
+                    || curFragment instanceof JejuFestivalFragment
+                    || curFragment instanceof SeogwipoCultureFragment)
+            {
+                callFragmentPage(new FestivalFragment());
+                return;
+            }
 
 
             if(isQuit==2)
@@ -123,9 +143,15 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_info) {
+            callFragmentPage(new InfoFragment());
         }
+
+        if (id == R.id.action_about) {
+           callFragmentPage(new AboutFragment());
+        }
+
+
 
         return super.onOptionsItemSelected(item);
     }

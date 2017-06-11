@@ -1,5 +1,5 @@
 //URL을 BitMap으로 변환하는 클래스.
-package codersit.co.kr.jejugo.activity.festival;
+package codersit.co.kr.jejugo.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
