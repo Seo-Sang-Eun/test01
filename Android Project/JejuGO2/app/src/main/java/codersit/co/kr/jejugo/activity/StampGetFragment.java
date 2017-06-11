@@ -345,10 +345,12 @@ public class StampGetFragment extends Fragment {
 
             String tmpStr = "stamp";
 
-            if( mCurArrayPos <10)
+            if( i <10)
                 tmpStr += "0" + i;
             else
                 tmpStr +=  "" + i;
+
+            Log.i(LOG,tmpStr +" __ " +saveDataManager.getData(tmpStr));
 
             if(saveDataManager.getData(tmpStr).compareTo("false")==0)
             {

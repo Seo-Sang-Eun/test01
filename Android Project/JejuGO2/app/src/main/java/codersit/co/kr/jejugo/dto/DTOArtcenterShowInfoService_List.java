@@ -99,4 +99,6 @@ public class DTOArtcenterShowInfoService_List {
     public String getP_RESE_YN() {
         return p_RESE_YN;
     }
+
+
 }

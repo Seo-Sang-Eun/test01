@@ -3,6 +3,7 @@ package codersit.co.kr.jejugo.activity.festival;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,7 @@ public class SeogwipoCultureAdpater extends BaseAdapter {
             holder.seogwipoCultureSubject = (TextView) convertView.findViewById(R.id.text_seo_subject);
             holder.seogwipoCultureAddress = (TextView) convertView.findViewById(R.id.text_seo_adress);
             holder.seogwipoCultureStartDate = (TextView) convertView.findViewById(R.id.text_seo_startDay);
+            holder.seogwipoCultureGetInfo = (TextView) convertView.findViewById(R.id.text_seo_get_info);
             convertView.setTag(holder);
         } else {
             holder = (SeogwipoCultureCustomViewHolder) convertView.getTag();
@@ -77,20 +79,29 @@ public class SeogwipoCultureAdpater extends BaseAdapter {
 
 
         m_title = dtoCultureEvent.getItems().get(position).getISubject();
-        m_help= dtoCultureEvent.getItems().get(position).getIHelp();
 
-        m_content = removeTag(dtoCultureEvent.getItems().get(position).getIContents());
-        homepage = dtoCultureEvent.getItems().get(position).getIhomepage();
-        price = dtoCultureEvent.getItems().get(position).getIPrice();
 
-        holder.ll_seo_culture_outlayout.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view)
-            {
-                SeogwipoCultureDialog seogwipoCultureDialog = new SeogwipoCultureDialog( mContext, m_help, homepage, price, m_content,m_title);
-                seogwipoCultureDialog.show();
-            }
-        });
+        m_content=removeTag(dtoCultureEvent.getItems().get(position).getIContents());
+
+        if(m_content.compareTo("false")==0)
+        {
+            holder.seogwipoCultureGetInfo.setText("상세정보 비제공");
+            holder.seogwipoCultureGetInfo.setTextColor(Color.parseColor("#9b9b9b"));
+        }
+        else
+        {
+
+
+            holder.ll_seo_culture_outlayout.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view)
+                {
+                    SeogwipoCultureDialog seogwipoCultureDialog = new SeogwipoCultureDialog( mContext,   m_content,m_title);
+                    seogwipoCultureDialog.show();
+                }
+            });
+        }
+
 
 
 
@@ -102,6 +113,7 @@ public class SeogwipoCultureAdpater extends BaseAdapter {
         TextView seogwipoCultureSubject;
         TextView seogwipoCultureAddress;
         TextView seogwipoCultureStartDate;
+        TextView seogwipoCultureGetInfo;
     }
 
     public String removeTag(String html) {
@@ -113,7 +125,7 @@ public class SeogwipoCultureAdpater extends BaseAdapter {
         temp = temp.replaceAll("&lsquo;","");
         temp = temp.replaceAll("&rsquo;","");
         if(temp.equals("empty"))
-            temp = "api에서 내용을 제공하지 않습니다.";
+            temp = "false";
         return temp.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
     }
 

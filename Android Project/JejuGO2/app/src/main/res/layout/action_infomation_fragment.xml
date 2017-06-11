@@ -3,19 +3,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:layout_margin="3dp"
     android:orientation="vertical">
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="10">
-
-
+        android:layout_height="wrap_content" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="10"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -23,13 +21,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:orientation="horizontal" >
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="131dp"
-                android:layout_marginRight="10dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/icon_stamp" />
 
             <LinearLayout
@@ -39,15 +35,14 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="251dp"
-                    android:layout_height="59dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="스탬프 모으기"
                     android:textSize="40sp" />
 
                 <TextView
                     android:layout_width="239dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.08"
                     android:text="제주시 관광 명소 근처에 접근하여 '제주GO스템프' 버튼을 누르면 스탬프를 획들 할 수 있습니다."
                     android:textSize="15sp" />
             </LinearLayout>
@@ -57,13 +52,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:orientation="horizontal" >
 
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="131dp"
-                android:layout_marginRight="10dp"
                 android:src="@drawable/icon_book" />
 
             <LinearLayout
@@ -90,13 +83,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:orientation="horizontal" >
 
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="131dp"
-                android:layout_marginRight="10dp"
+
                 android:src="@drawable/icon_festival" />
 
             <LinearLayout
@@ -114,7 +106,6 @@
                 <TextView
                     android:layout_width="239dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.08"
                     android:text="제주시,서귀포시에서 진행되는 행사 및 공연 정보를 제공합니다.\n각 항목을 누르면 자세한 정보를 확인 할 수 있습니다."
                     android:textSize="15sp" />
             </LinearLayout>
@@ -124,13 +115,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:orientation="horizontal" >
 
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="131dp"
-                android:layout_marginRight="10dp"
+
                 android:src="@drawable/icon_hotplace" />
 
             <LinearLayout
@@ -148,7 +138,6 @@
                 <TextView
                     android:layout_width="239dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.08"
                     android:text="제주도의 스마트관광플랫폼에서 제공하는 \n가장 많이 방문하는 8개 지역을 보여줍니다.\n 마커를 터치하면 상세정보를 확인 할 수 있습니다."
                     android:textSize="15sp" />
             </LinearLayout>
@@ -158,13 +147,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:orientation="horizontal" >
 
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="131dp"
-                android:layout_marginRight="10dp"
+
                 android:src="@drawable/icon_weather" />
 
             <LinearLayout
@@ -182,7 +170,6 @@
                 <TextView
                     android:layout_width="239dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.08"
                     android:text="제주도의 현재날씨 및 최근날씨, 주간날씨 정보를 실시간으로 확인합니다."
                     android:textSize="15sp" />
             </LinearLayout>
@@ -198,7 +185,7 @@
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="131dp"
-                android:layout_marginRight="10dp"
+
                 android:src="@drawable/icon_food" />
 
             <LinearLayout
@@ -216,7 +203,6 @@
                 <TextView
                     android:layout_width="239dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.08"
                     android:text="제주도의 유명 음식점을 지도에 표시합니다 \n각 마커를 누르면 상세정보를 확인할 수 있습니다.\n또한 네이버에 즉시 통합검색을 할 수 있는 버튼을 제공합니다."
                     android:textSize="15sp" />
             </LinearLayout>

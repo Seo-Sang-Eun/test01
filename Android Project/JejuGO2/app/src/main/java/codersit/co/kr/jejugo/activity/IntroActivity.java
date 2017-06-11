@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -16,6 +17,7 @@ import codersit.co.kr.jejugo.util.StampDataManager;
 
 public class IntroActivity extends AppCompatActivity {
 
+    String LOG = "IntroActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,16 +59,23 @@ public class IntroActivity extends AppCompatActivity {
         {
             if(i<10)
             {
+                Log.i(LOG,"stamp0"+i);
                 if(saveDataManager.getData("stamp0"+i) == null)
                 {
+                    Log.i(LOG,"stamp0"+i);
+
+
                     saveDataManager.putData("stamp0"+i,  "false");
                 }
 
             }
             else
             {
+                Log.i(LOG,"stamp"+i);
                 if(saveDataManager.getData("stamp"+i) == null)
                 {
+                    Log.i(LOG,"stamp"+i);
+
                     saveDataManager.putData("stamp"+i,  "false");
                 }
             }
