@@ -30,7 +30,7 @@
             android:text="쿠폰북" />
 
         <Button
-            android:id="@+id/storeBtn"
+            android:id="@+id/store_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="제휴업체" />
@@ -40,6 +40,6 @@
     <ListView
         android:id="@+id/stamp_place_view"
         android:layout_width="match_parent"
-        android:layout_height="459dp" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>
