@@ -33,15 +33,8 @@ public class JejuArtcenterAdapter extends BaseAdapter {
 
     private DTOArtcenterShowInfoService dtoArtcenterShowInfoService;
 
-
-//<<<<<<< HEAD
-//    public JejuArtcenterAdapter(DTOArtcenterShowInfoService dtoArtcenterShowInfoService , Context context) {
-//
-//        mContext= context;
-//=======
     public JejuArtcenterAdapter(DTOArtcenterShowInfoService dtoArtcenterShowInfoService , Activity activity) {
         mActivity= activity;
-//>>>>>>> f7fa4fc2ef635a4791ad4017dba276f92a7261ba
         this.dtoArtcenterShowInfoService = dtoArtcenterShowInfoService;
     }
 
@@ -114,7 +107,7 @@ public class JejuArtcenterAdapter extends BaseAdapter {
         strings.add(url); // [ url ]
         strings.add(curQuery + " " + detailInfo); // ex) [ 제주서귀포 블로그검색 결과 ]
 
-        ((MainActivity)mActivity).callFragmentPageWithData(new HotplaceDetailFragment(),strings);
+        ((MainActivity)mActivity).callFragmentPageWithData(new JejuArtcenterSearchFragment(),strings);
     }
 
 }
