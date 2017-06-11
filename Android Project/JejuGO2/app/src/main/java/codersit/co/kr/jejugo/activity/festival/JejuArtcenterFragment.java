@@ -8,10 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.activity.MainActivity;
+import codersit.co.kr.jejugo.activity.hotplace.HotplaceDetailFragment;
 import codersit.co.kr.jejugo.dao.DAOJejuArtcenterShowInfoService;
 import codersit.co.kr.jejugo.dto.DTOArtcenterShowInfoService;
 import codersit.co.kr.jejugo.util.ICallback;
@@ -62,6 +66,5 @@ public class JejuArtcenterFragment extends Fragment {
 
         }
     };
-
 
 }

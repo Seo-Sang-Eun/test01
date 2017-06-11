@@ -78,7 +78,8 @@ public class SeogwipoCultureAdpater extends BaseAdapter {
 
         m_title = dtoCultureEvent.getItems().get(position).getISubject();
         m_help= dtoCultureEvent.getItems().get(position).getIHelp();
-        m_content = dtoCultureEvent.getItems().get(position).getIContents();
+
+        m_content = removeTag(dtoCultureEvent.getItems().get(position).getIContents());
         homepage = dtoCultureEvent.getItems().get(position).getIhomepage();
         price = dtoCultureEvent.getItems().get(position).getIPrice();
 
@@ -103,5 +104,16 @@ public class SeogwipoCultureAdpater extends BaseAdapter {
         TextView seogwipoCultureStartDate;
     }
 
+    public String removeTag(String html) {
+        String temp;
+        temp = html;
+        temp = temp.replaceAll("&ldquo","");
+        temp = temp.replaceAll("&rjaejaedquo","");
+        temp = temp.replaceAll("&nbsp;","");
+
+        if(temp.equals("empty"))
+            temp = "api에서 내용을 제공하지 않습니다.";
+        return temp.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+    }
 
 }
