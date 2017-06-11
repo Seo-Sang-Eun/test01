@@ -1,35 +1,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:id="@+id/ll_jae_artcenter_outlayout"
-    android:layout_height="wrap_content"
-    android:padding="10dp">
-
-    <ImageView
-        android:id="@+id/imageView_artcenter"
-        android:layout_width="120dp"
-        android:layout_height="131dp"
-        android:layout_marginRight="10dp"
-        android:src="@mipmap/ic_launcher"/>
+    android:layout_height="wrap_content" >
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:layout_margin="2dp"
+        android:padding="6dp"
+        android:background="#ffffff"
+        android:id="@+id/ll_jae_artcenter_outlayout"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/imageView_artcenter"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"  />
 
         <TextView
             android:id="@+id/text_artcenter_title"
-            android:layout_width="251dp"
-            android:layout_height="59dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
             android:text="title"
-            android:textSize="18sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/text_artcenter_start"
-            android:layout_width="239dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.08"
-            android:textSize="15sp"
+            android:textSize="11sp"
             android:text="content" />
+
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="3dp"
+        android:padding="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:id="@+id/ll_jae_artcenter_outlayout2"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/imageView_artcenter2"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"  />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/text_artcenter_title2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="title"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/text_artcenter_start2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:text="content" />
+
+    </LinearLayout>
+
 </LinearLayout>

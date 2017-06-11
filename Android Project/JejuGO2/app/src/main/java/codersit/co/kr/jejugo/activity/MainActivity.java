@@ -46,13 +46,17 @@ public class MainActivity extends AppCompatActivity
     FrameLayout frame_layout;
 
     Fragment curFragment;
+    Toolbar toolbar;
+    DrawerLayout drawer;
+    ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         frame_layout = (FrameLayout)findViewById(R.id.frame_layout);
         mContext = this.getApplicationContext();
@@ -66,16 +70,14 @@ public class MainActivity extends AppCompatActivity
 //            }
 //        });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+
+        callFragmentPage(new MainFragment());
+
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        callFragmentPage(new MainFragment());
     }
 
     @Override
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (id == R.id.action_about) {
-           callFragmentPage(new AboutFragment());
+            callFragmentPage(new AboutFragment());
         }
 
 
@@ -181,8 +183,30 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    public void setToolbarText(Fragment fragment)
+    {
+        String toolbarText="";
+        if(fragment instanceof MainFragment)
+            toolbarText = "";
+        else if(fragment instanceof StampBookFragment)
+            toolbarText = "스탬프 북";
+        else if(fragment instanceof FoodFragment)
+            toolbarText = "모범 음식점 추천";
+
+        toolbar.setTitle(toolbarText);
+        setSupportActionBar(toolbar);
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+    }
+
     public void callFragmentPage(Fragment fragment)
     {
+        setToolbarText(fragment);
+
         isQuit=2;
 
         curFragment=fragment;
@@ -195,6 +219,8 @@ public class MainActivity extends AppCompatActivity
 
     public void callFragmentPageWithData(Fragment fragment, ArrayList<String> strings)
     {
+        setToolbarText(fragment);
+
         isQuit=2;
 
         curFragment=fragment;

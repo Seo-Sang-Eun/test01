@@ -69,7 +69,7 @@ public class JejuFestivalAdapter extends BaseAdapter {
         holder.jejuFestLocation.setText(dtoFestivalInquiryService.getData().get(position).getLocation());
 
         m_title = dtoFestivalInquiryService.getData().get(position).getTitle();
-        m_info = dtoFestivalInquiryService.getData().get(position).getInfo();
+        m_info = removeTag(dtoFestivalInquiryService.getData().get(position).getInfo());
         m_host = dtoFestivalInquiryService.getData().get(position).getHost();
 
         holder.ll_jejuFest_outlayout.setOnClickListener(new View.OnClickListener(){
@@ -85,6 +85,19 @@ public class JejuFestivalAdapter extends BaseAdapter {
         });
 
        return convertView;
+    }
+
+    public String removeTag(String html) {
+        String temp;
+        temp = html;
+        temp = temp.replaceAll("&ldquo","");
+        temp = temp.replaceAll("&rdquo","");
+        temp = temp.replaceAll("&nbsp;","");
+        temp = temp.replaceAll("&lsquo;","");
+        temp = temp.replaceAll("&rsquo;","");
+        if(temp.equals("empty"))
+            temp = "api에서 내용을 제공하지 않습니다.";
+        return temp.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
     }
 
     class JejuFestCustomViewHolder {

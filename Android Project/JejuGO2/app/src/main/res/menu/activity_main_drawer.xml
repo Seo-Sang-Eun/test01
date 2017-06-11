@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_stamp_get"
-            android:title="스템프 모으기" />
+            android:title="스탬프 모으기" />
         <item
             android:id="@+id/nav_hotplace"
             android:title="제주 HOT 플레이스" />
@@ -13,13 +13,13 @@
             android:title="제주 날씨" />
         <item
             android:id="@+id/nav_stamp_book"
-            android:title="스템프 북" />
+            android:title="스탬프 북" />
         <item
             android:id="@+id/nav_festival"
             android:title="공연행사정보" />
         <item
             android:id="@+id/nav_food"
-            android:title="근처 음식점 추천" />
+            android:title="모범 음식점 추천" />
     </group>
 
     <item android:title="Communicate">
