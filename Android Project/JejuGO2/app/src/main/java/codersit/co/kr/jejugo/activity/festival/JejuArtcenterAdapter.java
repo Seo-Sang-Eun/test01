@@ -1,22 +1,17 @@
 package codersit.co.kr.jejugo.activity.festival;
 
 import android.content.Context;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import codersit.co.kr.jejugo.R;
-import codersit.co.kr.jejugo.activity.MainActivity;
 import codersit.co.kr.jejugo.dto.DTOArtcenterShowInfoService;
+import codersit.co.kr.jejugo.util.ImageLoaderTask;
 
 /**
  * Created by admin on 2017-06-08.
@@ -33,7 +28,6 @@ public class JejuArtcenterAdapter extends BaseAdapter {
 
     public JejuArtcenterAdapter(DTOArtcenterShowInfoService dtoArtcenterShowInfoService , Context context) {
 
-        Log.i("AAA","111");
         mContext= context;
         this.dtoArtcenterShowInfoService = dtoArtcenterShowInfoService;
     }
@@ -42,13 +36,11 @@ public class JejuArtcenterAdapter extends BaseAdapter {
     @Override
     public int getCount() {
 
-        Log.i("AAA","222");
         return dtoArtcenterShowInfoService.getData().size();
     }
 
     @Override
     public Object getItem(int position) {
-        Log.i("AAA","333");
 
         return dtoArtcenterShowInfoService.getData().get(position);
     }
@@ -62,7 +54,7 @@ public class JejuArtcenterAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.i("AAA","444");
+//        Log.i("AAA","444");
         JejuArtCenterCustomViewHolder holder;
 
         final String m_intro;

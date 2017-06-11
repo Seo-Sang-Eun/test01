@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.activity.MainActivity;
 
 /**
  * Created by P200 on 2017-06-04.
@@ -39,41 +40,25 @@ public class FestivalFragment extends Fragment {
     @OnClick(R.id.artCenter_btn)
     void onClick_artCenterBtn()
     {
-        Log.i("TT","TT");
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,new JejuArtcenterFragment());
-        fragmentTransaction.commit();
+        ((MainActivity)getActivity()).callFragmentPage(new JejuArtcenterFragment());
     }
 
     @OnClick(R.id.cultureStreet_btn)
     void onClick_cultureStreetBtn()
     {
-        Log.i("TT","TT");
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,new JejuCultureStreetFragment());
-        fragmentTransaction.commit();
+        ((MainActivity)getActivity()).callFragmentPage(new JejuCultureStreetFragment());
     }
 
     @OnClick(R.id.jejuFest_btn)
     void onClick_jejuFestBtn()
     {
-        Log.i("TT","TT");
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,new JejuFestivalFragment());
-        fragmentTransaction.commit();
+        ((MainActivity)getActivity()).callFragmentPage(new JejuFestivalFragment());
     }
 
     @OnClick(R.id.seogwipoFest_btn)
     void onClick_seogwipoFestBtn()
     {
-        Log.i("TT","TT");
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,new SeogwipoCultureFragment());
-        fragmentTransaction.commit();
+        ((MainActivity)getActivity()).callFragmentPage(new SeogwipoCultureFragment());
     }
 
 

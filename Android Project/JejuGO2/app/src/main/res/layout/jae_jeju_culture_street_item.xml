@@ -1,36 +1,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
+    android:padding="15dp"
+    android:background="#ffffff"
     android:id="@+id/ll_jejuCulture_outlayout">
 
     <ImageView
         android:id="@+id/imageView_cultureStreet"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginRight="10dp"
-        android:src="@mipmap/ic_launcher" />
-
-    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
 
-        <TextView
-            android:id="@+id/text_cultureStreet_name"
-            android:layout_width="231dp"
-            android:layout_height="wrap_content"
-            android:text="title"
-            android:textSize="20sp"
-            android:layout_weight="0.17" />
+        android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/text_cultureStreet_adress"
-            android:layout_width="244dp"
-            android:layout_height="wrap_content"
-            android:text="content"
-            android:layout_weight="0.27" />
+    <TextView
+        android:id="@+id/text_cultureStreet_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="title"
+        android:textColor="#008bda"
+        android:textSize="20sp"/>
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/text_cultureStreet_adress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9b9b9b"
+        android:textSize="11sp"
+        android:text="content"/>
+
 </LinearLayout>
