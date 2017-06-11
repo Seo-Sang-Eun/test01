@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.activity.MainActivity;
 import codersit.co.kr.jejugo.activity.hotplace.HotplaceDetailFragment;
@@ -32,8 +31,7 @@ public class JejuArtcenterAdapter extends BaseAdapter {
     String LOG = "JejuArtcenterAdapter";
 
     private DTOArtcenterShowInfoService dtoArtcenterShowInfoService;
-
-
+ 
     public JejuArtcenterAdapter(DTOArtcenterShowInfoService dtoArtcenterShowInfoService , Activity activity) {
         mActivity= activity;
         this.dtoArtcenterShowInfoService = dtoArtcenterShowInfoService;
@@ -108,7 +106,7 @@ public class JejuArtcenterAdapter extends BaseAdapter {
         strings.add(url); // [ url ]
         strings.add(curQuery + " " + detailInfo); // ex) [ 제주서귀포 블로그검색 결과 ]
 
-        ((MainActivity)mActivity).callFragmentPageWithData(new HotplaceDetailFragment(),strings);
+        ((MainActivity)mActivity).callFragmentPageWithData(new JejuArtcenterSearchFragment(),strings);
     }
 
 }

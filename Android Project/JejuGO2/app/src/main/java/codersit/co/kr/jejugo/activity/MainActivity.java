@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
 import codersit.co.kr.jejugo.activity.festival.JejuArtcenterFragment;
+import codersit.co.kr.jejugo.activity.festival.JejuArtcenterSearchFragment;
 import codersit.co.kr.jejugo.activity.festival.JejuCultureStreetFragment;
 import codersit.co.kr.jejugo.activity.festival.JejuFestivalFragment;
 import codersit.co.kr.jejugo.activity.festival.SeogwipoCultureFragment;
@@ -94,7 +95,13 @@ public class MainActivity extends AppCompatActivity
             {
                 callFragmentPage(new FoodFragment());
                 return;
-            } else if(curFragment instanceof JejuArtcenterFragment
+            }
+            else if(curFragment instanceof JejuArtcenterSearchFragment)
+            {
+                callFragmentPage(new JejuArtcenterFragment());
+                return;
+            }
+            else if(curFragment instanceof JejuArtcenterFragment
                     || curFragment instanceof JejuCultureStreetFragment
                     || curFragment instanceof JejuFestivalFragment
                     || curFragment instanceof SeogwipoCultureFragment)
