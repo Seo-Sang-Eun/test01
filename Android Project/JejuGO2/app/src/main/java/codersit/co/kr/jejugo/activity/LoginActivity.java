@@ -39,25 +39,25 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.tv_login_login)
     void onClick_tv_login_login()
     {
-        String id = et_login_id.getText().toString();
-        String pw = et_login_pw.getText().toString();
-        String getDataCheck = saveDataManager.getData("id_"+id);
-
-        if(getDataCheck == null) { //id 없음
-            showDialogPwCheck();
-        }
-        else {
-            if(getDataCheck.equals(pw)) {
-                //로그인
-                Toast.makeText(activity, id + "님, 환영합니다!" , Toast.LENGTH_SHORT).show();
+//        String id = et_login_id.getText().toString();
+//        String pw = et_login_pw.getText().toString();
+//        String getDataCheck = saveDataManager.getData("id_"+id);
+//
+//        if(getDataCheck == null) { //id 없음
+//            showDialogPwCheck();
+//        }
+//        else {
+//            if(getDataCheck.equals(pw)) {
+//                //로그인
+//                Toast.makeText(activity, id + "님, 환영합니다!" , Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
-            }
-            else {
-                //패스워드 다름
-                showDialogPwCheck();
-            }
-        }
+//            }
+//            else {
+//                //패스워드 다름
+//                showDialogPwCheck();
+//            }
+//        }
 
     }
 

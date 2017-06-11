@@ -1,5 +1,6 @@
 package codersit.co.kr.jejugo.activity.festival;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -14,42 +15,41 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.activity.MainActivity;
+import codersit.co.kr.jejugo.activity.hotplace.HotplaceDetailFragment;
 import codersit.co.kr.jejugo.dto.DTOArtcenterShowInfoService;
 
 /**
  * Created by admin on 2017-06-08.
  */
 
-
-
 public class JejuArtcenterAdapter extends BaseAdapter {
 
-    Context mContext;
+    Activity mActivity;
+
+    String curQuery = null;
+
+    String LOG = "JejuArtcenterAdapter";
 
     private DTOArtcenterShowInfoService dtoArtcenterShowInfoService;
 
 
-    public JejuArtcenterAdapter(DTOArtcenterShowInfoService dtoArtcenterShowInfoService , Context context) {
-
-        Log.i("AAA","111");
-        mContext= context;
+    public JejuArtcenterAdapter(DTOArtcenterShowInfoService dtoArtcenterShowInfoService , Activity activity) {
+        mActivity= activity;
         this.dtoArtcenterShowInfoService = dtoArtcenterShowInfoService;
     }
 
-
     @Override
     public int getCount() {
-
-        Log.i("AAA","222");
         return dtoArtcenterShowInfoService.getData().size();
     }
 
     @Override
     public Object getItem(int position) {
-        Log.i("AAA","333");
-
         return dtoArtcenterShowInfoService.getData().get(position);
     }
 
@@ -58,28 +58,20 @@ public class JejuArtcenterAdapter extends BaseAdapter {
         return position;
     }
 
-
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.i("AAA","444");
         JejuArtCenterCustomViewHolder holder;
 
-        final String m_intro;
-        final String m_runtime;
-        final String m_title;
+
+
 
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.jae_artcenter_item, null, false);
-
             holder = new JejuArtCenterCustomViewHolder();
-            holder.ll_jae_artcenter_outlayout = (LinearLayout)convertView.findViewById(R.id.ll_jae_artcenter_outlayout) ;
             holder.jejuArtcenterImage = (ImageView) convertView.findViewById(R.id.imageView_artcenter);
             holder.jejuArtcenterTitle = (TextView) convertView.findViewById(R.id.text_artcenter_title);
             holder.jejuArtcenterStartDate = (TextView) convertView.findViewById(R.id.text_artcenter_start);
-
-
-
+            holder.jejuArtcenterLayout = (LinearLayout)convertView.findViewById(R.id.ll_jae_artcenter_outlayout);
             convertView.setTag(holder);
         } else {
             holder = (JejuArtCenterCustomViewHolder) convertView.getTag();
@@ -93,31 +85,35 @@ public class JejuArtcenterAdapter extends BaseAdapter {
         holder.jejuArtcenterTitle.setText(dtoArtcenterShowInfoService.getData().get(position).getP_NM());
         holder.jejuArtcenterStartDate.setText(dtoArtcenterShowInfoService.getData().get(position).getP_START_YMD() + " ~ " +dtoArtcenterShowInfoService.getData().get(position).getP_END_YMD());
 
-        m_title = dtoArtcenterShowInfoService.getData().get(position).getP_NM();
-        m_intro = dtoArtcenterShowInfoService.getData().get(position).getP_INTRO();
-        m_runtime =dtoArtcenterShowInfoService.getData().get(position).getP_RNUTIME();
-
-        holder.ll_jae_artcenter_outlayout.setOnClickListener(new View.OnClickListener() {
+        curQuery = dtoArtcenterShowInfoService.getData().get(position).getP_NM();
+        holder.jejuArtcenterLayout.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-
-                JejuArtcenterCustomDialog jejuArtcenterCustomDialog = new JejuArtcenterCustomDialog(mContext,m_title,m_intro,m_runtime);
-                jejuArtcenterCustomDialog.show();
-
-
+            public void onClick(View view)
+            {
+                searchBrowser("https://search.naver.com/search.naver?ie=UTF-8&query=" + curQuery, "통합검색 결과");
             }
+
         });
 
         return convertView;
     }
 
     class JejuArtCenterCustomViewHolder {
-        LinearLayout ll_jae_artcenter_outlayout;
+        LinearLayout jejuArtcenterLayout;
         ImageView jejuArtcenterImage;
         TextView jejuArtcenterTitle;
         TextView jejuArtcenterStartDate;
     }
 
+
+    void searchBrowser(String url, String detailInfo)
+    {
+        ArrayList<String> strings = new ArrayList<String>();
+        strings.add(url); // [ url ]
+        strings.add(curQuery + " " + detailInfo); // ex) [ 제주서귀포 블로그검색 결과 ]
+
+        ((MainActivity)mActivity).callFragmentPageWithData(new HotplaceDetailFragment(),strings);
+    }
 
 }
 
