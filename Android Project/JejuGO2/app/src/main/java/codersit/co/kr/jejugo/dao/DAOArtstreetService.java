@@ -32,15 +32,24 @@ public class DAOArtstreetService extends DAOClass {
         {
             protected Object doInBackground(Object[] objects)
             {
-                Call<DTOArtstreetService> call = IDAO.RetrofitForFestival.create(IDAO.class).getArtstreetService(startPage, pageSize, authApiKey);
+                DTOArtstreetService artstreetService = null;
+                Call<DTOArtstreetService> call = IDAO.RetrofitForJejuArtStreet.create(IDAO.class).getArtstreetService(startPage, pageSize, authApiKey);
                 try{
-                    DTOArtstreetService artstreetService = call.execute().body();
-                    iCallback.call(artstreetService);
+                    artstreetService = call.execute().body();
                 } catch(IOException e) {
                     e.printStackTrace();
                 }
-                return null;
+                return artstreetService;
             }
+
+            @Override
+            protected void onPostExecute(Object o) {
+
+                iCallback.call(o);
+
+                super.onPostExecute(o);
+            }
+
         }.execute();
     }
 }

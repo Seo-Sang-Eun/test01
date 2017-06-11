@@ -1,7 +1,6 @@
 package codersit.co.kr.jejugo.activity;
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,15 +10,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
-import codersit.co.kr.jejugo.util.GPSTracker;
+import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
+import codersit.co.kr.jejugo.activity.food.FoodFragment;
+import codersit.co.kr.jejugo.activity.hotplace.HotplaceFragment;
+//import codersit.co.kr.jejugo.util.GPSTracker;
 
 /**
  * Created by P200 on 2017-06-04.
@@ -45,7 +43,7 @@ public class MainFragment extends Fragment {
 
     };
 
-    GPSTracker gps = null;
+//    GPSTracker gps = null;
 
     Context mContext;
 
@@ -63,24 +61,24 @@ public class MainFragment extends Fragment {
         mContext = MainActivity.mContext;
 
 
-        if(gps == null) {
-            gps = new GPSTracker(mContext,mHandler);
-        }else{
-            gps.Update();
-        }
+//        if(gps == null) {
+//            gps = new GPSTracker(mContext,mHandler);
+//        }else{
+//            gps.Update();
+//        }
 
         // check if GPS enabled
-        if(gps.canGetLocation()){
-            double latitude = gps.getLatitude();
-            double longitude = gps.getLongitude();
+//        if(gps.canGetLocation()){
+//            double latitude = gps.getLatitude();
+//            double longitude = gps.getLongitude();
             // \n is for new line
-            Toast.makeText(mContext, "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-        }else{
+//            Toast.makeText(mContext, "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+//        }else{
             // can't get location
             // GPS or Network is not enabled
             // Ask user to enable GPS/network in settings
-            gps.showSettingsAlert();
-        }
+//            gps.showSettingsAlert();
+//        }
 
 
 
@@ -95,11 +93,11 @@ public class MainFragment extends Fragment {
     }
 
     public void makeNewGpsService(){
-        if(gps == null) {
-            gps = new GPSTracker( mContext ,mHandler);
-        }else{
-            gps.Update();
-        }
+//        if(gps == null) {
+//            gps = new GPSTracker( mContext ,mHandler);
+//        }else{
+//            gps.Update();
+//        }
     }
 
     public void logPrint(String str){
@@ -108,10 +106,16 @@ public class MainFragment extends Fragment {
 
 
 
-    @OnClick(R.id.ll_fragment_main_stamp)
-    void onClick_ll_fragment_main_stamp()
+    @OnClick(R.id.ll_fragment_main_stamp_get)
+    void onClick_ll_fragment_main_stamp_get()
     {
-        ((MainActivity)getActivity()).callFragmentPage(new StampFragment());
+        ((MainActivity)getActivity()).callFragmentPage(new StampGetFragment());
+    }
+
+    @OnClick(R.id.ll_fragment_main_stamp_book)
+    void onClick_ll_fragment_main_stamp_book()
+    {
+        ((MainActivity)getActivity()).callFragmentPage(new StampBookFragment());
     }
 
     @OnClick(R.id.ll_fragment_main_hotplace)

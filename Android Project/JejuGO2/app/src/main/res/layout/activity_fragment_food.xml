@@ -1,11 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="food"
+    <com.nhn.android.maps.NMapView
+        android:layout_margin="3dp"
+        android:layout_width="fill_parent"
+        android:id="@+id/nmapview_frag_food"
+        android:layout_height="250dp" />
+
+    <!--<LinearLayout-->
+        <!--android:layout_margin="3dp"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="250dp"-->
+        <!--/>-->
+
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3" />
+        android:layout_height="match_parent">
+
+        <TextView
+
+            android:visibility="gone"
+            android:padding="10dp"
+            android:text="ㅌㅌㅌㅌㅌㅌㅌㅌㅌ지역"
+            android:textColor="#008bda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_fragment_food_title"
+            android:textAlignment="center"
+            android:textSize="15sp" />
+
+        <TextView
+            android:visibility="gone"
+            android:padding="25dp"
+            android:text="공공데이터포털\n(http://www.data.go.kr)\n에서 제공하는 모범음식점입니다"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_fragment_food_tmptitle1"
+            android:textColor="#008bda"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <TextView
+            android:visibility="gone"
+            android:padding="25dp"
+            android:textColor="#333333"
+            android:text="지도위의 마커를 눌러\n음식점을 확인하세요"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_fragment_food_tmptitle2"
+            android:textAlignment="center"
+            android:textSize="28sp" />
+
+        <LinearLayout
+            android:visibility="visible"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ll_fragment_food_for_bt_ll">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textInfoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="식당 정보가 뜨는 곳입니다." />
+
+                <LinearLayout
+                    android:id="@+id/ll_fragment_food_search_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="96dp"
+                    android:layout_margin="3dp"
+                    android:background="#ffffff"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:srcCompat="@drawable/na_icon_search" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="통합검색"
+                        android:textAlignment="center"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

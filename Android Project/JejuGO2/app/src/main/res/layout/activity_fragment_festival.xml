@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
-    <TextView
-        android:text="play_info"
+
+    <Button
+        android:id="@+id/artCenter_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3" />
+        android:layout_weight="0.27"
+        android:text="제주아트센터" />
+
+    <Button
+        android:id="@+id/cultureStreet_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.26"
+        android:text="제주문화의거리" />
+
+    <Button
+        android:id="@+id/jejuFest_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.26"
+        android:text="제주시 축제/행사" />
+
+    <Button
+        android:id="@+id/seogwipoFest_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.27"
+        android:text="서귀포 문화예술행사" />
 </LinearLayout>

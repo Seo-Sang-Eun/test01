@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="350dp"
+    android:layout_height="450dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.80"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/jeju_cul_street_dialog_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dialog_Title" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4.09"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/jeju_cul_street_introduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.46"
+            android:text="introduce" />
+
+        <TextView
+            android:id="@+id/jeju_cul_street_ceo"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:text="ceo" />
+        <TextView
+            android:id="@+id/jeju_cul_street_telephone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="telephone" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal" android:layout_weight="1"
+        android:layout_width="match_parent" android:padding="15dp"
+        android:layout_height="0dp">
+
+            <Button
+                android:id="@+id/jeju_cul_okButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OK"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
+</LinearLayout>

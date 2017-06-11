@@ -13,19 +13,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
+import codersit.co.kr.jejugo.activity.food.FoodDetailFragment;
+import codersit.co.kr.jejugo.activity.food.FoodFragment;
+import codersit.co.kr.jejugo.activity.hotplace.HotplaceDetailFragment;
+import codersit.co.kr.jejugo.activity.hotplace.HotplaceFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private int isQuit;
 
-    public static Context mContext;
+    String LOG = "MainActivity";
 
+    public static Context mContext;
     public static int RENEW_GPS = 1;
     public static int SEND_PRINT = 2;
+
+    FrameLayout frame_layout;
+
+    Fragment curFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +47,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        frame_layout = (FrameLayout)findViewById(R.id.frame_layout);
         mContext = this.getApplicationContext();
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -57,13 +71,26 @@ public class MainActivity extends AppCompatActivity
         callFragmentPage(new MainFragment());
     }
 
-
     @Override
     public void onBackPressed() {
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+
+            if(curFragment instanceof HotplaceDetailFragment)
+            {
+                callFragmentPage(new HotplaceFragment());
+                return;
+            }
+            else if(curFragment instanceof FoodDetailFragment)
+            {
+                callFragmentPage(new FoodFragment());
+                return;
+            }
+
+
             if(isQuit==2)
             {
                 callFragmentPage(new MainFragment());
@@ -76,6 +103,8 @@ public class MainActivity extends AppCompatActivity
             }
             else if(isQuit==0)
                 super.onBackPressed();
+
+
         }
     }
 
@@ -107,8 +136,8 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_stamp) {
-            callFragmentPage(new StampFragment());
+        if (id == R.id.nav_stamp_get) {
+            callFragmentPage(new StampGetFragment());
         } else if (id == R.id.nav_hotplace) {
             callFragmentPage(new HotplaceFragment());
         } else if (id == R.id.nav_weather) {
@@ -117,8 +146,8 @@ public class MainActivity extends AppCompatActivity
             callFragmentPage(new FestivalFragment());
         } else if (id == R.id.nav_food) {
             callFragmentPage(new FoodFragment());
-        } else if (id == R.id.nav_send) {
-// 아직 X
+        } else if (id == R.id.nav_stamp_book) {
+            callFragmentPage(new StampBookFragment());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -130,11 +159,33 @@ public class MainActivity extends AppCompatActivity
     {
         isQuit=2;
 
+        curFragment=fragment;
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.replace(frame_layout.getId(),fragment);
         fragmentTransaction.commit();
     }
+
+    public void callFragmentPageWithData(Fragment fragment, ArrayList<String> strings)
+    {
+        isQuit=2;
+
+        curFragment=fragment;
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        Bundle bundle = new Bundle(strings.size());
+        for(int i = 0 ; i <strings.size();i++)
+            bundle.putStringArrayList("DATA",strings);
+
+        fragment.setArguments(bundle);
+
+        fragmentTransaction.replace(frame_layout.getId(),fragment);
+        fragmentTransaction.commit();
+    }
+
 
 
 }

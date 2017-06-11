@@ -9,6 +9,10 @@ import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.util.JejuFoodManager;
+import codersit.co.kr.jejugo.util.JejuWifiDataManager;
+import codersit.co.kr.jejugo.util.SaveDataManager;
+import codersit.co.kr.jejugo.util.StampDataManager;
 
 public class IntroActivity extends AppCompatActivity {
 
@@ -17,6 +21,9 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
+
+        JejuWifiDataManager.initData();
+        JejuFoodManager.initData();
 
         Handler mHandler = new Handler();
         mHandler.postDelayed(new Runnable()  {
@@ -27,6 +34,35 @@ public class IntroActivity extends AppCompatActivity {
                 IntroActivity.this.finish();
             }
         }, 3000);
+
+        SaveDataManager saveDataManager = new SaveDataManager(this);
+
+        StampDataManager.initData();
+
+        if(saveDataManager.getData("stampCount") == null)
+        {
+            saveDataManager.putData("stampCount", "0" );
+        }
+
+        for(int i = 0 ; i < 20;i++)
+        {
+            if(i<10)
+            {
+                if(saveDataManager.getData("stamp0"+i) == null)
+                {
+                    saveDataManager.putData("stamp0"+i,  "false");
+                }
+
+            }
+            else
+            {
+                if(saveDataManager.getData("stamp"+i) == null)
+                {
+                    saveDataManager.putData("stamp"+i,  "false");
+                }
+            }
+        }
+
     }
 
 }
