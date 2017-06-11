@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,7 +16,10 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
+import codersit.co.kr.jejugo.activity.hotplace.HotplaceDetailFragment;
 import codersit.co.kr.jejugo.dto.DTOStampPlace;
 import codersit.co.kr.jejugo.util.SaveDataManager;
 import codersit.co.kr.jejugo.util.StampDataManager;
@@ -32,6 +36,7 @@ public class StampBookFragment extends Fragment {
     ListView stamp_place_view;
     @Bind(R.id.stamp_num_view)
     TextView stamp_num_view;
+
 
     final String LOG = "StampBookFragment";
 
@@ -90,5 +95,13 @@ public class StampBookFragment extends Fragment {
         return view;
 
     }
+
+    @OnClick(R.id.store_btn)
+    void onClickstoreBtn()
+    {
+        ((MainActivity)getActivity()).callFragmentPage(new PartnerStoreFragment());
+    }
+
+
 
 }
