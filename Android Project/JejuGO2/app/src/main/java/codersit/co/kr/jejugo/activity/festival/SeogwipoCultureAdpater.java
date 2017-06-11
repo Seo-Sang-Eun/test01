@@ -108,9 +108,10 @@ public class SeogwipoCultureAdpater extends BaseAdapter {
         String temp;
         temp = html;
         temp = temp.replaceAll("&ldquo","");
-        temp = temp.replaceAll("&rjaejaedquo","");
+        temp = temp.replaceAll("&rdquo","");
         temp = temp.replaceAll("&nbsp;","");
-
+        temp = temp.replaceAll("&lsquo;","");
+        temp = temp.replaceAll("&rsquo;","");
         if(temp.equals("empty"))
             temp = "api에서 내용을 제공하지 않습니다.";
         return temp.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
