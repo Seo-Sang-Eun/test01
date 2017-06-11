@@ -136,16 +136,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-<<<<<<< HEAD
-        if (id == R.id.action_settings) {
-
-
-
-            return true;
-=======
         if (id == R.id.action_info) {
             callFragmentPage(new InfoFragment());
->>>>>>> f7fa4fc2ef635a4791ad4017dba276f92a7261ba
         }
 
         if (id == R.id.action_about) {

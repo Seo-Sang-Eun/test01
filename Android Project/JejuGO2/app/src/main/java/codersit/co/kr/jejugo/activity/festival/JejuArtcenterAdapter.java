@@ -14,11 +14,8 @@ import java.util.ArrayList;
 
 import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
-<<<<<<< HEAD
-=======
 import codersit.co.kr.jejugo.activity.MainActivity;
 import codersit.co.kr.jejugo.activity.hotplace.HotplaceDetailFragment;
->>>>>>> f7fa4fc2ef635a4791ad4017dba276f92a7261ba
 import codersit.co.kr.jejugo.dto.DTOArtcenterShowInfoService;
 import codersit.co.kr.jejugo.util.ImageLoaderTask;
 
@@ -37,32 +34,24 @@ public class JejuArtcenterAdapter extends BaseAdapter {
     private DTOArtcenterShowInfoService dtoArtcenterShowInfoService;
 
 
-<<<<<<< HEAD
-    public JejuArtcenterAdapter(DTOArtcenterShowInfoService dtoArtcenterShowInfoService , Context context) {
-
-        mContext= context;
-=======
+//<<<<<<< HEAD
+//    public JejuArtcenterAdapter(DTOArtcenterShowInfoService dtoArtcenterShowInfoService , Context context) {
+//
+//        mContext= context;
+//=======
     public JejuArtcenterAdapter(DTOArtcenterShowInfoService dtoArtcenterShowInfoService , Activity activity) {
         mActivity= activity;
->>>>>>> f7fa4fc2ef635a4791ad4017dba276f92a7261ba
+//>>>>>>> f7fa4fc2ef635a4791ad4017dba276f92a7261ba
         this.dtoArtcenterShowInfoService = dtoArtcenterShowInfoService;
     }
 
     @Override
     public int getCount() {
-<<<<<<< HEAD
-
-=======
->>>>>>> f7fa4fc2ef635a4791ad4017dba276f92a7261ba
         return dtoArtcenterShowInfoService.getData().size();
     }
 
     @Override
     public Object getItem(int position) {
-<<<<<<< HEAD
-
-=======
->>>>>>> f7fa4fc2ef635a4791ad4017dba276f92a7261ba
         return dtoArtcenterShowInfoService.getData().get(position);
     }
 
@@ -73,10 +62,6 @@ public class JejuArtcenterAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-<<<<<<< HEAD
-//        Log.i("AAA","444");
-=======
->>>>>>> f7fa4fc2ef635a4791ad4017dba276f92a7261ba
         JejuArtCenterCustomViewHolder holder;
 
 
