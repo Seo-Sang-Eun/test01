@@ -1,6 +1,7 @@
 package codersit.co.kr.jejugo.activity.coupon;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import butterknife.Bind;
 import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.dto.DTOCoupon;
 import codersit.co.kr.jejugo.dto.DTOPartnerStore;
+import codersit.co.kr.jejugo.util.ICallback;
 import codersit.co.kr.jejugo.util.ImageLoaderTask;
 
 /**
@@ -24,26 +26,28 @@ import codersit.co.kr.jejugo.util.ImageLoaderTask;
 
 public class CouponAdapter extends BaseAdapter {
 
-    @Bind(R.id.couponlist)
-    ListView couponlist;
+    String LOG = "CouponAdapter";
 
-    private ArrayList<String> tmp;
+    private ArrayList<String> strings;
     Context mContext;
 
     public CouponAdapter(Context mContext, ArrayList<String> strings)
     {
         this.mContext = mContext;
-        tmp = strings;
+        this.strings = strings;
+//        for(int i = 0 ; i < strings.size();i++)
+//            Log.i(LOG,strings.get(i));
+
     }
 
     @Override
     public int getCount() {
-        return tmp.size();
+        return strings.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return tmp.get(position);
+        return strings.get(position);
     }
 
     @Override
@@ -53,74 +57,143 @@ public class CouponAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        CouponBookCustomViewHolder holder;
+//        CouponBookCustomViewHolder holder;
 
-        final String m_name;
+//        Log.i(LOG,"POS : " + position);
+
         final String m_date;
 
-        if(convertView == null) {
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.coupon_book_item, null,false);
-            holder = new CouponBookCustomViewHolder();
+        LinearLayout couponItemLayout;
+        ImageView couponItemImage;
 
-            holder.couponItemLayout = (LinearLayout) convertView.findViewById(R.id.ll_coupon_item);
-            holder.couponItemImage= (ImageView) convertView.findViewById(R.id.coupon_item_image_view);
-            holder.couponItemName= (TextView) convertView.findViewById(R.id.coupon_item_name_textview);
-            holder.couponItemEnable= (TextView) convertView.findViewById(R.id.coupon_item_checkEnable_textview);
-            convertView.setTag(holder);
-        }
-        else {
-            holder = (CouponBookCustomViewHolder) convertView.getTag();
-        }
+        convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.coupon_book_item, null,false);
 
-        holder.couponItemImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.icon_book));
+        couponItemLayout = (LinearLayout) convertView.findViewById(R.id.ll_coupon_item);
+        couponItemImage= (ImageView) convertView.findViewById(R.id.coupon_item_image_view);
 
-        if(position >= 0 && position < 3) {
-            holder.couponItemName.setText("5% 쿠폰");
-            m_name = "5% 쿠폰";
-        }
-        else if(position >= 3 && position < 6) {
-            holder.couponItemName.setText("10% 쿠폰");
-            m_name = "10% 쿠폰";
-        }
-        else if(position >= 6 && position < 9) {
-            holder.couponItemName.setText("15% 쿠폰");
-            m_name = "15% 쿠폰";
-        }
-        else
+        m_date = strings.get(position);
+
+        // false : 공백 / flase2 : 사용완료
+        if( 0 <= position &&  position < 3)
         {
-            m_name = "0%쿠폰";
-        }
-
-        if(tmp.get(position).equals("false")) {
-            holder.couponItemEnable.setText("사용불가");
-            m_date = "아직 발급되지 않은 쿠폰";
-        }
-        else
-        {
-            holder.couponItemEnable.setText("사용가능");
-            m_date =tmp.get(position)+"부터 3일간";
-        }
-
-
-        holder.couponItemLayout.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
+            if(strings.get(position).equals("false"))
             {
-               CouponDialog couponDialog = new CouponDialog(mContext,m_name,m_date,position+1);
-                couponDialog.show();
+//                Log.i(LOG,position + "  GONE1");
+                couponItemImage.setVisibility(View.GONE);
+                couponItemLayout.setVisibility(View.GONE);
             }
-        });
+            else if(strings.get(position).equals("false2"))
+            {
+                couponItemImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.cn5));
+            }
+            else
+            {
+                couponItemImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.c5));
+                couponItemLayout.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        CouponDialog couponDialog = new CouponDialog(mContext,"5% 쿠폰",m_date,position+1);
+                        couponDialog.setiCallbackListener(new ICallback() {
+                            @Override
+                            public void call(Object o) {
 
+                                iCallback2.call(null);
+
+                            }
+                        });
+                        couponDialog.show();
+                    }
+                });
+            }
+        }
+        else if( 3 <= position &&  position < 6)
+        {
+            if(strings.get(position).equals("false"))
+            {
+//                Log.i(LOG,position + "  GONE2");
+                couponItemImage.setVisibility(View.GONE);
+                couponItemLayout.setVisibility(View.GONE);
+            }
+            else if(strings.get(position).equals("false2"))
+            {
+                couponItemImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.cn10));
+            }
+            else
+            {
+                couponItemImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.c10));
+                couponItemLayout.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        CouponDialog couponDialog = new CouponDialog(mContext,"10% 쿠폰",m_date,position+1);
+                        couponDialog.setiCallbackListener(new ICallback() {
+                            @Override
+                            public void call(Object o) {
+
+                                iCallback2.call(null);
+
+                            }
+                        });
+                        couponDialog.show();
+                    }
+                });
+            }
+        }
+        else if( 6 <= position && position < 9)
+        {
+            if(strings.get(position).equals("false"))
+            {
+//                Log.i(LOG,position + "  GONE3");
+                couponItemImage.setVisibility(View.GONE);
+                couponItemLayout.setVisibility(View.GONE);
+            }
+            else if(strings.get(position).equals("false2"))
+            {
+                couponItemImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.cn15));
+            }
+            else
+            {
+                couponItemImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.c15));
+                couponItemLayout.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        CouponDialog couponDialog = new CouponDialog(mContext,"15% 쿠폰",m_date,position+1);
+
+
+                        couponDialog.setiCallbackListener(new ICallback() {
+                            @Override
+                            public void call(Object o) {
+
+                                iCallback2.call(null);
+
+                            }
+                        });
+
+                        couponDialog.show();
+                    }
+                });
+            }
+        }
+        else
+        {
+            couponItemImage.setVisibility(View.GONE);
+        }
 
         return convertView;
     }
 
-    class CouponBookCustomViewHolder {
-        LinearLayout couponItemLayout;
-        ImageView couponItemImage;
-        TextView couponItemName;
-        TextView couponItemEnable;
+
+    private ICallback iCallback2;
+
+    public void setiCallbackListener(ICallback iCallback)
+    {
+        this.iCallback2 = iCallback;
     }
+
 
 }

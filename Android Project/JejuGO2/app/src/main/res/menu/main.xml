@@ -4,11 +4,11 @@
     <item
         android:id="@+id/action_info"
         android:orderInCategory="100"
-        android:title="infomation"
+        android:title="메뉴 설명서"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_about"
         android:orderInCategory="100"
-        android:title="about"
+        android:title="개발자 정보"
         app:showAsAction="never" />
 </menu>

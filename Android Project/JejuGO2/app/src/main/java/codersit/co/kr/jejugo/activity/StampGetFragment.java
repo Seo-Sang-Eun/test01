@@ -35,6 +35,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.activity.stampbook.StampBookFragment;
 import codersit.co.kr.jejugo.dto.DTOStampPlace;
 import codersit.co.kr.jejugo.util.JejuWifiDataManager;
 import codersit.co.kr.jejugo.util.NMapPOIflagType;
@@ -173,7 +174,7 @@ public class StampGetFragment extends Fragment {
 
     }
 
-    @OnClick(R.id.bt_test)
+//    @OnClick(R.id.bt_test)
     void OnClickbt_test()
     {
         Log.i(LOG,"BT_TEST");

@@ -25,7 +25,7 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
 
         JejuWifiDataManager.initData();
-//        JejuFoodManager.initData();
+        JejuFoodManager.initData();
 
 
         Handler mHandler = new Handler();

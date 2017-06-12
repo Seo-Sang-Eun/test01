@@ -169,7 +169,7 @@
                 android:layout_weight="0.01" />
 
             <TextView
-                android:text="근처 음식점 추천"
+                android:text="모범 음식점 추천"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center" />

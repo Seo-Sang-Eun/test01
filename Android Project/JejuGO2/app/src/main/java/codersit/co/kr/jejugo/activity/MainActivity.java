@@ -19,6 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.activity.coupon.CouponFragment;
 import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
 import codersit.co.kr.jejugo.activity.festival.JejuArtcenterFragment;
 import codersit.co.kr.jejugo.activity.festival.JejuArtcenterSearchFragment;
@@ -29,8 +30,10 @@ import codersit.co.kr.jejugo.activity.food.FoodDetailFragment;
 import codersit.co.kr.jejugo.activity.food.FoodFragment;
 import codersit.co.kr.jejugo.activity.hotplace.HotplaceDetailFragment;
 import codersit.co.kr.jejugo.activity.hotplace.HotplaceFragment;
+import codersit.co.kr.jejugo.activity.partnerstore.PartnerStoreFragment;
 import codersit.co.kr.jejugo.activity.setting.AboutFragment;
 import codersit.co.kr.jejugo.activity.setting.InfoFragment;
+import codersit.co.kr.jejugo.activity.stampbook.StampBookFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -96,6 +99,16 @@ public class MainActivity extends AppCompatActivity
             else if(curFragment instanceof FoodDetailFragment)
             {
                 callFragmentPage(new FoodFragment());
+                return;
+            }
+            else if(curFragment instanceof CouponFragment)
+            {
+                callFragmentPage(new StampBookFragment());
+                return;
+            }
+            else if(curFragment instanceof PartnerStoreFragment)
+            {
+                callFragmentPage(new StampBookFragment());
                 return;
             }
             else if(curFragment instanceof JejuArtcenterSearchFragment)
@@ -192,6 +205,36 @@ public class MainActivity extends AppCompatActivity
             toolbarText = "스탬프 북";
         else if(fragment instanceof FoodFragment)
             toolbarText = "모범 음식점 추천";
+        else if(fragment instanceof FestivalFragment)
+            toolbarText = "공연행사정보";
+        else if(fragment instanceof JejuArtcenterFragment)
+            toolbarText = "제주아트센터";
+        else if(fragment instanceof JejuCultureStreetFragment)
+            toolbarText = "제주문화축제의거리";
+        else if(fragment instanceof JejuFestivalFragment)
+            toolbarText = "제주시 축제/행사";
+        else if(fragment instanceof SeogwipoCultureFragment)
+            toolbarText = "서귀포 문화예술행사";
+        else if(fragment instanceof JejuArtcenterSearchFragment)
+            toolbarText = "제주아트센터 검색결과";
+        else if(fragment instanceof CouponFragment)
+            toolbarText = "사용쿠폰 현황";
+        else if(fragment instanceof PartnerStoreFragment)
+            toolbarText = "제휴업체";
+        else if(fragment instanceof HotplaceFragment)
+            toolbarText = "제주 HOT 플레이스";
+        else if(fragment instanceof AboutFragment)
+            toolbarText = "개발자 정보";
+        else if(fragment instanceof InfoFragment)
+            toolbarText = "메뉴 설명서";
+        else if(fragment instanceof StampGetFragment)
+            toolbarText = "스탬프 모으기";
+        else if(fragment instanceof WeatherFragment)
+            toolbarText = "날씨정보";
+        else if(fragment instanceof HotplaceDetailFragment)
+            toolbarText = "제주 HOT플레이스 검색결과";
+        else if(fragment instanceof FoodDetailFragment)
+            toolbarText = "모범 음식점 검색결과";
 
         toolbar.setTitle(toolbarText);
         setSupportActionBar(toolbar);

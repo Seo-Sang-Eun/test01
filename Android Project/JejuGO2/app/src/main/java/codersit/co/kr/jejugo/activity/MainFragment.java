@@ -17,6 +17,7 @@ import codersit.co.kr.jejugo.R;
 import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
 import codersit.co.kr.jejugo.activity.food.FoodFragment;
 import codersit.co.kr.jejugo.activity.hotplace.HotplaceFragment;
+import codersit.co.kr.jejugo.activity.stampbook.StampBookFragment;
 //import codersit.co.kr.jejugo.util.GPSTracker;
 
 /**

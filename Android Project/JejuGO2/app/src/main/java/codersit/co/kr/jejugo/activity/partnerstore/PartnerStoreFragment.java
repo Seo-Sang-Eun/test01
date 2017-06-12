@@ -1,4 +1,4 @@
-package codersit.co.kr.jejugo.activity;
+package codersit.co.kr.jejugo.activity.partnerstore;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -16,8 +16,8 @@ import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.activity.MainActivity;
 import codersit.co.kr.jejugo.util.PartnerStoreManager;
 
 

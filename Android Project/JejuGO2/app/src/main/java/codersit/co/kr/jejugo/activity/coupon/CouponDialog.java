@@ -13,6 +13,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.util.ICallback;
 import codersit.co.kr.jejugo.util.SaveDataManager;
 
 /**
@@ -25,14 +26,11 @@ public class CouponDialog extends Dialog {
     String m_date;
     String m_couponNum;
 
-    @Bind(R.id.dialog_coupon_name)
-    TextView dialogName;
-
     @Bind(R.id.dialog_coupon_date)
     TextView dialogDate;
 
-    @Bind(R.id.dialog_coupon_num)
-    TextView dialogCouponNum;
+//    @Bind(R.id.dialog_coupon_num)
+//    TextView dialogCouponNum;
 
     @Bind(R.id.dialog_coupon_image)
     ImageView dialogImage;
@@ -42,6 +40,9 @@ public class CouponDialog extends Dialog {
 
     @Bind(R.id.dialog_coupon_cancelButton)
     Button dialogCancelBtn;
+
+    @Bind(R.id.coupon_dialog_Title)
+    TextView coupon_dialog_Title;
 
     int position;
     Context m_context;
@@ -72,16 +73,16 @@ public class CouponDialog extends Dialog {
         setContentView(R.layout.dialog_coupon);
         ButterKnife.bind(this);
 
-        dialogName.setText(m_name);
         dialogDate.setText(m_date);
-        dialogCouponNum.setText(m_couponNum);
+//        dialogCouponNum.setText(m_couponNum);
+        coupon_dialog_Title.setText(m_name);
 
         if(position >= 1 && position < 4)
-            dialogImage.setImageDrawable(m_context.getResources().getDrawable(R.drawable.icon_book));
+            dialogImage.setImageDrawable(m_context.getResources().getDrawable(R.drawable.c5));
         else if(position >= 4 && position < 7)
-            dialogImage.setImageDrawable(m_context.getResources().getDrawable(R.drawable.icon_book));
+            dialogImage.setImageDrawable(m_context.getResources().getDrawable(R.drawable.c10));
         else if(position >= 7 && position < 10)
-            dialogImage.setImageDrawable(m_context.getResources().getDrawable(R.drawable.icon_book));
+            dialogImage.setImageDrawable(m_context.getResources().getDrawable(R.drawable.c15));
 
 
 
@@ -96,11 +97,24 @@ public class CouponDialog extends Dialog {
             @Override
             public void onClick(View view) {
                 SaveDataManager saveDataManager = new SaveDataManager(m_context.getApplicationContext());
-                saveDataManager.putData("stampInfo"+position,"false");
+                saveDataManager.putData("stampInfo"+position,"false2"); // false : 공백 / flase2 : 사용완료
+
+                iCallback.call(null);
+
                 dismiss();
+
+
             }
         });
 
     }
+
+    private ICallback iCallback;
+
+    public void setiCallbackListener(ICallback iCallback)
+    {
+        this.iCallback = iCallback;
+    }
+
 
 }

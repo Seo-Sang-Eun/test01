@@ -1,14 +1,17 @@
-package codersit.co.kr.jejugo.activity;
+package codersit.co.kr.jejugo.activity.stampbook;
+
+/**
+ * Created by P200 on 2017-06-12.
+ */
+
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,14 +21,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import codersit.co.kr.jejugo.R;
+import codersit.co.kr.jejugo.activity.MainActivity;
 import codersit.co.kr.jejugo.activity.coupon.CouponFragment;
-import codersit.co.kr.jejugo.activity.festival.FestivalFragment;
-import codersit.co.kr.jejugo.activity.hotplace.HotplaceDetailFragment;
-import codersit.co.kr.jejugo.dto.DTOStampPlace;
+import codersit.co.kr.jejugo.activity.partnerstore.PartnerStoreFragment;
 import codersit.co.kr.jejugo.util.SaveDataManager;
 import codersit.co.kr.jejugo.util.StampDataManager;
-
-import static codersit.co.kr.jejugo.util.StampDataManager.dtoStampPlaceArrayList;
 
 /**
  * Created by P200 on 2017-06-09.
@@ -59,7 +59,7 @@ public class StampBookFragment extends Fragment {
 //        String 2b = saveDataManager.getData("stampInfo3"); // false or 2011-11-11
 //        String bb = saveDataManager.getData("stampInfo4"); // false or 2011-11-11
 
-        for(int i = 0 ; i < StampDataManager.dtoStampPlaceArrayList.size();i++)
+        for(int i = 0; i < StampDataManager.dtoStampPlaceArrayList.size(); i++)
         {
             String tmpStr = "stamp";
             if( StampDataManager.dtoStampPlaceArrayList.get(i).getId() <10)
@@ -71,23 +71,21 @@ public class StampBookFragment extends Fragment {
                 StampDataManager.dtoStampPlaceArrayList.get(i).setGet(false);
             else
                 StampDataManager.dtoStampPlaceArrayList.get(i).setGet(true);
-
         }
 
-
-        ArrayList<String> tempArray = new ArrayList<>();
+        ArrayList<DTOStampBookAdapter> tempArray = new ArrayList<>();
 
         for(int i = 0 ; i < StampDataManager.dtoStampPlaceArrayList.size();i++)
         {
-            if(StampDataManager.dtoStampPlaceArrayList.get(i).getGet() == true)
-            {
-                tempArray.add(StampDataManager.dtoStampPlaceArrayList.get(i).getPlaceName());
-            }
+            tempArray.add(new DTOStampBookAdapter(StampDataManager.dtoStampPlaceArrayList.get(i).getPlaceName(),
+                    StampDataManager.dtoStampPlaceArrayList.get(i).getGet()));
 
         }
 
         stamp_num_view.setText(stampCnt);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>( ((MainActivity)getActivity()) , android.R.layout.simple_list_item_1, tempArray);
+
+        StampBookAdapter adapter = new StampBookAdapter(((MainActivity)getActivity()),tempArray);
+
         stamp_place_view.setAdapter(adapter);
 
 
@@ -109,6 +107,24 @@ public class StampBookFragment extends Fragment {
         ((MainActivity)getActivity()).callFragmentPage(new CouponFragment());
     }
 
+    public class DTOStampBookAdapter
+    {
+        private String placeName;
+        private Boolean isCheck;
+
+        public DTOStampBookAdapter(String placeName, Boolean isCheck) {
+            this.placeName = placeName;
+            this.isCheck = isCheck;
+        }
+
+        public String getPlaceName() {
+            return placeName;
+        }
+
+        public Boolean getCheck() {
+            return isCheck;
+        }
+    }
 
 
 }

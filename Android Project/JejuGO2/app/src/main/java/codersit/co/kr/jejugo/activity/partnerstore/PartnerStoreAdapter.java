@@ -1,7 +1,6 @@
-package codersit.co.kr.jejugo.activity;
+package codersit.co.kr.jejugo.activity.partnerstore;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +12,7 @@ import java.util.List;
 import java.util.Locale;
 
 import codersit.co.kr.jejugo.R;
-import codersit.co.kr.jejugo.dto.DTOBestEating;
 import codersit.co.kr.jejugo.dto.DTOPartnerStore;
-import codersit.co.kr.jejugo.util.PartnerStoreManager;
 
 /**
  * Created by BooHee on 2017-06-11.
@@ -57,14 +54,13 @@ public class PartnerStoreAdapter extends BaseAdapter {
 
         convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.partnerstore_item, parent, false);
 
-        TextView txt1 = (TextView)convertView.findViewById(R.id.store_title);
-        txt1.setText(dtoStoreList.get(position).getStoreName());
+        TextView tv_store_title = (TextView)convertView.findViewById(R.id.store_title);
+        TextView tv_store_addr = (TextView)convertView.findViewById(R.id.store_addr);
+        TextView tv_store_tel = (TextView)convertView.findViewById(R.id.store_tel);
 
-        TextView txt2 = (TextView)convertView.findViewById(R.id.store_addr);
-        txt2.setText(dtoStoreList.get(position).getAddr());
-
-        TextView txt3 = (TextView)convertView.findViewById(R.id.store_tel);
-        txt3.setText(dtoStoreList.get(position).getTelNo());
+        tv_store_title.setText(dtoStoreList.get(position).getStoreName());
+        tv_store_addr.setText(dtoStoreList.get(position).getAddr());
+        tv_store_tel.setText("("+dtoStoreList.get(position).getTelNo()+")");
 
         return convertView;
     }

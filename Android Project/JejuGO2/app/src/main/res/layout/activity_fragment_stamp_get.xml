@@ -33,13 +33,13 @@
             android:id="@+id/tv_fragment_stam_get_place"
             android:textSize="18sp" />
 
-        <Button
-            android:text="부희짱"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/bt_test"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
+        <!--<Button-->
+            <!--android:text="부희짱"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:id="@+id/bt_test"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentStart="true" />-->
     </RelativeLayout>
 
 </LinearLayout>
