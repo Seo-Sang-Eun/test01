@@ -36,8 +36,8 @@ public class StampDataManager {
         dtoStampPlaceArrayList.add(new DTOStampPlace(12,"126.796260","33.555948","월정리해변",false));
         dtoStampPlaceArrayList.add(new DTOStampPlace(13,"126.623703","33.251890","쇠소깍",false));
         dtoStampPlaceArrayList.add(new DTOStampPlace(14,"126.759823","33.558220","김녕성세기해변",false));
-        dtoStampPlaceArrayList.add(new DTOStampPlace(14,"126.837535","33.327854","표선해비치해변",false));
-        dtoStampPlaceArrayList.add(new DTOStampPlace(14,"126.799614","33.386621","성읍민속마을",false));
+        dtoStampPlaceArrayList.add(new DTOStampPlace(15,"126.837535","33.327854","표선해비치해변",false));
+        dtoStampPlaceArrayList.add(new DTOStampPlace(16,"126.799614","33.386621","성읍민속마을",false));
 
 
 

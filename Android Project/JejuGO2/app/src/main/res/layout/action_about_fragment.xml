@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:srcCompat="@drawable/icon_hotplace"
+            app:srcCompat="@drawable/rst_icon"
             android:id="@+id/imageView2"
             android:layout_weight="1" />
 
